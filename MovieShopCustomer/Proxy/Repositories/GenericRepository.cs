@@ -24,11 +24,11 @@ namespace Proxy.Repositories
             }
         }
 
-        public abstract List<T> GetAll(MovieShopContext ctx);
 
         public void Remove(T item)
         {
 
         }
+        public abstract List<T> GetAll(MovieShopContext ctx);
     }
 }

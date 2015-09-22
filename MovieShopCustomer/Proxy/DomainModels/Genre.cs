@@ -1,12 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Proxy.DomainModels
 {
-    class Genre
+    public class Genre
     {
+        [Key]
+        public int Id { get; private set; }
+
+        public string Name { get; set; }
+
+        /// <summary>
+        /// Constructor:
+        /// </summary>
+        public Genre(int Id)
+        {
+            this.Id = Id;
+        }
     }
 }
