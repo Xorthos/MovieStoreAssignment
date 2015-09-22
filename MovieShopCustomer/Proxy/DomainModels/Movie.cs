@@ -12,6 +12,7 @@ namespace Proxy.DomainModels
         public string Title { get; set; }
         public double price { get; set; }
         public DateTime Year { get; set; }
+        public int RandomNumber { get; set; }
 
         public Movie()
         {

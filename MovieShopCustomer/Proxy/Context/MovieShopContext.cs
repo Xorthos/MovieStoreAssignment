@@ -10,7 +10,7 @@ namespace Proxy.Context
 {
     public class MovieShopContext : DbContext
     {
-        public DbSet<Movie> Movies { get; set; }
+        public DbSet<Movie> Items { get; set; }
 
         public MovieShopContext() : base("MovieShop")
         {

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Proxy.Repositories
+namespace Proxy.DomainModels
 {
-    class GenreRepository
+    class Order
     {
     }
 }
