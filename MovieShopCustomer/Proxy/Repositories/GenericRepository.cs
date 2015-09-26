@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Proxy.Repositories
 {
+
     public abstract class MovieRepository<T>
     {
         /// <summary>
@@ -16,7 +17,7 @@ namespace Proxy.Repositories
         /// <param name="item"></param>
         public void Add(T item)
         {
-            using(var ctx = new MovieShopContext())
+            using (var ctx = new MovieShopContext())
             {
 
                 GetAll(ctx).Add(item);

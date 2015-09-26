@@ -1,0 +1,12 @@
+﻿
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit Genre</h2>
+<form method="Post" action="~/Genre/Edit" class="col col-md-12">
+    <input type="hidden" class="form-control" name="Id" value="@Model.Id" hidden />
+    <input type="text" class="form-control" name="Genre" value="@Model.Genre" />
+
+</form>
+
