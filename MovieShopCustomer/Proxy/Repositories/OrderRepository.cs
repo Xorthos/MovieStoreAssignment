@@ -16,7 +16,6 @@ namespace Proxy.Repositories
         /// <param name="ord">the order to be added</param>
         public void Add(Order ord)
         {
-
             using (var ctx = new MovieShopContext())
             {
                 ctx.Orders.Add(ord);
@@ -32,7 +31,23 @@ namespace Proxy.Repositories
         {
             using (var ctx = new MovieShopContext())
             {
-                return ctx.Orders.ToList();
+                return ctx.Orders.Include("Customer").Include("Movie").ToList();
+            }
+        }
+
+        public void ChangeOrder(Order ord)
+        {
+            using (var ctx = new MovieShopContext())
+            {
+                //gets the item that we want to update
+                var order = ctx.Orders.Include("Customer").Include("Movie").Where(c => c.Id == ord.Id).FirstOrDefault();
+                //changes the data
+                order.Movie = ord.Movie;
+                order.OrderDate = ord.OrderDate;
+                order.Customer = ord.Customer;
+
+                //saves the changes.
+                ctx.SaveChanges();
             }
         }
     }

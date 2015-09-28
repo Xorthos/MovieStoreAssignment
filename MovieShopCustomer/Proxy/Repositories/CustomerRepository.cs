@@ -40,9 +40,43 @@ namespace Proxy.Repositories
         {
             using (var ctx = new MovieShopContext()) {
                  Customer cust = ctx.Customers.Select(c => c.Email);
+                 var cust = ctx.Customers.Where(c => c.Email == email).FirstOrDefault();
                 return cust;
             }
         }
+<<<<<<< HEAD
         */
+=======
+
+        /// <summary>
+        /// returns a customers with a specified Id
+        /// </summary>
+        /// <param name="id">the Id of the Customer</param>
+        /// <returns></returns>
+        public Customer GetCustomer(int id)
+        {
+            using (var ctx = new MovieShopContext())
+            {
+                var cust = ctx.Customers.Where(c => c.Id == id).FirstOrDefault();
+                return cust;
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public void ChangeMovie(Customer cust)
+        {
+            using (var ctx = new MovieShopContext())
+            {
+                var customer = ctx.Customers.Include("Genre").Where(c => c.Id == cust.Id).FirstOrDefault();
+                customer.FirstName = cust.FirstName;
+                customer.Address = cust.Address;
+                customer.Email = cust.Email;
+                customer.LastName = cust.LastName;
+
+                ctx.SaveChanges();
+            }
+        }
+>>>>>>> 37bf7ec2e10742534b88cbb153bb519cf8e71402
     }
 }

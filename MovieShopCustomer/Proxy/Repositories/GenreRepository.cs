@@ -16,7 +16,6 @@ namespace Proxy.Repositories
         /// <param name="gen">the genre to be added</param>
         public void Add(Genre gen)
         {
-
             using (var ctx = new MovieShopContext())
             {
                 ctx.Genres.Add(gen);
@@ -36,5 +35,13 @@ namespace Proxy.Repositories
             }
         }
 
+        public void EditGenre(Genre gen)
+        {
+            using (var ctx = new MovieShopContext())
+            {
+                var genre = ctx.Genres.Where(c => c.Id == gen.Id).FirstOrDefault();
+
+            }
+        }
     }
 }
