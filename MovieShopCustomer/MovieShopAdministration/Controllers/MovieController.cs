@@ -1,4 +1,5 @@
-﻿using Proxy.DomainModels;
+﻿using MovieShopAdministration.Models;
+using Proxy.DomainModels;
 using Proxy.Facade;
 using System;
 using System.Collections.Generic;
@@ -14,49 +15,58 @@ namespace MovieShopAdministration.Controllers
         // GET: Movie
         public ActionResult Index()
         {
-            //List<Movie> movies = facade.GetMovieRepository().getAll();
+            List<Movie> movies = facade.GetMovieRepository().getAll();
 
-            return View();
+            return View(movies);
         }
 
         [HttpGet]
         public ActionResult Create() {
-            return View();
+            //MAYBE THE NAME OF THE REPOSITORY IS GOING TO CHANGE!!
+            List<Genre> genres = facade.GetGenreReposity().getAll();
+
+            return View(genres);
         }
 
         [HttpPost]
         public ActionResult Create(Movie movie)
         {
-            //Movie.Genre = facade.GetMovieRepository().FindGenre(movie.Genre.Id);
-            //facade.GetMovieRepository().AddGenre(movie);
+            //METHOD NAME MIGHT CHANGE.
+            Movie.Genre = facade.GetGenreRepository().FindGenre(movie.Genre.Id);
+            facade.GetMovieRepository().AddMovie(movie);
             return Redirect("Index");
         }
 
         [HttpGet]
         public ActionResult Edit(int movieId) {
 
-            //Movie = facade.GetMovieRepository().FindMovie(movieId),
-            //Genre = facade.GetMovieRepository().GetGenre();
+            Movie theMovie = facade.GetMovieRepository().FindMovie(movieId);
+            List<Genre> genres = facade.GetGenreRepository().GetAll();
+            EditMovieModel theViewModel = new EditMovieModel() { Movie = theMovie, Genres = genres };
             
-            return View();
+            return View(theViewModel);
         }
+
         [HttpPost]
         public ActionResult Edit(Movie movie)
         {
-            // movie.Genre = facade.GetMovieRepository().FindGenre(movie.Genre.Id);
-            //facade.GetMovieRepository().UpdateMovie(movie);
+            //METHOD NAME MIGHT CHANGE.
+            movie.Genre = facade.GetGenreRepository().FindGenre(movie.Genre.Id);
+            //METHOD NAME MIGHT CHANGE.
+            facade.GetMovieRepository().UpdateMovie(movie);
             return Redirect("Index");
 
         }
         [HttpGet]
         public ActionResult Delete(int movieId)
         {
-            return View(movieId);
+            Movie theMovie = facade.GetMovieRepository().FindMovie(movieId);
+            return View(theMovie);
         }
         [HttpPost]
         public ActionResult DeleteAccepted(int movieId)
         {
-           // facade.GetMovieRepository().DeleteMovie(movieId);
+            facade.GetMovieRepository().DeleteMovie(movieId);
             return Redirect("Index");
         }
     }
