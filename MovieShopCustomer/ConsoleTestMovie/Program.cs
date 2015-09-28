@@ -12,7 +12,7 @@ namespace ConsoleTestMovie
     {
         static void Main(string[] args)
         {
-            Movie mov = new Movie() { ID = 1, Title = "Title", price = 2020, Year = DateTime.Now, RandomNumber = 45 };
+            Movie mov = new Movie() { ID = 1, Title = "Title", price = 2020, Year = DateTime.Now};
             Facade fac = new Facade();
             fac.GetMovieRepository().Add(mov);
 
