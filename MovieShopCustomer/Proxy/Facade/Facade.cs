@@ -13,5 +13,10 @@ namespace Proxy.Facade
         {
             return new MovieRepository();
         }
+
+        public GenreRepository GetGenreRepository()
+        {
+            return new GenreRepository();
+        }
     }
 }

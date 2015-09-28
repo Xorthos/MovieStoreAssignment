@@ -20,11 +20,11 @@ namespace Proxy.Repositories
             }
         }
 
-        public List<Movie> GetAllMovies()
+        public List<Movie> GetAll()
         {
             using(var ctx = new MovieShopContext())
             {
-                return ctx.Movies.ToList();
+                return ctx.Movies.Include("Genre").ToList();
             }
         }
     }

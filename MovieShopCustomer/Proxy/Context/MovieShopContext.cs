@@ -1,4 +1,5 @@
 ﻿using Proxy.DomainModels;
+using Proxy.Seeding;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -17,7 +18,7 @@ namespace Proxy.Context
 
         public MovieShopContext() : base("MovieShop")
         {
-
+            Database.SetInitializer(new DBInitializer());
         }
     }
 }

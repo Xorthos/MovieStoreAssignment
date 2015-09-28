@@ -35,6 +35,7 @@ namespace Proxy.Repositories
         /// </summary>
         /// <param name="email">The email of the customer that is wanted</param>
         /// <returns></returns>
+        /*
         public Customer GetCustomer(string email)
         {
             using (var ctx = new MovieShopContext()) {
@@ -42,5 +43,6 @@ namespace Proxy.Repositories
                 return cust;
             }
         }
+        */
     }
 }
