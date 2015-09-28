@@ -1,19 +1,31 @@
-﻿using System;
+﻿using Proxy.Context;
+using Proxy.DomainModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Proxy.Context;
-using Proxy.DomainModels;
 
 namespace Proxy.Repositories
 {
-    public class GenreRepository : MovieRepository<Movie>
+    public class MovieRepository
     {
-        public override List<Movie> GetAll(MovieShopContext ctx)
+
+        public void Add(Movie movie)
         {
-            return ctx.Movies.ToList();
+            using(var ctx = new MovieShopContext())
+            {
+                ctx.Movies.Add(movie);
+                ctx.SaveChanges();
+            }
+        }
+
+        public List<Movie> GetAllMovies()
+        {
+            using(var ctx = new MovieShopContext())
+            {
+                return ctx.Movies.ToList();
+            }
         }
     }
 }
-
