@@ -46,7 +46,6 @@ namespace Proxy.Repositories
         }
 <<<<<<< HEAD
         */
-=======
 
         /// <summary>
         /// returns a customers with a specified Id
@@ -77,6 +76,5 @@ namespace Proxy.Repositories
                 ctx.SaveChanges();
             }
         }
->>>>>>> 37bf7ec2e10742534b88cbb153bb519cf8e71402
     }
 }

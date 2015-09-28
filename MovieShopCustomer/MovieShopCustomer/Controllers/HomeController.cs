@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Proxy.Facade;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,9 +9,10 @@ namespace MovieShopCustomer.Controllers
 {
     public class HomeController : Controller
     {
+        Facade facade = new Facade();
         public ActionResult Index()
         {
-            return View();
+            return View(facade.GetMovieRepository().GetAll());
         }
 
         public ActionResult About()
