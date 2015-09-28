@@ -11,8 +11,8 @@ namespace Proxy.DomainModels
     {
         [Key]
         public int Id { get; set; }
-        public Customer Customer { get; set; }
-        public Movie Movie { get; set; }
+        public virtual Customer Customer { get; set; }
+        public virtual Movie Movie { get; set; }
         public DateTime OrderDate { get; set; }
 
         /// <summary>
