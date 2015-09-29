@@ -11,6 +11,7 @@ namespace Proxy.DomainModels
     {
         [Key]
         public int Id { get; set; }
+        [StringLength(100, ErrorMessage = "Keep the name under 100 chars")]
         public string Title { get; set; }
         public double Price { get; set; }
         public DateTime Year { get; set; }

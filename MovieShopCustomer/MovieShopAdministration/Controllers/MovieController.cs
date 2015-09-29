@@ -50,8 +50,8 @@ namespace MovieShopAdministration.Controllers
         [HttpPost]
         public ActionResult Edit(Movie movie)
         {
-            //METHOD NAME MIGHT CHANGE.
-            movie.Genre = facade.GetGenreRepository().GetGenre(movie.Genre.Id);
+                //METHOD NAME MIGHT CHANGE.
+                movie.Genre = facade.GetGenreRepository().GetGenre(movie.Genre.Id);
             //METHOD NAME MIGHT CHANGE.
             facade.GetMovieRepository().UpdateMovie(movie);
             return Redirect("Index");
