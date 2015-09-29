@@ -52,12 +52,13 @@ namespace Proxy.Repositories
             {
                 var movie = ctx.Movies.Where(c => c.Id == id).FirstOrDefault();
                 ctx.Movies.Remove(movie);
+                ctx.SaveChanges();
             }
         }
         /// <summary>
         /// 
         /// </summary>
-        public void ChangeMovie(Movie mov)
+        public void UpdateMovie(Movie mov)
         {
             using (var ctx = new MovieShopContext())
             {

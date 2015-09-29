@@ -1,4 +1,4 @@
-﻿
+﻿@model MovieShopAdministration.Models.EditMovieModel
 @{
     ViewBag.Title = "Edit";
 }
@@ -10,12 +10,12 @@
   <input type="number" step="0.01" class="form-control" name="Price" value="@Model.Movie.Price">
   <input type="date" class=" form-control" name="Year" value="@Model.Movie.Year.ToString("yyyy-MM-dd")">
   <select class="form-control" name="Genre.Id"> 
-      @foreach (var item in Model.Genre) {
+      @foreach (var item in Model.Genres) {
           <option value="@item.Id" @(Model.Movie.Genre.Id==@item.Id ? "selected": "")>(@item.Name)</option>
       }
     </select>
-    <input type="image" class="form-control" name="ImgUrl" value="@Model.Movie.Title" />
-    <input type="url" class="form-control" name="TrailerUrl" value="@Model.Movie.Title" />
+    <input type="url" class="form-control" name="ImgUrl" value="@Model.Movie.ImgUrl" />
+    <input type="url" class="form-control" name="TrailerUrl" value="@Model.Movie.TrailerUrl" />
     <button type="submit" class="btn btn-default">Update</button>
 
 </form>

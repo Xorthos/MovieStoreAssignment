@@ -32,41 +32,41 @@ namespace MovieShopAdministration.Controllers
         public ActionResult Create(Movie movie)
         {
             //METHOD NAME MIGHT CHANGE.
-            //Movie.Genre = facade.GetGenreRepository().FindGenre(movie.Genre.Id);
-            //facade.GetMovieRepository().AddMovie(movie);
+            movie.Genre = facade.GetGenreRepository().GetGenre(movie.Genre.Id);
+            facade.GetMovieRepository().Add(movie);
             return Redirect("Index");
         }
 
         [HttpGet]
         public ActionResult Edit(int movieId) {
 
-            //Movie theMovie = facade.GetMovieRepository().GetMovie(movieId);
+            Movie theMovie = facade.GetMovieRepository().GetMovie(movieId);
             List<Genre> genres = facade.GetGenreRepository().GetAll();
-            //EditMovieModel theViewModel = new EditMovieModel() { Movie = theMovie, Genres = genres };
+            EditMovieModel theViewModel = new EditMovieModel() { Movie = theMovie, Genres = genres };
             
-            return View();
+            return View(theViewModel);
         }
 
         [HttpPost]
         public ActionResult Edit(Movie movie)
         {
             //METHOD NAME MIGHT CHANGE.
-            //movie.Genre = facade.GetGenreRepository().FindGenre(movie.Genre.Id);
+            movie.Genre = facade.GetGenreRepository().GetGenre(movie.Genre.Id);
             //METHOD NAME MIGHT CHANGE.
-            //facade.GetMovieRepository().UpdateMovie(movie);
+            facade.GetMovieRepository().UpdateMovie(movie);
             return Redirect("Index");
 
         }
         [HttpGet]
         public ActionResult Delete(int movieId)
         {
-            //Movie theMovie = facade.GetMovieRepository().FindMovie(movieId);
-            return View();
+            Movie theMovie = facade.GetMovieRepository().GetMovie(movieId);
+            return View(theMovie);
         }
         [HttpPost]
         public ActionResult DeleteAccepted(int movieId)
         {
-            //facade.GetMovieRepository().DeleteMovie(movieId);
+            facade.GetMovieRepository().Delete(movieId);
             return Redirect("Index");
         }
     }

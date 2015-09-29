@@ -43,5 +43,12 @@ namespace Proxy.Repositories
 
             }
         }
+
+        public Genre GetGenre(int id)
+        {
+            using(var ctx = new MovieShopContext()) { 
+                return ctx.Genres.Where(c => c.Id == id).FirstOrDefault();
+            }
+        }
     }
 }

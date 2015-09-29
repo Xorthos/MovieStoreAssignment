@@ -5,25 +5,28 @@
 }
 <div class="container">
     <div class="row">
-        <h1>Bootstrap 3 Lightbox using Modal</h1>
+        <h1>Available movies</h1>
         <div class="row">
             @foreach (var item in Model)
             {
-            <div class="col-lg-3 col-sm-4 col-xs-6" style="outline : solid lightgrey 1px; margin : 10px; background-color : lightgray">
-            <a title="@item.Title" href="#">
-            <img style="margin-top: 15px" class="thumbnail img-responsive" src="@item.ImgUrl" height="200">
-            </a> 
-                <p style="font-size:30px">@item.Title</p>
-                <h4>@item.Year.Year</h4>
-                <h4>@item.Genre.Name</h4>
-                <div>
-                    <div style="position:relative; float:left">
-<p style="font-size:30px">Kr. @item.Price </p></div>
-            <div style="position:relative; float:right"><a class="btn btn-default" style="background-color : gray">Buy</a></div>
-            </div>
-</div>
+                <div class="col-lg-2 col-sm-4 col-xs-6" style="outline : solid lightgrey 1px; margin : 10px; background-color : lightgray; min-height : 400px; min-width : 150px">
+                    <a title="@item.Title" href="#">
+                        <img style="margin-top: 15px; max-height : 220px; max-width : 160px; vertical-align : central; display: block; margin-left: auto; margin-right: auto" class="thumbnail img-responsive" src="@item.ImgUrl">
+                    </a>
+                        <div style="position : absolute; bottom: 0; width : 85%">
+                            <p style="font-size:20px; margin-bottom : 0px;"><b>@item.Title</b></p>
+                            <p style="font-size:15px; margin : 0px;">@item.Year.Year</p>
+                            <p style="font-size:15px; margin : 0px;">@item.Genre.Name</p>
+                            <div>
+                                <div style="position:relative; float:left">
+                                    <p style="font-size:30px">Kr. @item.Price </p>
+                                </div>
+                                <div style="position:relative; float:right"><a class="btn btn-default" style="background-color : gray">Buy</a></div>
+                            </div>
+                        </div>
+                    </div>
             }
-            </div>
+        </div>
         <hr>
         <a href="http://bootply.com/71401">Edit on Bootply</a>
         <hr>

@@ -13,13 +13,30 @@ namespace Proxy.Seeding
     {
         protected override void Seed(MovieShopContext context)
         {
-            Genre g1 = context.Genres.Add(new Genre() { Id = 1, Name = "HorseSeed" });
-            Genre g2 = context.Genres.Add(new Genre() { Id = 2, Name = "Cheese" });
+            Genre g1 = context.Genres.Add(new Genre() { Id = 1, Name = "Comedy" });
+            Genre g2 = context.Genres.Add(new Genre() { Id = 2, Name = "Action" });
+            Genre g3 = context.Genres.Add(new Genre() { Id = 3, Name = "Drama" });
+            Genre g4 = context.Genres.Add(new Genre() { Id = 4, Name = "Sci-Fi" });
+            Genre g5 = context.Genres.Add(new Genre() { Id = 5, Name = "Horror" });
 
-            context.Movies.Add(new Movie() { Id = 1, Title = "Bools", Genre = g1, Price = 150, Year = DateTime.Now, ImgUrl = "http://twilightseriestheories.com/wp-content/uploads/2010/03/EclipseMovieCover.jpg", TrailerUrl = "https://www.youtube.com/watch?v=S2HIda5wSVU" });
-            context.Movies.Add(new Movie() { Id = 2, Title = "Bools'N'Balls", Genre = g1, Price = 300, Year = DateTime.Now, ImgUrl = "http://www.bellanaija.com/wp-content/uploads/2009/10/Guilty-Pleasures-1.jpg", TrailerUrl = "https://www.youtube.com/watch?v=ARul3sUZfUM" });
-            context.Movies.Add(new Movie() { Id = 3, Title = "RomanticStuff", Genre = g2, Price = 30, Year = DateTime.Now, ImgUrl = "https://jacobboombar.files.wordpress.com/2014/03/oblivion-dvd-cover-55.jpg", TrailerUrl = "https://www.youtube.com/watch?v=w0qQkSuWOS8" });
-
+            context.Movies.Add(new Movie() { Id = 1, Title = "Avengers: Age Of Ultron", Genre = g2, Price = 150, Year = DateTime.Now, ImgUrl = "http://scaled.ysimag.es/movie/the-avengers-age-of-ultron", TrailerUrl = "https://www.youtube.com/watch?v=S2HIda5wSVU" });
+            context.Movies.Add(new Movie() { Id = 2, Title = "The Voices", Genre = g1, Price = 300, Year = DateTime.Now, ImgUrl = "http://scaled.ysimag.es/movie/voices-the", TrailerUrl = "https://www.youtube.com/watch?v=ARul3sUZfUM" });
+            context.Movies.Add(new Movie() { Id = 3, Title = "The D Train", Genre = g1, Price = 30, Year = DateTime.Now, ImgUrl = "http://scaled.ysimag.es/movie/d-train-the", TrailerUrl = "https://www.youtube.com/watch?v=w0qQkSuWOS8" });
+            context.Movies.Add(new Movie() { Id = 4, Title = "Horns", Genre = g3, Price = 30, Year = DateTime.Now, ImgUrl = "http://scaled.ysimag.es/movie/horns", TrailerUrl = "https://www.youtube.com/watch?v=w0qQkSuWOS8" });
+            context.Movies.Add(new Movie() { Id = 5, Title = "Good Kill", Genre = g2, Price = 30, Year = DateTime.Now, ImgUrl = "http://scaled.ysimag.es/movie/good-kill", TrailerUrl = "https://www.youtube.com/watch?v=w0qQkSuWOS8" });
+            context.Movies.Add(new Movie() { Id = 6, Title = "Tomorrowland: A world beyond", Genre = g4, Price = 30, Year = DateTime.Now, ImgUrl = "http://scaled.ysimag.es/movie/tomorrowland-a-world-beyond", TrailerUrl = "https://www.youtube.com/watch?v=w0qQkSuWOS8" });
+            context.Movies.Add(new Movie() { Id = 7, Title = "Aloha", Genre = g3, Price = 30, Year = DateTime.Now, ImgUrl = "http://scaled.ysimag.es/movie/aloha", TrailerUrl = "https://www.youtube.com/watch?v=w0qQkSuWOS8" });
+            context.Movies.Add(new Movie() { Id = 8, Title = "It follows", Genre = g5, Price = 30, Year = DateTime.Now, ImgUrl = "http://scaled.ysimag.es/movie/it-follows", TrailerUrl = "https://www.youtube.com/watch?v=w0qQkSuWOS8" });
+            context.Movies.Add(new Movie() { Id = 9, Title = "Fast & Furious 7", Genre = g2, Price = 30, Year = DateTime.Now, ImgUrl = "http://scaled.ysimag.es/movie/fast-furious-7", TrailerUrl = "https://www.youtube.com/watch?v=w0qQkSuWOS8" });
+            context.Movies.Add(new Movie() { Id = 10, Title = "Avengers: Age Of Ultron", Genre = g2, Price = 150, Year = DateTime.Now, ImgUrl = "http://scaled.ysimag.es/movie/the-avengers-age-of-ultron", TrailerUrl = "https://www.youtube.com/watch?v=S2HIda5wSVU" });
+            context.Movies.Add(new Movie() { Id = 11, Title = "The Voices", Genre = g1, Price = 300, Year = DateTime.Now, ImgUrl = "http://scaled.ysimag.es/movie/voices-the", TrailerUrl = "https://www.youtube.com/watch?v=ARul3sUZfUM" });
+            context.Movies.Add(new Movie() { Id = 12, Title = "The D Train", Genre = g1, Price = 30, Year = DateTime.Now, ImgUrl = "http://scaled.ysimag.es/movie/d-train-the", TrailerUrl = "https://www.youtube.com/watch?v=w0qQkSuWOS8" });
+            context.Movies.Add(new Movie() { Id = 13, Title = "Horns", Genre = g3, Price = 30, Year = DateTime.Now, ImgUrl = "http://scaled.ysimag.es/movie/horns", TrailerUrl = "https://www.youtube.com/watch?v=w0qQkSuWOS8" });
+            context.Movies.Add(new Movie() { Id = 14, Title = "Good Kill", Genre = g2, Price = 30, Year = DateTime.Now, ImgUrl = "http://scaled.ysimag.es/movie/good-kill", TrailerUrl = "https://www.youtube.com/watch?v=w0qQkSuWOS8" });
+            context.Movies.Add(new Movie() { Id = 15, Title = "Tomorrowland: A world beyond", Genre = g4, Price = 30, Year = DateTime.Now, ImgUrl = "http://scaled.ysimag.es/movie/tomorrowland-a-world-beyond", TrailerUrl = "https://www.youtube.com/watch?v=w0qQkSuWOS8" });
+            context.Movies.Add(new Movie() { Id = 16, Title = "Aloha", Genre = g3, Price = 30, Year = DateTime.Now, ImgUrl = "http://scaled.ysimag.es/movie/aloha", TrailerUrl = "https://www.youtube.com/watch?v=w0qQkSuWOS8" });
+            context.Movies.Add(new Movie() { Id = 17, Title = "It follows", Genre = g5, Price = 30, Year = DateTime.Now, ImgUrl = "http://scaled.ysimag.es/movie/it-follows", TrailerUrl = "https://www.youtube.com/watch?v=w0qQkSuWOS8" });
+            context.Movies.Add(new Movie() { Id = 18, Title = "Fast & Furious 7", Genre = g2, Price = 30, Year = DateTime.Now, ImgUrl = "http://scaled.ysimag.es/movie/fast-furious-7", TrailerUrl = "https://www.youtube.com/watch?v=w0qQkSuWOS8" });
             base.Seed(context);
         }
     }
