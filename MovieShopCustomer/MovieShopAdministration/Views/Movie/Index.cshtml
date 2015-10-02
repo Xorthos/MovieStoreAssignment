@@ -1,11 +1,21 @@
-﻿@model List<Proxy.DomainModels.Movie>
+﻿@model MovieShopAdministration.Models.IndexViewModel
     
 @{
     ViewBag.Title = "Index";
 }
 
 <h2>Index</h2>
-
+<form method="Get" action="~/Movie/FilterMovies" class="col md-12">
+    <input type="text" class="form-control" name="SearchToken" value="" />
+    <input type="checkbox" name="UseGenre" value="true">Search by genre<br>
+    <select class="form-control" name="GenreId">
+        @foreach (var item in Model.Genres)
+        {
+            <option value="@item.Id">@item.Name</option>
+        }
+    </select>
+    <button type="submit" class="btn btn-default">Search</button>
+</form>
 <table class="table table-striped table-condensed">
 <thead>
     <tr>
@@ -19,7 +29,7 @@
 
 </thead> 
     <tbody>
-        @foreach (var item in Model) {
+        @foreach (var item in Model.Movies) {
             <tr>
             <td>@item.Title</td>
             <td>@item.Price</td>

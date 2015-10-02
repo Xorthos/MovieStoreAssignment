@@ -16,8 +16,28 @@ namespace MovieShopAdministration.Controllers
         public ActionResult Index()
         {
             List<Movie> movies = facade.GetMovieRepository().GetAll();
+            List<Genre> genres = facade.GetGenreRepository().GetAll();
 
-            return View(movies);
+            return View(new IndexViewModel() { Movies = movies, Genres = genres });
+        }
+
+        [HttpGet]
+        public ActionResult FilterMovies(FilterModel filters)
+        {
+            List<Movie> movies = facade.GetMovieRepository().GetAll();
+            if (filters.SearchToken != null)
+            {
+                movies = movies.Where(c => c.Title.ToLower().Contains(filters.SearchToken.ToLower())).ToList();
+            }
+            if (filters.UseGenre)
+            {
+                movies = movies.Where(c => c.Genre.Id == filters.GenreId).ToList();
+            }
+
+            List<Genre> genres = facade.GetGenreRepository().GetAll();
+
+            return View("Index", new IndexViewModel() { Movies = movies, Genres = genres });
+            //return RedirectToAction("Index", new { movies = movies });
         }
 
         [HttpGet]
@@ -48,6 +68,7 @@ namespace MovieShopAdministration.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Edit(Movie movie)
         {
                 //METHOD NAME MIGHT CHANGE.
