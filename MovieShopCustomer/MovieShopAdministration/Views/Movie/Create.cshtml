@@ -1,4 +1,8 @@
 ﻿
+﻿@using Proxy.DomainModels;
+@model List<Genre>
+   
+
 @{
     ViewBag.Title = "Create";
 }
@@ -27,6 +31,7 @@
          <div class="form-group">
         <label for=" ImgUrl">ImgUrl</label>
          <input type="image" class="form-control" name="ImgUrl" />
+         <input type="url" class="form-control" name="ImgUrl" />
          </div>
          <div class="form-group">
         <label for="TrailerUrl">TralerUrl</label>
