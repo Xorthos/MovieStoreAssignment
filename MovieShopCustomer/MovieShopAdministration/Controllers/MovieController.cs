@@ -22,10 +22,9 @@ namespace MovieShopAdministration.Controllers
 
         [HttpGet]
         public ActionResult Create() {
-            //MAYBE THE NAME OF THE REPOSITORY IS GOING TO CHANGE!!
-            List<Genre> genres = facade.GetGenreRepository().GetAll();
 
-            return View(genres);
+            EditMovieModel genre = new EditMovieModel();
+            return View(genre);
         }
 
         [HttpPost]
