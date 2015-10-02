@@ -1,17 +1,10 @@
-﻿
-﻿@using Proxy.DomainModels;
-
-@*@model Proxy.DomainModels.Movie*@
-
-   @model List<Genre>
-
+﻿@model MovieShopAdministration.Models.EditMovieModel
 
     @{
         ViewBag.Title = "Create";
     }
 
     <h2>Create Movie</h2>
-
     <form method="Post" action="~/Movie/Create" class="col-md-12">
         @Html.ValidationSummary(true, "Something went wrong", new { @class = "text-danger" })
          @*@Html.TextBox(m => m.Title, htmlAttributes : new { @class = "form-control", @Name = "Title" })*@
@@ -27,28 +20,10 @@
             <label for="price"> Price</label>
             <input type="number" class="form-control" name="Price" />
         </div>
-        <div class="form-group">
-            <label for=" Year">Year</label>
-            <input type="date" class="form-control" name="Year" />
-        </div>
-<<<<<<< HEAD
-         <select class="form-control" id="genreId" name="Genre.Id">
-         @foreach (var item in Model)
-         {
-             <option value=" @item.Id">@item.Name</option>
-         }
-             </select>
-         <div class="form-group">
-        <label for=" ImgUrl">ImgUrl</label>
-         <input type="image" class="form-control" name="ImgUrl" />
-         <input type="url" class="form-control" name="ImgUrl" />
-         </div>
-         <div class="form-group">
-        <label for="TrailerUrl">TralerUrl</label>
-         <input type="url"class="form-control" name="TrailerUrl">
-=======
+
+
         <select class="form-control" id="genreId" name="Genre.Id">
-            @foreach (var item in Model)
+            @foreach (var item in Model.Genres)
             {
                 <option value=" @item.Id">@item.Name</option>
             }
@@ -60,7 +35,11 @@
         <div class="form-group">
             <label for="TrailerUrl">TralerUrl</label>
             <input type="url" class="form-control" name="TrailerUrl">
->>>>>>> 3db0a3819907ad3b34a35458b1d0a38be4e56839
         </div>
+        <div class="form-group">
+            <label for=" Year">Year</label>
+            <input type="date" class="form-control" name="Year" />
+        </div>
+        
         <button type="submit" class="btn-default">Save </button>
     </form>
