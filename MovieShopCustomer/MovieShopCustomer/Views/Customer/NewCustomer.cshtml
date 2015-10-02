@@ -1,0 +1,41 @@
+﻿@model Proxy.DomainModels.Customer
+
+@{
+    ViewBag.Title = "NewCustomer";
+}
+
+<h2>NewCustomer</h2>
+    @Html.AntiForgeryToken()
+
+<div>
+    @Html.LabelFor(c => c.FirstName)
+    @Html.EditorFor(c => c.FirstName)
+</div>
+
+<div>
+    @Html.LabelFor(c => c.MiddleName)
+    @Html.EditorFor(c => c.MiddleName)
+</div>
+
+<div>
+    @Html.LabelFor(c => c.LastName)
+    @Html.EditorFor(c => c.LastName)
+</div>
+
+<div>
+    @Html.LabelFor(c => c.StreetName)
+    @Html.EditorFor(c => c.StreetName)
+</div>
+
+<div>
+    @Html.LabelFor(c => c.StreetNumber)
+    @Html.EditorFor(c => c.StreetNumber)
+</div>
+
+<div>
+    @Html.LabelFor(c => c.Email)
+    @Html.EditorFor(c => c.Email)
+</div>
+
+@Html.BeginForm("NewCustomer")
+<button type="submit" class="btn-default">Create</button>
