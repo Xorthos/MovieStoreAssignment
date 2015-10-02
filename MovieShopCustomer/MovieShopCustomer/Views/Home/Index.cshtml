@@ -1,13 +1,24 @@
-﻿@model List<Proxy.DomainModels.Movie>
+﻿@model MovieShopCustomer.Models.IndexViewModel
 
 @{
     ViewBag.Title = "Home Page";
 }
+<form method="Get" action="~/Home/FilterMovies" class="col md-12" style="margin-top : 20px">
+    <input type="text" class="form-control" name="SearchToken" value="" />
+    <input type="checkbox" name="UseGenre" value="true">Search by genre<br>
+    <select class="form-control" name="GenreId">
+        @foreach (var item in Model.Genres)
+        {
+            <option value="@item.Id">@item.Name</option>
+        }
+    </select>
+    <button type="submit" class="btn btn-default">Search</button>
+</form>
 <div class="container">
     <div class="row">
         <h1>Available movies</h1>
         <div class="row">
-            @foreach (var item in Model)
+            @foreach (var item in Model.Movies)
             {
                 <div class="col-lg-2 col-sm-4 col-xs-6" style="outline : solid lightgrey 1px; margin : 10px; background-color : lightgray; min-height : 400px; min-width : 150px">
                     <a title="@item.Title" href="#">
@@ -27,9 +38,6 @@
                     </div>
             }
         </div>
-        <hr>
-        <a href="http://bootply.com/71401">Edit on Bootply</a>
-        <hr>
     </div>
 </div>
 <div class="modal" id="myModal" role="dialog">

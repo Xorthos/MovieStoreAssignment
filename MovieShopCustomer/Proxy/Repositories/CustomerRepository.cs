@@ -69,7 +69,8 @@ namespace Proxy.Repositories
             {
                 var customer = ctx.Customers.Include("Genre").Where(c => c.Id == cust.Id).FirstOrDefault();
                 customer.FirstName = cust.FirstName;
-                //customer.Address = cust.Address;
+                customer.StreetName = cust.StreetName;
+                customer.StreetNumber = cust.StreetNumber;
                 customer.Email = cust.Email;
                 customer.LastName = cust.LastName;
 
