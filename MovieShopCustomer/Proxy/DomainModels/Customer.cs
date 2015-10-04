@@ -11,23 +11,24 @@ namespace Proxy.DomainModels
     {
         [Key]
         public int Id { get; set; }
-        [Required]
-        [DataType("Text")]
+
+        [Required(ErrorMessage ="First name required")]
         public string FirstName { get; set; }
-        [DataType("Text")]
+
         public string MiddleName { get; set; }
-        [Required]
-        [DataType("Text")]
+
+        [Required(ErrorMessage ="Last Name required")]
         public string LastName { get; set; }
-        [Required]
-        [DataType("Text")]
+
+        [Required(ErrorMessage = "Street name required")]
         public string StreetName { get; set; }
-        [Required]
-        [DataType("Number")]
+
+        [Required(ErrorMessage = "Street number required")]
+        [Range(0, int.MaxValue, ErrorMessage ="Must be positive")]
         public int StreetNumber { get; set; }
-        [Required]
-        [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}")]
-        [DataType("Text")]
+
+        [Required(ErrorMessage = "Email required")]
+        [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}",ErrorMessage ="Doesn't look like an email"),]
         public string Email { get; set; }
 
         /// <summary>

@@ -1,4 +1,5 @@
 ﻿using Proxy.DomainModels;
+using Proxy.Facade;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +30,12 @@ namespace MovieShopCustomer.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult NewCustomer(Customer cust)
         {
-            return Redirect("Index");
+            if (ModelState.IsValid)
+            {
+                new Facade().GetCustomerRepository().Add(cust);
+                return Redirect("Index");
+            }
+            return View(cust);
         }
     }
 }
