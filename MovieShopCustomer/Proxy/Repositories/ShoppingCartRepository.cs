@@ -51,7 +51,7 @@ namespace Proxy.Repositories
             using (var ctx = new MovieShopContext())
             {
                 var shoppingCart = ctx.ShoppingCarts.Where(c => c.CustomerId.Equals(cart.CustomerId)).FirstOrDefault();
-                shoppingCart.Movies = cart.Movies;
+                shoppingCart.Orderline = cart.Orderline;
                 ctx.SaveChanges();
             }
         }

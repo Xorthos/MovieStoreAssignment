@@ -9,8 +9,12 @@ namespace Proxy.DomainModels
 {
     public class ShoppingCart
     {
+        public ShoppingCart()
+        {
+            Orderline = new List<Orderline>();
+        }
         [Key]
         public string CustomerId { get; set; }
-        public List<Movie> Movies { get; set; }
+        public List<Orderline> Orderline { get; set; }
     }
 }
