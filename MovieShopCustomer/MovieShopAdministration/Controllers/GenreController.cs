@@ -1,4 +1,5 @@
-﻿using Proxy.DomainModels;
+﻿using MovieShopAdministration.Models;
+using Proxy.DomainModels;
 using Proxy.Facade;
 using System;
 using System.Collections.Generic;
@@ -14,8 +15,8 @@ namespace MovieShopAdministration.Controllers
         // GET: Genre
         public ActionResult Index()
         {
-           // List<Genre> genres = facade.GetGenreRepository().getAll();
-            return View();
+            List<Genre> genres = facade.GetGenreRepository().GetAll();
+            return View(new IndexViewModel() {Genres = genres });
         }
         [HttpGet]
         public ActionResult Create() {
