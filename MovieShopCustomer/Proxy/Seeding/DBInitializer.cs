@@ -13,13 +13,19 @@ namespace Proxy.Seeding
     {
         protected override void Seed(MovieShopContext context)
         {
+
+            
+
+
             Genre g1 = context.Genres.Add(new Genre() { Id = 1, Name = "Comedy" });
             Genre g2 = context.Genres.Add(new Genre() { Id = 2, Name = "Action" });
             Genre g3 = context.Genres.Add(new Genre() { Id = 3, Name = "Drama" });
             Genre g4 = context.Genres.Add(new Genre() { Id = 4, Name = "Sci-Fi" });
             Genre g5 = context.Genres.Add(new Genre() { Id = 5, Name = "Horror" });
 
-            context.Movies.Add(new Movie() { Id = 1, Title = "Avengers: Age Of Ultron", Genre = g2, Price = 150, Year = DateTime.Now, ImgUrl = "http://scaled.ysimag.es/movie/the-avengers-age-of-ultron", TrailerUrl = "https://www.youtube.com/watch?v=S2HIda5wSVU" });
+            var hello = new Movie() { Id = 1, Title = "Avengers: Age Of Ultron", Genre = g2, Price = 150, Year = DateTime.Now, ImgUrl = "http://scaled.ysimag.es/movie/the-avengers-age-of-ultron", TrailerUrl = "https://www.youtube.com/watch?v=S2HIda5wSVU" };
+
+            context.Movies.Add(hello);
             context.Movies.Add(new Movie() { Id = 2, Title = "The Voices", Genre = g1, Price = 300, Year = DateTime.Now, ImgUrl = "http://scaled.ysimag.es/movie/voices-the", TrailerUrl = "https://www.youtube.com/watch?v=ARul3sUZfUM" });
             context.Movies.Add(new Movie() { Id = 3, Title = "The D Train", Genre = g1, Price = 30, Year = DateTime.Now, ImgUrl = "http://scaled.ysimag.es/movie/d-train-the", TrailerUrl = "https://www.youtube.com/watch?v=w0qQkSuWOS8" });
             context.Movies.Add(new Movie() { Id = 4, Title = "Horns", Genre = g3, Price = 30, Year = DateTime.Now, ImgUrl = "http://scaled.ysimag.es/movie/horns", TrailerUrl = "https://www.youtube.com/watch?v=w0qQkSuWOS8" });
@@ -37,6 +43,26 @@ namespace Proxy.Seeding
             context.Movies.Add(new Movie() { Id = 16, Title = "Aloha", Genre = g3, Price = 30, Year = DateTime.Now, ImgUrl = "http://scaled.ysimag.es/movie/aloha", TrailerUrl = "https://www.youtube.com/watch?v=w0qQkSuWOS8" });
             context.Movies.Add(new Movie() { Id = 17, Title = "It follows", Genre = g5, Price = 30, Year = DateTime.Now, ImgUrl = "http://scaled.ysimag.es/movie/it-follows", TrailerUrl = "https://www.youtube.com/watch?v=w0qQkSuWOS8" });
             context.Movies.Add(new Movie() { Id = 18, Title = "Fast & Furious 7", Genre = g2, Price = 30, Year = DateTime.Now, ImgUrl = "http://scaled.ysimag.es/movie/fast-furious-7", TrailerUrl = "https://www.youtube.com/watch?v=w0qQkSuWOS8" });
+
+            Order ord1 = context.Orders.Add(new Order
+            {
+                Id = 1,
+                Customer = (new Customer
+                {
+                    Id = 1,
+                    FirstName = "Something",
+                    MiddleName = "So",
+                    LastName = "Cool",
+                    Email = "something@gmail.com",
+                    Password = "Flower",
+                    StreetName = "Vej",
+                    StreetNumber = 2
+                }),
+                Orderlines = new List<Orderline>(),
+                OrderDate = DateTime.Now
+            });
+
+            var Orderline = new Orderline() { Order = ord1, Movie = hello, Amount = 3 };
             base.Seed(context);
         }
     }

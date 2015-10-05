@@ -18,6 +18,7 @@ namespace Proxy.Repositories
         {
             using (var ctx = new MovieShopContext())
             {
+                ctx.Orderline.AddRange(ord.Orderlines);
                 ctx.Orders.Add(ord);
                 ctx.SaveChanges();
             }
@@ -31,7 +32,7 @@ namespace Proxy.Repositories
         {
             using (var ctx = new MovieShopContext())
             {
-                return ctx.Orders.Include("Customer").Include("Movie").ToList();
+                return ctx.Orders.Include("Orderlines").Include("Customer").ToList();
             }
         }
 
@@ -40,9 +41,9 @@ namespace Proxy.Repositories
             using (var ctx = new MovieShopContext())
             {
                 //gets the item that we want to update
-                var order = ctx.Orders.Include("Customer").Include("Movie").Where(c => c.Id == ord.Id).FirstOrDefault();
+                var order = ctx.Orders.Include("Customer").Include("Orderline").Where(c => c.Id == ord.Id).FirstOrDefault();
                 //changes the data
-                order.Movie = ord.Movie;
+                order.Orderlines = ord.Orderlines;
                 order.OrderDate = ord.OrderDate;
                 order.Customer = ord.Customer;
 

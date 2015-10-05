@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,7 +9,12 @@ using System.Threading.Tasks;
 namespace Proxy.DomainModels
 {
     public class Orderline
-    {
+    {   [Key]
+         [ForeignKey("Id")]
+        public Movie Movie { get; set; }
+        [Key]
+        [ForeignKey("Id")]
+        public Order Order { get; set; }
         private int amount;
 
         [Required]
@@ -30,6 +36,6 @@ namespace Proxy.DomainModels
                 }
             }
         }
-        public Movie Movie { get; set; }
+     
     }
 }
