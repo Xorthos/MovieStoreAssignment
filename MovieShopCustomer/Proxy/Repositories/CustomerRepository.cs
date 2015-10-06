@@ -14,7 +14,7 @@ namespace Proxy.Repositories
 
             using(var ctx = new MovieShopContext())
             {
-                ctx.Customers.Add(cust);
+                ctx.Customer.Add(cust);
                 ctx.SaveChanges();
             }
         }
@@ -27,7 +27,7 @@ namespace Proxy.Repositories
         {
             using (var ctx = new MovieShopContext())
             {
-                return ctx.Customers.ToList();
+                return ctx.Customer.ToList();
             }
         }
         /// <summary>
@@ -53,7 +53,7 @@ namespace Proxy.Repositories
         {
             using (var ctx = new MovieShopContext())
             {
-                var cust = ctx.Customers.Where(c => c.Id == id).FirstOrDefault();
+                var cust = ctx.Customer.Where(c => c.Id == id).FirstOrDefault();
                 return cust;
             }
         }
@@ -64,7 +64,7 @@ namespace Proxy.Repositories
         {
             using (var ctx = new MovieShopContext())
             {
-                var customer = ctx.Customers.Include("Genre").Where(c => c.Id == cust.Id).FirstOrDefault();
+                var customer = ctx.Customer.Include("Genre").Where(c => c.Id == cust.Id).FirstOrDefault();
                 customer.FirstName = cust.FirstName;
                 customer.StreetName = cust.StreetName;
                 customer.StreetNumber = cust.StreetNumber;

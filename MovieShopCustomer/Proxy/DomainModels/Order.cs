@@ -13,8 +13,9 @@ namespace Proxy.DomainModels
         public int Id { get; set; }
         [Required]
         public Customer Customer { get; set; }
-        [Required]
-        public Movie Movie { get; set; }
+
+        public List<Orderline> Orderlines{ get; set;}
+
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
         public DateTime OrderDate { get; set; }
 

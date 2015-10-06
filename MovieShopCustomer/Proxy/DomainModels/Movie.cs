@@ -10,6 +10,7 @@ namespace Proxy.DomainModels
     public class Movie
     {
         [Key]
+        [Display(Name = "MovieId")]
         public int Id { get; set; }
         [StringLength(50, ErrorMessage = "Keep the name under 50 chars")]
         [Required]

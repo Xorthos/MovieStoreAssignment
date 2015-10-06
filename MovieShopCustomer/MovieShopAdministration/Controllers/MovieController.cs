@@ -48,7 +48,7 @@ namespace MovieShopAdministration.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(Movie movie)
+        public ActionResult Create([Bind(Include = "Title, Price, Year, Genre.Id, ImgUrl, TrailerUrl")]Movie movie)
         {
             //METHOD NAME MIGHT CHANGE.
             movie.Genre = facade.GetGenreRepository().GetGenre(movie.Genre.Id);

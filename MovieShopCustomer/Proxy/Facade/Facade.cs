@@ -44,14 +44,5 @@ namespace Proxy.Facade
         {
             return new OrderRepository();
         }
-
-        /// <summary>
-        /// Creates a shoppingcartrepository
-        /// </summary>
-        /// <returns>a shoppingcart repository</returns>
-        public ShoppingCartRepository GetShoppingCartRepository()
-        {
-            return new ShoppingCartRepository();
-        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,8 +14,18 @@ namespace Proxy.DomainModels
         public int OrderId { get; set; }
 
         private int amount;
+        [Key, ForeignKey("Movie")]
+        [Column(Order = 1)]
+        public int MovieId{ get; set; }
 
-        [Required]
+        public Movie Movie { get; set; }
+
+        [Key]
+        [Column(Order = 2)]
+        public int OrderId { get; set; }
+
+        private int amount;
+        
         [Range(1,10)]
         public int Amount {
             get
@@ -33,6 +44,11 @@ namespace Proxy.DomainModels
                 }
             }
         }
-        public Movie Movie { get; set; }
+
+        public Orderline()
+        {
+
+        }
+     
     }
 }
