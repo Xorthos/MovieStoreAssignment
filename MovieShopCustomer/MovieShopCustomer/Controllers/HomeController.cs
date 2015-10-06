@@ -38,6 +38,11 @@ namespace MovieShopCustomer.Controllers
             return View("Index", new IndexViewModel() { Movies = movies, Genres = genres });
         }
 
+        public ActionResult Test()
+        {
+            return View(facade.GetOrderRepository().GetAll());
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

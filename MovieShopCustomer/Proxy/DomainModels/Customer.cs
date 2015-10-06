@@ -12,24 +12,28 @@ namespace Proxy.DomainModels
         [Key]
         public int Id { get; set; }
 
-        [Required(ErrorMessage ="First name required")]
+        [Required]
         public string FirstName { get; set; }
 
         public string MiddleName { get; set; }
 
-        [Required(ErrorMessage ="Last Name required")]
+        [Required]
         public string LastName { get; set; }
 
-        [Required(ErrorMessage = "Street name required")]
+        [Required]
         public string StreetName { get; set; }
 
-        [Required(ErrorMessage = "Street number required")]
+        [Required]
         [Range(0, int.MaxValue, ErrorMessage ="Must be positive")]
         public int StreetNumber { get; set; }
 
-        [Required(ErrorMessage = "Email required")]
-        [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}",ErrorMessage ="Doesn't look like an email"),]
+        [Required]
+        //[RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}",ErrorMessage ="Doesn't look like an email")]
         public string Email { get; set; }
+        [Required]
+        //[RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}")]
+        //[StringLength(20, MinimumLength = 6, ErrorMessage = "The password needs to has a length of 6-20.")]
+        public string Password { get; set; }
 
         /// <summary>
         /// Constructor:
