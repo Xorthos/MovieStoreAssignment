@@ -16,13 +16,28 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Movie shop", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
-            <div class="navbar-collapse collapse">
+            <div class="navbar-collapse collapse navbar-right">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    @if(Session["UserName"] != null)
+                    {
+                        <li>@Html.ActionLink("Log out", "UserLogOut", "home")</li>
+                        <li>@Html.ActionLink(Session["UserName"] as string, "UserProfile", "Home")</li>
+                    }
+                    else
+                    {
+                        <li>
+                            <form method="Post" action="~/Home/UserLogIn">
+                                @Html.TextBox("UserEmail")
+                                @Html.Password("UserPassword")
+                                <button type="submit" class="btn btn-default">Log in</button>
+                            </form>
+                            </li>
+                        <li>@Html.ActionLink("Register", "UserRegister", "Home")</li>
+                    }
+                    <li>@Html.ActionLink("Shopping cart", "ShoppingCart", "Home")</li>
+
                 </ul>
             </div>
         </div>

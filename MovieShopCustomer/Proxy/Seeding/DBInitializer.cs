@@ -37,6 +37,9 @@ namespace Proxy.Seeding
             context.Movies.Add(new Movie() { Id = 16, Title = "Aloha", Genre = g3, Price = 30, Year = DateTime.Now, ImgUrl = "http://scaled.ysimag.es/movie/aloha", TrailerUrl = "https://www.youtube.com/watch?v=w0qQkSuWOS8" });
             context.Movies.Add(new Movie() { Id = 17, Title = "It follows", Genre = g5, Price = 30, Year = DateTime.Now, ImgUrl = "http://scaled.ysimag.es/movie/it-follows", TrailerUrl = "https://www.youtube.com/watch?v=w0qQkSuWOS8" });
             context.Movies.Add(new Movie() { Id = 18, Title = "Fast & Furious 7", Genre = g2, Price = 30, Year = DateTime.Now, ImgUrl = "http://scaled.ysimag.es/movie/fast-furious-7", TrailerUrl = "https://www.youtube.com/watch?v=w0qQkSuWOS8" });
+
+            context.Customers.Add(new Customer() { Email = "mads@minimads.com", Password = "1234567", Id = 1, FirstName = "Mads", MiddleName = "Albæk", LastName = "Damsgaard-Sørensen", StreetName = "Skrænten", StreetNumber = 132 });
+
             base.Seed(context);
         }
     }

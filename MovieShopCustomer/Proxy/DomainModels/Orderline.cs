@@ -9,6 +9,9 @@ namespace Proxy.DomainModels
 {
     public class Orderline
     {
+        [Key]
+        public int OrderId { get; set; }
+
         private int amount;
 
         [Required]
