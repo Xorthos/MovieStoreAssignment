@@ -10,9 +10,6 @@ namespace Proxy.DomainModels
 {
     public class Orderline
     {
-        [Key]
-        public int OrderId { get; set; }
-
         private int amount;
         [Key, ForeignKey("Movie")]
         [Column(Order = 1)]
@@ -23,8 +20,6 @@ namespace Proxy.DomainModels
         [Key]
         [Column(Order = 2)]
         public int OrderId { get; set; }
-
-        private int amount;
         
         [Range(1,10)]
         public int Amount {
