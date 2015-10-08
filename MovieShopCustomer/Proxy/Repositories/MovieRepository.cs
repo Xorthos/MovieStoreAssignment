@@ -18,7 +18,7 @@ namespace Proxy.Repositories
         {
             using(var ctx = new MovieShopContext())
             {
-                ctx.Movie.Add(movie);
+                ctx.Movies.Add(movie);
                 ctx.SaveChanges();
             }
         }
@@ -30,7 +30,7 @@ namespace Proxy.Repositories
         {
             using(var ctx = new MovieShopContext())
             {
-                return ctx.Movie.Include("Genre").ToList();
+                return ctx.Movies.Include("Genre").ToList();
             }
         }
 
@@ -42,7 +42,7 @@ namespace Proxy.Repositories
         public Movie GetMovie(int id)
         {
             using(var ctx = new MovieShopContext()) { 
-                return ctx.Movie.Include("Genre").Where(c => c.Id == id).FirstOrDefault();
+                return ctx.Movies.Include("Genre").Where(c => c.Id == id).FirstOrDefault();
             }
         }
 
@@ -50,8 +50,8 @@ namespace Proxy.Repositories
         {
             using (var ctx = new MovieShopContext())
             {
-                var movie = ctx.Movie.Where(c => c.Id == id).FirstOrDefault();
-                ctx.Movie.Remove(movie);
+                var movie = ctx.Movies.Where(c => c.Id == id).FirstOrDefault();
+                ctx.Movies.Remove(movie);
                 ctx.SaveChanges();
             }
         }
@@ -62,7 +62,7 @@ namespace Proxy.Repositories
         {
             using (var ctx = new MovieShopContext())
             {
-                var movie = ctx.Movie.Include("Genre").Where(c => c.Id == mov.Id).FirstOrDefault();
+                var movie = ctx.Movies.Include("Genre").Where(c => c.Id == mov.Id).FirstOrDefault();
                 movie.Genre = mov.Genre;
                 movie.Price = mov.Price;
                 movie.Title = mov.Title;

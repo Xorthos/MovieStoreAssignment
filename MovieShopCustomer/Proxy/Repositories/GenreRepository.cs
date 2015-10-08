@@ -18,7 +18,7 @@ namespace Proxy.Repositories
         {
             using (var ctx = new MovieShopContext())
             {
-                ctx.Genre.Add(gen);
+                ctx.Genres.Add(gen);
                 ctx.SaveChanges();
             }
         }
@@ -31,7 +31,7 @@ namespace Proxy.Repositories
         {
             using (var ctx = new MovieShopContext())
             {
-                return ctx.Genre.ToList();
+                return ctx.Genres.ToList();
             }
         }
 
@@ -39,7 +39,7 @@ namespace Proxy.Repositories
         {
             using (var ctx = new MovieShopContext())
             {
-                var genre = ctx.Genre.Where(c => c.Id == gen.Id).FirstOrDefault();
+                var genre = ctx.Genres.Where(c => c.Id == gen.Id).FirstOrDefault();
 
             }
         }
@@ -47,7 +47,7 @@ namespace Proxy.Repositories
         public Genre GetGenre(int id)
         {
             using(var ctx = new MovieShopContext()) { 
-                return ctx.Genre.Where(c => c.Id == id).FirstOrDefault();
+                return ctx.Genres.Where(c => c.Id == id).FirstOrDefault();
             }
         }
     }
