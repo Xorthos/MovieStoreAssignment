@@ -37,5 +37,12 @@ namespace MovieShopCustomer.Controllers
             }
             return View(cust);
         }
+
+        public ActionResult UserLogOut()
+        {
+            Session["UserId"] = null;
+            Session["UserName"] = null;
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

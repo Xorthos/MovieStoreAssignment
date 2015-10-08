@@ -45,18 +45,19 @@ namespace Proxy.Seeding
 
             context.Customers.Add(cust);
 
-            var ord = new Order()
+
+            List<Orderline> orderlines = new List<Orderline>();
+            orderlines.Add(context.Orderline.Add(new Orderline() { OrderId = 1, MovieId = hello.Id, Amount = 3 }));
+            orderlines.Add(context.Orderline.Add(new Orderline() { OrderId = 1, MovieId = 6, Amount = 6 }));
+            orderlines.Add(context.Orderline.Add(new Orderline() { OrderId = 1, MovieId = 17, Amount = 8 }));
+
+            var ord = new Order(orderlines, cust)
             {
-                Id = 1,
-                Customer = cust,
-                OrderDate = DateTime.Now
+                Id = 1
             };
 
             context.Orders.Add(ord);
-            
-            context.Orderline.Add(new Orderline() { OrderId = 1, MovieId = hello.Id, Amount = 3 });
-            context.Orderline.Add(new Orderline() { OrderId = 1, MovieId = 6, Amount = 6 });
-            context.Orderline.Add(new Orderline() { OrderId = 1, MovieId = 17, Amount = 8 });
+
             base.Seed(context);
         }
     }

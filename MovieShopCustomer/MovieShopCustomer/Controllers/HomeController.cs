@@ -67,10 +67,26 @@ namespace MovieShopCustomer.Controllers
             Customer cust = facade.GetCustomerRepository().GetCustomer(UserEmail);
             if(cust != null && cust.Password.Equals(UserPassword))
             {
-                Session["UserName"] = cust.FirstName + " " + cust.MiddleName != null ? cust.MiddleName + " " : "" + cust.LastName;
+                Session["UserName"] = cust.FirstName + " " + cust.LastName;
                 Session["UserId"] = cust.Id;
             }
             return Redirect("Index");
+        }
+
+        [HttpGet]
+        public ActionResult Checkout()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Checkout(Order order)
+        {
+            if (ModelState.IsValid)
+            {
+                return View();
+            }
+            return View("OrderFailed");
         }
     }
 }
