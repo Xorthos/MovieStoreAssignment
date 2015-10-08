@@ -20,7 +20,7 @@
         <div class="row">
             @foreach (var item in Model.Movies)
             {
-                <div class="col-lg-2 col-sm-4 col-xs-6" style="outline : solid lightgrey 1px; margin : 10px; background-color : lightgray; min-height : 400px; min-width : 150px">
+                <div class="col-lg-2 col-sm-4 col-xs-6" style="outline : solid lightgrey 1px; margin : 10px; background-color : lightgray; min-height : 430px; min-width : 150px">
                     <a title="@item.Title" href="#">
                         <img style="margin-top: 15px; max-height : 220px; max-width : 160px; vertical-align : central; display: block; margin-left: auto; margin-right: auto" class="thumbnail img-responsive" src="@item.ImgUrl">
                     </a>
@@ -32,7 +32,13 @@
                                 <div style="position:relative; float:left">
                                     <p style="font-size:30px">Kr. @item.Price </p>
                                 </div>
-                                <div style="position:relative; float:right"><a class="btn btn-default" style="background-color : gray">Buy</a></div>
+                                <div style="position:relative; float:right">
+                                    <form method="Get" action="~/Home/AddMovieToCart">
+                                        <input type="hidden" name="movieId" value="@item.Id"/>
+                                        <input type="number" min="1" max="20" style="width : 50px" maxlength="2" name="amount" value="" />
+                                        <button type="submit" class="btn btn-default">Add to cart</button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>

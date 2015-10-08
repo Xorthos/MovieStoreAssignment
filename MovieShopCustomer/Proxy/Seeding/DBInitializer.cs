@@ -13,6 +13,11 @@ namespace Proxy.Seeding
     {
         protected override void Seed(MovieShopContext context)
         {
+            Genre g1 = context.Genres.Add(new Genre() { Id = 1, Name = "Comedy" });
+            Genre g2 = context.Genres.Add(new Genre() { Id = 2, Name = "Action" });
+            Genre g3 = context.Genres.Add(new Genre() { Id = 3, Name = "Drama" });
+            Genre g4 = context.Genres.Add(new Genre() { Id = 4, Name = "Sci-Fi" });
+            Genre g5 = context.Genres.Add(new Genre() { Id = 5, Name = "Horror" });
             Genre g1 = context.Genre.Add(new Genre() { Id = 1, Name = "Comedy" });
             Genre g2 = context.Genre.Add(new Genre() { Id = 2, Name = "Action" });
             Genre g3 = context.Genre.Add(new Genre() { Id = 3, Name = "Drama" });
@@ -41,6 +46,7 @@ namespace Proxy.Seeding
             context.Movie.Add(new Movie() { Id = 18, Title = "Fast & Furious 7", Genre = g2, Price = 30, Year = DateTime.Now, ImgUrl = "http://scaled.ysimag.es/movie/fast-furious-7", TrailerUrl = "https://www.youtube.com/watch?v=w0qQkSuWOS8" });
 
             Customer cust = new Customer() { Id = 1, Email = "bh@h.dk", FirstName = "Hej", MiddleName = "Nows", LastName = "DFNDF", Password="ddddddd", StreetName= "hejs", StreetNumber = 5};
+            context.Customers.Add(new Customer() { Email = "mads@minimads.com", Password = "1234567", Id = 1, FirstName = "Mads", MiddleName = "Albæk", LastName = "Damsgaard-Sørensen", StreetName = "Skrænten", StreetNumber = 132 });
 
             context.Customer.Add(cust);
 

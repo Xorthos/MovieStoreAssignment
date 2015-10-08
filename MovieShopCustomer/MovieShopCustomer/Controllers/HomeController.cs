@@ -14,6 +14,10 @@ namespace MovieShopCustomer.Controllers
         Facade facade = new Facade();
         public ActionResult Index()
         {
+            if(Session["ShoppingCart"] == null)
+            {
+                Session["ShoppingCart"] = new ShoppingCart();
+            }
             List<Movie> movies = facade.GetMovieRepository().GetAll();
             List<Genre> genres = facade.GetGenreRepository().GetAll();
 
@@ -38,23 +42,35 @@ namespace MovieShopCustomer.Controllers
             return View("Index", new IndexViewModel() { Movies = movies, Genres = genres });
         }
 
-        public ActionResult Test()
+        public ActionResult ShoppingCart()
         {
-            return View(facade.GetOrderRepository().GetAll());
+                return View(Session["ShoppingCart"] as ShoppingCart);
         }
 
-        public ActionResult About()
+        public ActionResult AddMovieToCart(int movieId, int amount)
         {
-            ViewBag.Message = "Your application description page.";
+            Orderline line = new Orderline() { Movie = facade.GetMovieRepository().GetMovie(movieId), Amount = amount };
+            ShoppingCart cart = Session["ShoppingCart"] as ShoppingCart;
+            cart.Orderline.Add(line);
+            return Redirect("Index");
+        }
 
+        [HttpGet]
+        public ActionResult UserLogIn()
+        {
             return View();
         }
 
-        public ActionResult Contact()
+        [HttpPost]
+        public ActionResult UserLogIn(string UserEmail, string UserPassword)
         {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            Customer cust = facade.GetCustomerRepository().GetCustomer(UserEmail);
+            if(cust != null && cust.Password.Equals(UserPassword))
+            {
+                Session["UserName"] = cust.FirstName + " " + cust.MiddleName != null ? cust.MiddleName + " " : "" + cust.LastName;
+                Session["UserId"] = cust.Id;
+            }
+            return Redirect("Index");
         }
     }
 }

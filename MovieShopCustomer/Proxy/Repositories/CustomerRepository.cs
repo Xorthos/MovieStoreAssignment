@@ -35,17 +35,14 @@ namespace Proxy.Repositories
         /// </summary>
         /// <param name="email">The email of the customer that is wanted</param>
         /// <returns></returns>
-        /*
+        
         public Customer GetCustomer(string email)
         {
             using (var ctx = new MovieShopContext()) {
-                 Customer cust = ctx.Customers.Select(c => c.Email);
-                 var cust = ctx.Customers.Where(c => c.Email == email).FirstOrDefault();
+                 var cust = ctx.Customers.Where(c => c.Email.Equals(email)).FirstOrDefault();
                 return cust;
             }
         }
-<<<<<<< HEAD
-        */
 
         /// <summary>
         /// returns a customers with a specified Id
@@ -63,7 +60,7 @@ namespace Proxy.Repositories
         /// <summary>
         /// 
         /// </summary>
-        public void ChangeMovie(Customer cust)
+        public void ChangeCustomer(Customer cust)
         {
             using (var ctx = new MovieShopContext())
             {

@@ -10,6 +10,10 @@ namespace Proxy.DomainModels
 {
     public class Orderline
     {
+        [Key]
+        public int OrderId { get; set; }
+
+        private int amount;
         [Key, ForeignKey("Movie")]
         [Column(Order = 1)]
         public int MovieId{ get; set; }
