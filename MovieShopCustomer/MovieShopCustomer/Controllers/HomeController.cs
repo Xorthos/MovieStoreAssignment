@@ -74,9 +74,18 @@ namespace MovieShopCustomer.Controllers
         }
 
         [HttpGet]
-        public ActionResult Checkout()
+        public ActionResult Checkout(CheckoutViewModel checkout)
         {
-            return View();
+            try
+            {
+                int userId = (int)Session["UserId"];
+                Customer customer = facade.GetCustomerRepository().GetCustomer(userId);
+                ShoppingCart cart = Session["ShoppingCart"] as ShoppingCart;
+                return View("Checkout", new CheckoutViewModel() { Customer = customer, ShoppingCart = cart });
+            }
+            catch {
+                return Redirect("Index");
+            }
         }
 
         [HttpPost]

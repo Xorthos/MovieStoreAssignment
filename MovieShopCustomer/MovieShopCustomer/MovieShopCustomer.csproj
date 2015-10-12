@@ -133,6 +133,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CheckoutViewModel.cs" />
     <Compile Include="Models\FilterModel.cs" />
     <Compile Include="Models\IndexViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -175,6 +176,7 @@
     <Content Include="Views\Home\ShoppingCart.cshtml" />
     <Content Include="Views\Home\UserLogIn.cshtml" />
     <Content Include="Views\Customer\NewCustomer.cshtml" />
+    <Content Include="Views\Home\Checkout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
