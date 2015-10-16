@@ -22,9 +22,11 @@ namespace Proxy.DomainModels
         /// <summary>
         /// Constructor:
         /// </summary>
-        public Order()
+        public Order(List<Orderline> orderLines, Customer cust)
         {
-
+            Orderlines = orderLines;
+            Customer = cust;
+            OrderDate = DateTime.Now;
         }
     }
 }

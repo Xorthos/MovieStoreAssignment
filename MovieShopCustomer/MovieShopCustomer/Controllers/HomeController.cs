@@ -67,10 +67,35 @@ namespace MovieShopCustomer.Controllers
             Customer cust = facade.GetCustomerRepository().GetCustomer(UserEmail);
             if(cust != null && cust.Password.Equals(UserPassword))
             {
-                Session["UserName"] = cust.FirstName + " " + cust.MiddleName != null ? cust.MiddleName + " " : "" + cust.LastName;
+                Session["UserName"] = cust.FirstName + " " + cust.LastName;
                 Session["UserId"] = cust.Id;
             }
             return Redirect("Index");
+        }
+
+        [HttpGet]
+        public ActionResult Checkout(CheckoutViewModel checkout)
+        {
+            try
+            {
+                int userId = (int)Session["UserId"];
+                Customer customer = facade.GetCustomerRepository().GetCustomer(userId);
+                ShoppingCart cart = Session["ShoppingCart"] as ShoppingCart;
+                return View("Checkout", new CheckoutViewModel() { Customer = customer, ShoppingCart = cart });
+            }
+            catch {
+                return Redirect("Index");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Checkout(Order order)
+        {
+            if (ModelState.IsValid)
+            {
+                return View();
+            }
+            return View("OrderFailed");
         }
     }
 }
