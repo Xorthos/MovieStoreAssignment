@@ -32,9 +32,14 @@ namespace Proxy.Repositories
         {
             using (var ctx = new MovieShopContext())
             {
-                
+                var orderlines = ctx.Orderline.Include("Movie").ToList();
                 var orders = ctx.Orders.Include("Customer").Include("Orderlines").ToList();
-                
+
+                foreach (var item in orders)
+                {
+                    item.Orderlines = orderlines.Where(cm => cm.OrderId == item.Id).ToList();
+                }
+
                 return orders;
             }
         }

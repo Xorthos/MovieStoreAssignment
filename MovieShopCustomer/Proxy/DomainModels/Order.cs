@@ -19,6 +19,11 @@ namespace Proxy.DomainModels
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
         public DateTime OrderDate { get; set; }
 
+        public Order()
+        {
+
+        }
+
         /// <summary>
         /// Constructor:
         /// </summary>

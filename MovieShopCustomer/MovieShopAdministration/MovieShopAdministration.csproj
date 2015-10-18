@@ -138,6 +138,7 @@
     <Compile Include="Models\EditMovieModel.cs" />
     <Compile Include="Models\FilterModel.cs" />
     <Compile Include="Models\IndexViewModel.cs" />
+    <Compile Include="Models\OrderStrongType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -184,6 +185,7 @@
     <Content Include="Views\Genre\Edit.cshtml" />
     <Content Include="Views\Genre\Create.cshtml" />
     <Content Include="Views\Genre\Index.cshtml" />
+    <Content Include="Views\Home\SeeOrders.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

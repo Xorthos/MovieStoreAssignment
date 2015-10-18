@@ -31,10 +31,7 @@ namespace Proxy.DomainModels
         //[RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}",ErrorMessage ="Doesn't look like an email")]
         [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}",ErrorMessage ="Doesn't look like an email")]
         public string Email { get; set; }
-        [Required]
-        //[RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}")]
-        //[StringLength(20, MinimumLength = 6, ErrorMessage = "The password needs to has a length of 6-20.")]
-        public string Email { get; set; }
+        
         [Required]
         [StringLength(20, MinimumLength = 6, ErrorMessage = "The password needs to has a length of 6-20.")]
         public string Password { get; set; }
