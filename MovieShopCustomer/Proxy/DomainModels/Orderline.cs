@@ -14,6 +14,7 @@ namespace Proxy.DomainModels
         [Key, ForeignKey("Movie")]
         [Column(Order = 1)]
         public int MovieId{ get; set; }
+        public double Price { get; set; }
 
         public Movie Movie { get; set; }
 

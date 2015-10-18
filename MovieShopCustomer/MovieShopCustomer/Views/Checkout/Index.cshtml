@@ -5,7 +5,7 @@
 }
 
 <h2>Checkout</h2>
-<form method="Post" action="~/Customer/Checkout" >
+<form method="Post" action="~/Checkout/Index" >
     <div class="row">
         <div class="col-md-4">
            
@@ -56,6 +56,7 @@
                         <th>Amount</th>
                         <th>Price/each</th>
                         <th>Total Price</th>
+                        
 
                     </tr>
                 </thead>
@@ -70,6 +71,7 @@
                         <td>@item.Amount</td>
                         <td>@item.Movie.Price</td>
                         <td>@TotalPrice</td>
+                        <td>@Html.ActionLink("Delete", "Delete", "Checkout", new { movieId = @item.Movie.Id}, null)</td>
                     </tr>
           }
                     <tr>
@@ -78,10 +80,10 @@
                     </tr>
                </tbody>
             </table>
-            @Html.ActionLink("Puchase", "Purchase", "Home", new { @class = "btn btn-default", @style = "float : right; margin-left: 10px" })
+            @Html.ActionLink("Puchase", "Purchase", "Checkout", new { }, new { @class = "btn btn-default", @style = "float : right; margin-left: 10px" })
             
             
-           @Html.ActionLink("Back to List", "Index", "Home", new { @class = "btn btn-default", @style = "float : right" })
+           @Html.ActionLink("Back to List", "Index", "Home", new { }, new { @class = "btn btn-default", @style = "float : right" })
             
         </div>
     </div>

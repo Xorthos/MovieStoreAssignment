@@ -14,7 +14,7 @@ namespace MovieShopCustomer.Controllers
         Facade facade = new Facade();
         public ActionResult Index()
         {
-            if(Session["ShoppingCart"] == null)
+            if (Session["ShoppingCart"] == null)
             {
                 Session["ShoppingCart"] = new ShoppingCart();
             }
@@ -44,7 +44,7 @@ namespace MovieShopCustomer.Controllers
 
         public ActionResult ShoppingCart()
         {
-                return View(Session["ShoppingCart"] as ShoppingCart);
+            return View(Session["ShoppingCart"] as ShoppingCart);
         }
 
         public ActionResult AddMovieToCart(int movieId, int amount)
@@ -65,7 +65,7 @@ namespace MovieShopCustomer.Controllers
         public ActionResult UserLogIn(string UserEmail, string UserPassword)
         {
             Customer cust = facade.GetCustomerRepository().GetCustomer(UserEmail);
-            if(cust != null && cust.Password.Equals(UserPassword))
+            if (cust != null && cust.Password.Equals(UserPassword))
             {
                 Session["UserName"] = cust.FirstName + " " + cust.LastName;
                 Session["UserId"] = cust.Id;
@@ -73,29 +73,6 @@ namespace MovieShopCustomer.Controllers
             return Redirect("Index");
         }
 
-        [HttpGet]
-        public ActionResult Checkout(CheckoutViewModel checkout)
-        {
-            try
-            {
-                int userId = (int)Session["UserId"];
-                Customer customer = facade.GetCustomerRepository().GetCustomer(userId);
-                ShoppingCart cart = Session["ShoppingCart"] as ShoppingCart;
-                return View("Checkout", new CheckoutViewModel() { Customer = customer, ShoppingCart = cart });
-            }
-            catch {
-                return Redirect("Index");
-            }
-        }
 
-        [HttpPost]
-        public ActionResult Checkout(Order order)
-        {
-            if (ModelState.IsValid)
-            {
-                return View();
-            }
-            return View("OrderFailed");
-        }
     }
 }
