@@ -73,12 +73,6 @@ namespace MovieShopCustomer.Controllers
             return Redirect("Index");
         }
 
-        [HttpGet]
-        public ActionResult Checkout()
-        {
-            return View();
-        }
-
         [HttpPost]
         public ActionResult Checkout(Order order)
         {
@@ -148,6 +142,12 @@ namespace MovieShopCustomer.Controllers
             {
                 return View(cust);
             }
+        }
+
+        [HttpGet]
+        public ActionResult ViewOrders()
+        {
+            return View(facade.GetOrderRepository().GetOrders((int)Session["UserId"]));
         }
     }
 }

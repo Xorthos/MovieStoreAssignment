@@ -1,0 +1,90 @@
+﻿@model MovieShopCustomer.Models.CheckoutViewModel
+
+@{
+    ViewBag.Title = "Checkout";
+}
+
+<h2>Checkout</h2>
+<form method="Post" action="~/Checkout/Index" >
+    <div class="row">
+        <div class="col-md-4">
+           
+
+
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+
+            <div class="form-group">
+                @Html.LabelFor(c => c.Customer.FirstName)
+                @Html.TextBoxFor(c => c.Customer.FirstName, htmlAttributes: new { @class = "form-control", disabled = "disabled" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(c => c.Customer.MiddleName)
+                @Html.TextBoxFor(c => c.Customer.MiddleName, htmlAttributes: new { @class = "form-control", disabled = "disabled" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(c => c.Customer.LastName)
+                @Html.TextBoxFor(c => c.Customer.LastName, htmlAttributes: new { @class = "form-control", disabled = "disabled" })
+                
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(c => c.Customer.StreetName)
+                @Html.TextBoxFor(c => c.Customer.StreetName, htmlAttributes: new { @class = "form-control", disabled = "disabled" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(c => c.Customer.StreetNumber)
+                @Html.TextBoxFor(c => c.Customer.StreetNumber, htmlAttributes: new { @class = "form-control", disabled = "disabled" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(c => c.Customer.Email)
+                @Html.TextBoxFor(c => c.Customer.Email, htmlAttributes: new { @class = "form-control", disabled = "disabled" })
+            </div>
+
+        </div>
+
+        <div class="col-md-8">
+            
+            <table id="example" class="table table-striped table-bordered col-lg-pull-5" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Amount</th>
+                        <th>Price/each</th>
+                        <th>Total Price</th>
+                        
+
+                    </tr>
+                </thead>
+                <tbody>
+          @{double FinalPrice = 0; }
+          @foreach (var item in Model.ShoppingCart.Orderline)
+          {
+              double TotalPrice = @item.Movie.Price * @item.Amount;
+              FinalPrice += TotalPrice;
+                    <tr>
+                        <td>@item.Movie.Title</td>
+                        <td>@item.Amount</td>
+                        <td>@item.Movie.Price</td>
+                        <td>@TotalPrice</td>
+                        <td>@Html.ActionLink("Delete", "Delete", "Checkout", new { movieId = @item.Movie.Id}, null)</td>
+                    </tr>
+          }
+                    <tr>
+                        <td colspan="3">Final Price</td>
+                        <td>@FinalPrice</td>
+                    </tr>
+               </tbody>
+            </table>
+            @Html.ActionLink("Puchase", "Purchase", "Checkout", new { }, new { @class = "btn btn-default", @style = "float : right; margin-left: 10px" })
+            
+            
+           @Html.ActionLink("Back to List", "Index", "Home", new { }, new { @class = "btn btn-default", @style = "float : right" })
+            
+        </div>
+    </div>
+</form>

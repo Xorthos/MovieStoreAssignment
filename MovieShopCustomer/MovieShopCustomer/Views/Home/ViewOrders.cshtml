@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Proxy.DomainModels.Order>
+
+@{
+    ViewBag.Title = "ViewOrders";
+}
+
+<table class="table">
+    <tr>
+        <th>
+            <h2>Orders</h2>
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <table class="table">
+            <td>
+                <table class="table">
+                    <tr>
+                        <td>Order date</td>
+                        <td>@item.OrderDate</td>
+                    </tr>
+                    <tr>
+                        <td>Customer</td>
+                        <td>@item.Customer</td>
+                    </tr>
+                    <tr>
+                        <td>Order id</td>
+                        <td>@item.Id</td>
+                    </tr>
+                    <tr>
+                        <td>Status</td>
+                        <td>@item.Status</td>
+                    </tr>
+                </table>
+            </td>
+            <td>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Amount</th>
+                            <th>Price/each</th>
+                            <th>Total Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{double FinalPrice = 0; }
+                        @foreach (var line in item.Orderlines)
+                        {
+                            double TotalPrice = @line.Movie.Price * @line.Amount;
+                            FinalPrice += TotalPrice;
+                            <tr>
+                                <td>@line.Movie.Title</td>
+                                <td>@line.Amount</td>
+                                <td>@line.Movie.Price</td>
+                                <td>@TotalPrice</td>
+                            </tr>
+                        }
+                        <tr>
+                            <td colspan="3">Final Price</td>
+                            <td>@FinalPrice</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </table>
+    </tr>
+}
+
+</table>
