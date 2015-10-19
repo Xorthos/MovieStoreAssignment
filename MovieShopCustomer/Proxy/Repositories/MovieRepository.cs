@@ -28,10 +28,18 @@ namespace Proxy.Repositories
         /// <returns></returns>
         public List<Movie> GetAll()
         {
-            using(var ctx = new MovieShopContext())
+            try
+            {
+                using(var ctx = new MovieShopContext())
             {
                 return ctx.Movies.Include("Genre").ToList();
             }
+            }
+            catch(Exception e)
+            {
+                return null;
+            }
+            
         }
 
         /// <summary>

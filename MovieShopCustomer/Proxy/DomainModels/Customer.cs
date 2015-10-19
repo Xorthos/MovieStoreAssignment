@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +10,7 @@ namespace Proxy.DomainModels
 {
     public class Customer
     {
+
         [Key]
         public int Id { get; set; }
 
@@ -30,7 +32,7 @@ namespace Proxy.DomainModels
         [Required]
         public string Email { get; set; }
         [Required]
-        [StringLength(20, MinimumLength = 6, ErrorMessage = "The password needs to has a length of 6-20.")]
+        [StringLength(20, MinimumLength = 6, ErrorMessage = "The password needs to have a length of 6-20.")]
         public string Password { get; set; }
 
         /// <summary>

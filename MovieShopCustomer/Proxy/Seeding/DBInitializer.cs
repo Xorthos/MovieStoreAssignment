@@ -13,6 +13,13 @@ namespace Proxy.Seeding
     {
         protected override void Seed(MovieShopContext context)
         {
+            Status stat1 = new Status() { Name = "Processing" };
+            Status stat2 = new Status() { Name = "Shipped" };
+            Status stat3 = new Status() { Name = "Completed" };
+            context.status.Add(stat1);
+            context.status.Add(stat2);
+            context.status.Add(stat3);
+
             Genre g1 = context.Genres.Add(new Genre() { Id = 1, Name = "Comedy" });
             Genre g2 = context.Genres.Add(new Genre() { Id = 2, Name = "Action" });
             Genre g3 = context.Genres.Add(new Genre() { Id = 3, Name = "Drama" });
@@ -53,7 +60,8 @@ namespace Proxy.Seeding
 
             var ord = new Order(orderlines, cust)
             {
-                Id = 1
+                Id = 1,
+                Status = stat1
             };
 
             context.Orders.Add(ord);

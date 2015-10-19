@@ -64,12 +64,24 @@ namespace Proxy.Repositories
         {
             using (var ctx = new MovieShopContext())
             {
-                var customer = ctx.Customers.Include("Genre").Where(c => c.Id == cust.Id).FirstOrDefault();
+                var customer = ctx.Customers.Where(c => c.Id == cust.Id).FirstOrDefault();
                 customer.FirstName = cust.FirstName;
+                customer.MiddleName = cust.MiddleName;
+                customer.LastName = cust.LastName;
                 customer.StreetName = cust.StreetName;
                 customer.StreetNumber = cust.StreetNumber;
                 customer.Email = cust.Email;
-                customer.LastName = cust.LastName;
+
+                ctx.SaveChanges();
+            }
+        }
+
+        public void ChangePassword(Customer cust)
+        {
+            using (var ctx = new MovieShopContext())
+            {
+                var customer = ctx.Customers.Where(c => c.Id == cust.Id).FirstOrDefault();
+                customer.Password = cust.Password;
 
                 ctx.SaveChanges();
             }

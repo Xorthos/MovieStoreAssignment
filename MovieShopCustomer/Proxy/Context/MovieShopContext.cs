@@ -17,6 +17,7 @@ namespace Proxy.Context
         public DbSet<Order> Orders { get; set; }
         public DbSet<ShoppingCart> ShoppingCarts { get; set; }
         public DbSet<Orderline> Orderline { get; set; }
+        public DbSet<Status> status { get; set; }
 
         public MovieShopContext() : base("MovieShop")
         {

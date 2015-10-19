@@ -14,7 +14,7 @@ namespace MovieShopCustomer.Controllers
         Facade facade = new Facade();
         public ActionResult Index()
         {
-            if(Session["ShoppingCart"] == null)
+            if (Session["ShoppingCart"] == null)
             {
                 Session["ShoppingCart"] = new ShoppingCart();
             }
@@ -44,7 +44,7 @@ namespace MovieShopCustomer.Controllers
 
         public ActionResult ShoppingCart()
         {
-                return View(Session["ShoppingCart"] as ShoppingCart);
+            return View(Session["ShoppingCart"] as ShoppingCart);
         }
 
         public ActionResult AddMovieToCart(int movieId, int amount)
@@ -65,7 +65,7 @@ namespace MovieShopCustomer.Controllers
         public ActionResult UserLogIn(string UserEmail, string UserPassword)
         {
             Customer cust = facade.GetCustomerRepository().GetCustomer(UserEmail);
-            if(cust != null && cust.Password.Equals(UserPassword))
+            if (cust != null && cust.Password.Equals(UserPassword))
             {
                 Session["UserName"] = cust.FirstName + " " + cust.LastName;
                 Session["UserId"] = cust.Id;
@@ -87,6 +87,67 @@ namespace MovieShopCustomer.Controllers
                 return View();
             }
             return View("OrderFailed");
+        }
+
+        [HttpGet]
+        public ActionResult UserProfile()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult ChangePass()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ChangePass(ChangePassModel viewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                Customer cust = facade.GetCustomerRepository().GetCustomer((int)Session["UserId"]);
+                if (cust.Password.Equals(viewModel.OldPassword))
+                {
+                    cust.Password = viewModel.Password;
+                    facade.GetCustomerRepository().ChangePassword(cust);
+                    ViewBag.PreviousFail = null;
+
+                }
+                else
+                {
+                    ViewBag.PreviousFail = true;
+                    return View(viewModel);
+                }
+                return RedirectToAction("UserProfile");
+            }
+            else
+            {
+                return View(viewModel);
+            }
+        }
+        [HttpGet]
+        public ActionResult ChangeInfo()
+        {
+            return View(facade.GetCustomerRepository().GetCustomer((int)Session["UserId"]));
+        }
+
+        [HttpPost]
+        public ActionResult ChangeInfo([Bind(Include ="FirstName, MiddleName, LastName, StreetName, StreetNumber, Email")] Customer cust)
+        {
+            ModelState.Remove("Password");
+            if (ModelState.IsValid)
+            {
+                Session["UserName"] = cust.FirstName + " " + cust.LastName;
+                cust.Id = (int)Session["UserId"];
+                facade.GetCustomerRepository().ChangeCustomer(cust);
+
+                return RedirectToAction("UserProfile");
+            }
+            else
+            {
+                return View(cust);
+            }
         }
     }
 }
