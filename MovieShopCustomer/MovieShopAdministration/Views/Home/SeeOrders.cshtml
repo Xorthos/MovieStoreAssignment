@@ -1,0 +1,33 @@
+﻿@model MovieShopAdministration.Models.OrderStrongType
+
+@{
+    ViewBag.Title = "SeeOrders";
+}
+
+<link type="link/css" href="~/Content/SeeOrders.css" rel="stylesheet"/>
+@foreach (var item in Model.Orders)
+{
+    <form method="post" action="~/Customer/NewCustomer" class="col-md-12">
+        <div class="form-group">
+            
+            <p style="float-right">@item.Customer.FirstName</p>
+            <p style="float-left">@item.Customer.MiddleName</p>
+            <p>@item.Customer.LastName</p>
+
+            <p>@item.Customer.StreetName</p>
+            <p>@item.Customer.StreetNumber</p>
+
+            <div class="form-group .col-sm-5 col-md-6" style="width:100%; border:10px solid #808080; padding:8px; background: #808080" >
+                @foreach (var line in item.Orderlines)
+                {
+                    
+                    <p>@line.Movie.Title</p>
+                    <p>@line.Amount</p>
+                }
+            </div>
+
+        </div>
+    </form>
+
+
+}
