@@ -37,7 +37,7 @@ namespace MovieShopCustomer.Controllers
             {
                 return View();
             }
-            return View("OrderFailed");
+            return View();
         }
         #endregion
         #region Delete an orderline
@@ -62,18 +62,19 @@ namespace MovieShopCustomer.Controllers
         }
         #endregion
         #region Purchase 
-        [HttpGet]
+        [HttpPost]
         public ActionResult Purchase() {
             try {
                 int userId = (int)Session["UserId"];
                 Customer customer = facade.GetCustomerRepository().GetCustomer(userId);
                 ShoppingCart cart = Session["ShoppingCart"] as ShoppingCart;
-
+                
                 for (int i = 0; i < cart.Orderline.Count; i++)
                 {
                     cart.Orderline[i].MovieId = cart.Orderline[i].Movie.Id;
                     cart.Orderline[i].Price = cart.Orderline[i].Movie.Price;
                 }
+                
                 Order order = new Order(cart.Orderline, customer);
                 facade.GetOrderRepository().Add(order);
 

@@ -7,7 +7,7 @@
     <h2>Create Movie</h2>
 
     <form method="Post" action="~/Movie/Create" class="col-md-12">
-        @Html.ValidationSummary(true, "Something went wrong", new { @class = "text-danger" })
+        @*@@Html.ValidationSummary(true, "Something went wrong", new { @class = "text-danger" })*@
          @*@Html.TextBox(m => m.Title, htmlAttributes : new { @class = "form-control", @Name = "Title" })*@
       
         <div class=" form-group">
@@ -37,13 +37,10 @@
                 <option value=" @item.Id">@item.Name</option>
             }
         </select>
-<<<<<<< HEAD
 
-=======
             </div>
->>>>>>> 7ee5b76f30b1d1b8f187e8ab34fbf49d063c73ea
         <div class="form-group">
-            <label for=" ImgUrl">Cover</label>
+            <label for="ImgUrl">Cover</label>
             <input type="url" class="form-control" name="ImgUrl" />
         </div>
 
@@ -51,15 +48,6 @@
             <label for="TrailerUrl">TrailerUrl</label>
             <input type="url" class="form-control" name="TrailerUrl">
         </div>
-
-<<<<<<< HEAD
-        <div class="form-group">
-            <label for=" Year">Year</label>
-            <input type="date" class="form-control" name="Year" />
-        </div>
         
-        <button type="submit" class=".btn-default">Save </button>
-=======
         <button type="submit" class="btn-default">Save </button>
->>>>>>> 7ee5b76f30b1d1b8f187e8ab34fbf49d063c73ea
     </form>

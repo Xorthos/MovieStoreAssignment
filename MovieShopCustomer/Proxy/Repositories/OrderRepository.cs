@@ -18,14 +18,16 @@ namespace Proxy.Repositories
         {
             using (var ctx = new MovieShopContext())
             {
-                var g = ctx.Orders.Add(ord);
+                ctx.Customers.Attach(ord.Customer);
                 foreach (var item in ord.Orderlines)
                 {
-                    item.OrderId = g.Id;
+
+                    ctx.Movies.Attach(item.Movie);
                 }
-                ctx.Orderline.AddRange(ord.Orderlines);
+                ctx.Orders.Add(ord);
                 ctx.SaveChanges();
             }
+
         }
 
         /// <summary>
