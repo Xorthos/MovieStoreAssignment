@@ -47,9 +47,9 @@ namespace Proxy.Seeding
 
 
             List<Orderline> orderlines = new List<Orderline>();
-            orderlines.Add(context.Orderline.Add(new Orderline() { OrderId = 1, MovieId = hello.Id, Amount = 3 }));
-            orderlines.Add(context.Orderline.Add(new Orderline() { OrderId = 1, MovieId = 6, Amount = 6 }));
-            orderlines.Add(context.Orderline.Add(new Orderline() { OrderId = 1, MovieId = 17, Amount = 8 }));
+            orderlines.Add(context.Orderline.Add(new Orderline() { OrderId = 1, MovieId = hello.Id, Amount = 3, Price = hello.Price }));
+            orderlines.Add(context.Orderline.Add(new Orderline() { OrderId = 1, MovieId = 6, Amount = 6, Price = 30 }));
+            orderlines.Add(context.Orderline.Add(new Orderline() { OrderId = 1, MovieId = 17, Amount = 8, Price = 30 }));
 
             var ord = new Order(orderlines, cust)
             {
