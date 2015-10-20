@@ -81,6 +81,7 @@ namespace MovieShopCustomer.Controllers
                 cart.Orderline = new List<Orderline>();
                 return View("Success");
             }
+            catch
             {
                 return View("Error");
             }
