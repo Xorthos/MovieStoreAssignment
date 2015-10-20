@@ -49,10 +49,28 @@ namespace MovieShopCustomer.Controllers
 
         public ActionResult AddMovieToCart(int movieId, int amount)
         {
+            if (IncrimentIfInCart(movieId, amount))
+            {
+                return Redirect("Index");
+            }
             Orderline line = new Orderline() { Movie = facade.GetMovieRepository().GetMovie(movieId), Amount = amount };
             ShoppingCart cart = Session["ShoppingCart"] as ShoppingCart;
             cart.Orderline.Add(line);
             return Redirect("Index");
+        }
+
+        public bool IncrimentIfInCart(int movieId, int amount)
+        {
+            ShoppingCart cart = Session["ShoppingCart"] as ShoppingCart;
+            foreach (var item in cart.Orderline)
+            {
+                if(item.Movie.Id == movieId)
+                {
+                    item.Amount += amount;
+                    return true;
+                }
+            }
+            return false;
         }
 
         [HttpGet]

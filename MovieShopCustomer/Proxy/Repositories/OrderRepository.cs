@@ -2,6 +2,9 @@
 using Proxy.DomainModels;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
+using System.Data.Entity.Core.Objects.DataClasses;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,13 +19,26 @@ namespace Proxy.Repositories
         /// <param name="ord">the order to be added</param>
         public void Add(Order ord)
         {
+
             using (var ctx = new MovieShopContext())
             {
                 ctx.Customers.Attach(ord.Customer);
-                foreach (var item in ord.Orderlines)
+                foreach (Orderline item in ord.Orderlines)
                 {
-
-                    ctx.Movies.Attach(item.Movie);
+                    bool isDetached = ctx.Entry(item.Movie).State == EntityState.Detached;
+                    if (isDetached)
+                        ctx.Movies.Attach(item.Movie);
+                    ctx.Entry(item.Movie.Genre).State = EntityState.Detached;
+                }
+                GenreRepository genreRep = new GenreRepository();
+                foreach (var item in genreRep.GetAll())
+                {
+                    ctx.Genres.Attach(item);
+                }
+                foreach (var item in ctx.status.ToList())
+                {
+                    if (item.Name.Equals("Processing"))
+                        ord.Status = item;
                 }
                 ctx.Orders.Add(ord);
                 ctx.SaveChanges();
