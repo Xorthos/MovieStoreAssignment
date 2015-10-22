@@ -1,4 +1,5 @@
-﻿using Proxy.DomainModels;
+﻿using MovieShopCustomer.Models;
+using Proxy.DomainModels;
 using Proxy.Facade;
 using System;
 using System.Collections.Generic;
@@ -28,14 +29,16 @@ namespace MovieShopCustomer.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult NewCustomer(Customer cust)
+        public ActionResult NewCustomer(RegisterModel registerModel)
         {
+            ModelState.Remove("Customer.Password");
             if (ModelState.IsValid)
             {
-                new Facade().GetCustomerRepository().Add(cust);
-                return Redirect("Index");
+                registerModel.Customer.Password = registerModel.Password;
+                new Facade().GetCustomerRepository().Add(registerModel.Customer);
+                return RedirectToAction("Index", "Home");
             }
-            return View(cust);
+            return View(registerModel);
         }
 
         public ActionResult UserLogOut()

@@ -3,11 +3,6 @@
 @{
     ViewBag.Title = "Home Page";
 }
-
-<div class="col-lg-12" style="background-color:red">
-    <p style="font-size:40px">This is a test site, NOT a real movie shop. All images used on this site is borrowed, and the source can be found by following the image URL.</p>
-
-</div>
 <form method="Get" action="~/Home/FilterMovies" class="col md-12" style="margin-top : 20px">
     <input type="text" class="form-control" name="SearchToken" value="" />
     <input type="checkbox" name="UseGenre" value="true">Search by genre<br>
@@ -40,7 +35,7 @@
                                 <div style="position:relative; float:right">
                                     <form method="Get" action="~/Home/AddMovieToCart">
                                         <input type="hidden" name="movieId" value="@item.Id"/>
-                                        <input type="number" min="1" max="20" style="width : 50px" maxlength="2" name="amount" value="" />
+                                        <input type="number" min="1" max="10" style="width : 50px" maxlength="2" name="amount" value="1" />
                                         <button type="submit" class="btn btn-default">Add to cart</button>
                                     </form>
                                 </div>

@@ -138,6 +138,7 @@
     <Compile Include="Models\CheckoutViewModel.cs" />
     <Compile Include="Models\FilterModel.cs" />
     <Compile Include="Models\IndexViewModel.cs" />
+    <Compile Include="Models\RegisterModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
