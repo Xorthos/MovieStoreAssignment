@@ -24,7 +24,7 @@ namespace MovieShopAdministration.Controllers
         }
         [HttpPost]
         public ActionResult Create(Genre genre) {
-            // facade.GetGenreRepository().AddGenre(genre);
+             facade.GetGenreRepository().Add(genre);
             return Redirect("Index");
         }
         [HttpGet]
