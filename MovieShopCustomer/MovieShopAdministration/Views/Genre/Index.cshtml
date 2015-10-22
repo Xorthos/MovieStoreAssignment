@@ -11,6 +11,7 @@
                 <tr>
                     <th>Id</th>
                     <th>Genre</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -19,7 +20,8 @@
                     <tr>
                         <td>@item.Id</td>
                         <td>@item.Name</td>
-                </tr>
+                        <td> @Html.ActionLink("Edit", "Edit", "Genre", new { genreId = @item.Id }, new { @class = "btn btn-success" })</td>
+</tr>
                 }
             </tbody>
         </table>

@@ -10,6 +10,9 @@ namespace Proxy.Repositories
 {
     public class CustomerRepository
     {
+        /// <summary>
+        /// Add a customer
+        /// </summary>
         public void Add(Customer cust) {
 
             using(var ctx = new MovieShopContext())
@@ -20,7 +23,7 @@ namespace Proxy.Repositories
         }
 
         /// <summary>
-        /// 
+        /// List all customer
         /// </summary>
         /// <returns>a list containing all customers</returns>
         public List<Customer> GetAll()
@@ -58,7 +61,7 @@ namespace Proxy.Repositories
             }
         }
         /// <summary>
-        /// 
+        /// Change a customer
         /// </summary>
         public void ChangeCustomer(Customer cust)
         {
@@ -76,6 +79,9 @@ namespace Proxy.Repositories
             }
         }
 
+        /// <summary>
+        /// Change a password in the customer object
+        /// </summary>
         public void ChangePassword(Customer cust)
         {
             using (var ctx = new MovieShopContext())

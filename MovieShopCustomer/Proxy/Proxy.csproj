@@ -65,9 +65,7 @@
     <Compile Include="Repositories\OrderRepository.cs" />
     <Compile Include="Seeding\DBInitializer.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Repository\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />

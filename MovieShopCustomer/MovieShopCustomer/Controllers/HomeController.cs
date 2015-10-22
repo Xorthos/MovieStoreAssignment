@@ -9,9 +9,11 @@ using System.Web.Mvc;
 
 namespace MovieShopCustomer.Controllers
 {
+    
     public class HomeController : Controller
     {
         Facade facade = new Facade();
+        #region Home Index
         public ActionResult Index()
         {
             if (Session["ShoppingCart"] == null)
@@ -23,7 +25,9 @@ namespace MovieShopCustomer.Controllers
 
             return View(new IndexViewModel() { Movies = movies, Genres = genres });
         }
+        #endregion
 
+        #region Search between movies and filter option by genres
         [HttpGet]
         public ActionResult FilterMovies(FilterModel filters)
         {
@@ -41,12 +45,16 @@ namespace MovieShopCustomer.Controllers
 
             return View("Index", new IndexViewModel() { Movies = movies, Genres = genres });
         }
+        #endregion
 
+        #region ShoppingCart
         public ActionResult ShoppingCart()
         {
             return View(Session["ShoppingCart"] as ShoppingCart);
         }
+        #endregion
 
+        #region Adding a movie to the shoppingCart
         public ActionResult AddMovieToCart(int movieId, int amount)
         {
             if (IncrimentIfInCart(movieId, amount))
@@ -58,8 +66,10 @@ namespace MovieShopCustomer.Controllers
             cart.Orderline.Add(line);
             return Redirect("Index");
         }
+        #endregion
 
-        public bool IncrimentIfInCart(int movieId, int amount)
+        #region Increase the amount if it exist
+        private bool IncrimentIfInCart(int movieId, int amount)
         {
             ShoppingCart cart = Session["ShoppingCart"] as ShoppingCart;
             foreach (var item in cart.Orderline)
@@ -72,7 +82,9 @@ namespace MovieShopCustomer.Controllers
             }
             return false;
         }
+        #endregion
 
+        #region UserLogin
         [HttpGet]
         public ActionResult UserLogIn()
         {
@@ -90,23 +102,17 @@ namespace MovieShopCustomer.Controllers
             }
             return Redirect("Index");
         }
+        #endregion
 
-        [HttpPost]
-        public ActionResult Checkout(Order order)
-        {
-            if (ModelState.IsValid)
-            {
-                return View();
-            }
-            return View("OrderFailed");
-        }
-
+        #region UserProfile
         [HttpGet]
         public ActionResult UserProfile()
         {
             return View();
         }
+        #endregion
 
+        #region Change a Password
         [HttpGet]
         public ActionResult ChangePass()
         {
@@ -138,6 +144,9 @@ namespace MovieShopCustomer.Controllers
                 return View(viewModel);
             }
         }
+        #endregion
+
+        #region Change a Customer Information
         [HttpGet]
         public ActionResult ChangeInfo()
         {
@@ -161,11 +170,15 @@ namespace MovieShopCustomer.Controllers
                 return View(cust);
             }
         }
+        #endregion
 
+        #region ViewOrders
         [HttpGet]
         public ActionResult ViewOrders()
         {
             return View(facade.GetOrderRepository().GetOrders((int)Session["UserId"]));
         }
+        #endregion
+
     }
 }
