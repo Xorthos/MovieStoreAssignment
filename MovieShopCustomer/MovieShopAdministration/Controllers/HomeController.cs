@@ -8,8 +8,11 @@ using System.Web.Mvc;
 
 namespace MovieShopAdministration.Controllers
 {
+
     public class HomeController : Controller
     {
+        Facade facade = new Facade();
+
         public ActionResult Index()
         {
             return View();
@@ -29,10 +32,10 @@ namespace MovieShopAdministration.Controllers
             return View();
         }
 
-        public ActionResult SeeOrders()
+        public ActionResult ViewOrders()
         {
             
-            return View(new OrderStrongType());
+            return View(facade.GetOrderRepository().GetAll());
         }
     }
 }
