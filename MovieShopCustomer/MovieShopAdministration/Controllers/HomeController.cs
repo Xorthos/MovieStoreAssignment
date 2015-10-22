@@ -1,4 +1,5 @@
 ﻿using MovieShopAdministration.Models;
+using Proxy.DomainModels;
 using Proxy.Facade;
 using System;
 using System.Collections.Generic;
@@ -16,11 +17,17 @@ namespace MovieShopAdministration.Controllers
         public ActionResult Index()
         {
             return View();
+            List<Movie> movies = facade.GetMovieRepository().GetAll();
+            List<Genre> genres = facade.GetGenreRepository().GetAll();
+            return View(new IndexViewModel() { Movies = movies, Genres = genres });
         }
 
         public ActionResult About()
+        [HttpGet]
+        public ActionResult Customer()
         {
             ViewBag.Message = "Your application description page.";
+            List<Customer> customers = facade.GetCustomerRepository().GetAll();
 
             return View();
         }
@@ -30,6 +37,7 @@ namespace MovieShopAdministration.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+            return View(customers);
         }
 
         public ActionResult ViewOrders()
