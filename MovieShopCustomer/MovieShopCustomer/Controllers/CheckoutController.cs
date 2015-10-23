@@ -26,7 +26,7 @@ namespace MovieShopCustomer.Controllers
             }
             catch
             {
-                return Redirect("Home/Index");
+                return View("LogInAndTryAgain");
             }
         }
 

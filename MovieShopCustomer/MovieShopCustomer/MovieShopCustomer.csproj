@@ -187,6 +187,7 @@
     <Content Include="Views\Checkout\Success.cshtml" />
     <Content Include="Views\Checkout\Error.cshtml" />
     <Content Include="Views\Home\ViewOrders.cshtml" />
+    <Content Include="Views\Checkout\LogInAndTryAgain.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
