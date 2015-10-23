@@ -40,7 +40,8 @@ namespace MovieShopCustomer.Controllers
             return View();
         }
         #endregion
-        #region Delete an orderline
+
+        #region Delete a movie from ShoppingCart
         [HttpGet]
         public ActionResult Delete(int movieId)
         {
@@ -61,6 +62,7 @@ namespace MovieShopCustomer.Controllers
             }
         }
         #endregion
+
         #region Purchase 
         [HttpPost]
         public ActionResult Purchase() {

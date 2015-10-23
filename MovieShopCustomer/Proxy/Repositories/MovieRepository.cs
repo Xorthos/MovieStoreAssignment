@@ -11,9 +11,8 @@ namespace Proxy.Repositories
     public class MovieRepository
     {
         /// <summary>
-        /// 
+        /// Add a movie
         /// </summary>
-        /// <param name="movie"></param>
         public void Add(Movie movie)
         {
             using(var ctx = new MovieShopContext())
@@ -24,9 +23,8 @@ namespace Proxy.Repositories
             }
         }
         /// <summary>
-        /// 
+        /// Get all movie
         /// </summary>
-        /// <returns></returns>
         public List<Movie> GetAll()
         {
             try
@@ -44,9 +42,8 @@ namespace Proxy.Repositories
         }
 
         /// <summary>
-        /// returns the movie wih the given Id
+        /// returns the movie by Id
         /// </summary>
-        /// <param name="id">the id</param>
         /// <returns>the movie with the given Id</returns>
         public Movie GetMovie(int id)
         {
@@ -54,7 +51,9 @@ namespace Proxy.Repositories
                 return ctx.Movies.Include("Genre").Where(c => c.Id == id).FirstOrDefault();
             }
         }
-
+        /// <summary>
+        /// Delete a movie
+        /// </summary>
         public void Delete(int id)
         {
             using (var ctx = new MovieShopContext())
@@ -65,7 +64,7 @@ namespace Proxy.Repositories
             }
         }
         /// <summary>
-        /// 
+        /// Update a movie
         /// </summary>
         public void UpdateMovie(Movie mov)
         {

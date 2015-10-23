@@ -24,7 +24,7 @@ namespace Proxy.Repositories
         }
         
         /// <summary>
-        /// 
+        /// Get all genre
         /// </summary>
         /// <returns>a list containing all genres</returns>
         public List<Genre> GetAll()
@@ -35,15 +35,21 @@ namespace Proxy.Repositories
             }
         }
 
+        /// <summary>
+        ///Edit one genre 
+        /// </summary>
         public void EditGenre(Genre gen)
         {
             using (var ctx = new MovieShopContext())
             {
                 var genre = ctx.Genres.Where(c => c.Id == gen.Id).FirstOrDefault();
-
+                genre.Name = gen.Name;
+                ctx.SaveChanges();
             }
         }
-
+        /// <summary>
+        /// Get one genre by id
+        /// </summary>
         public Genre GetGenre(int id)
         {
             using(var ctx = new MovieShopContext()) { 

@@ -14,7 +14,7 @@ namespace Proxy.Repositories
     public class OrderRepository
     {
         /// <summary>
-        /// Adds a genre to the database
+        /// Adds an order to the database
         /// </summary>
         /// <param name="ord">the order to be added</param>
         public void Add(Order ord)
@@ -47,7 +47,7 @@ namespace Proxy.Repositories
         }
 
         /// <summary>
-        /// 
+        /// List all order
         /// </summary>
         /// <returns>a list containing all orders</returns>
         public List<Order> GetAll()
@@ -65,7 +65,9 @@ namespace Proxy.Repositories
                 return orders;
             }
         }
-
+        /// <summary>
+        /// Update one order 
+        /// </summary>
         public void ChangeOrder(Order ord)
         {
             using (var ctx = new MovieShopContext())
@@ -82,6 +84,9 @@ namespace Proxy.Repositories
             }
         }
 
+        /// <summary>
+        /// List all order by customer id
+        /// </summary>
         public List<Order> GetOrders(int id)
         {
             using (var ctx = new MovieShopContext())

@@ -12,6 +12,7 @@ namespace MovieShopAdministration.Controllers
     public class MovieController : Controller
     {
         Facade facade = new Facade();
+        #region Index for Movies
         // GET: Movie
         public ActionResult Index()
         {
@@ -20,7 +21,9 @@ namespace MovieShopAdministration.Controllers
 
             return View(new IndexViewModel() { Movies = movies, Genres = genres });
         }
+        #endregion
 
+        #region Search for a Movie and filtering by Genre
         [HttpGet]
         public ActionResult FilterMovies(FilterModel filters)
         {
@@ -39,7 +42,8 @@ namespace MovieShopAdministration.Controllers
             return View("Index", new IndexViewModel() { Movies = movies, Genres = genres });
             //return RedirectToAction("Index", new { movies = movies });
         }
-
+        #endregion
+        #region Create a movie
         [HttpGet]
         public ActionResult Create() {
 
@@ -56,7 +60,9 @@ namespace MovieShopAdministration.Controllers
             facade.GetMovieRepository().Add(movie);
             return Redirect("Index");
         }
+        #endregion
 
+        #region Update a movie with a selected movieId
         [HttpGet]
         public ActionResult Edit(int movieId) {
 
@@ -78,6 +84,9 @@ namespace MovieShopAdministration.Controllers
             return Redirect("Index");
 
         }
+        #endregion
+
+        #region Delete a movie with a given movieId
         [HttpGet]
         public ActionResult Delete(int movieId)
         {
@@ -90,5 +99,6 @@ namespace MovieShopAdministration.Controllers
             facade.GetMovieRepository().Delete(movieId);
             return Redirect("Index");
         }
+        #endregion
     }
 }

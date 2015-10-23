@@ -11,12 +11,15 @@ namespace MovieShopCustomer.Controllers
 {
     public class CustomerController : Controller
     {
+        #region Customer Index
         // GET: Customer
         public ActionResult Index()
         {
             return View();
         }
+        #endregion
 
+        #region Create a new Customer
         /// <summary>
         /// Creates a new customer.
         /// </summary>
@@ -40,12 +43,15 @@ namespace MovieShopCustomer.Controllers
             }
             return View(registerModel);
         }
+        #endregion
 
+        #region UserLogOut
         public ActionResult UserLogOut()
         {
             Session["UserId"] = null;
             Session["UserName"] = null;
             return RedirectToAction("Index", "Home");
         }
+        #endregion
     }
 }
