@@ -18,6 +18,7 @@ namespace Proxy.Repositories
         {
             using(var ctx = new MovieShopContext())
             {
+                ctx.Genres.Attach(movie.Genre);
                 ctx.Movies.Add(movie);
                 ctx.SaveChanges();
             }
