@@ -38,7 +38,7 @@ namespace MovieShopCustomer.Controllers
             }
             if (filters.UseGenre)
             {
-                movies = movies.Where(c => c.Genre.Id == filters.GenreId).ToList();
+                movies = movies.Where(c => c.Genre.Id == filters.GenreId).ToList(); 
             }
 
             List<Genre> genres = facade.GetGenreRepository().GetAll();
