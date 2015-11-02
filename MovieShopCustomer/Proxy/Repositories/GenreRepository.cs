@@ -20,6 +20,7 @@ namespace Proxy.Repositories
             {
                 ctx.Genres.Add(gen);
                 ctx.SaveChanges();
+                k
             }
         }
         
