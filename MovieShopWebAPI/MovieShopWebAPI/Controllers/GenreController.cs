@@ -7,17 +7,19 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using MovieShopDALC.Facade;
 using MovieShopDALC.Models;
+using MovieShopDALC.Repositories.Abstraction;
 
 namespace GenreShopWebAPI.Controllers
 {
     public class GenreController : ApiController
     {
-        private Facade facade = new Facade();
+        //Gets the propper repository from the factory according to the object used.
+        private IRepository<Genre> genreRepository = Facade.GetGenreRepository();
 
 
-        public List<Genre> GetGenres()
+        public IEnumerable<Genre> GetGenres()
         {
-            List<Genre> Genres = facade.GetGenreRepository().GetAll();
+            IEnumerable<Genre> Genres = genreRepository.GetAll();
             return Genres;
         }
 
@@ -25,7 +27,7 @@ namespace GenreShopWebAPI.Controllers
         [ResponseType(typeof(Genre))]
         public IHttpActionResult GetGenre(int id)
         {
-            Genre Genre = facade.GetGenreRepository().GetGenre(id);
+            Genre Genre = genreRepository.Get(id);
             if (Genre == null)
             {
                 return NotFound();
@@ -36,16 +38,16 @@ namespace GenreShopWebAPI.Controllers
 
         // POST: api/Genre
         [ResponseType(typeof(Genre))]
-        public IHttpActionResult PostGenre(Genre Genre)
+        public IHttpActionResult PostGenre(Genre genre)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            facade.GetGenreRepository().Add(Genre);
+            genreRepository.Add(genre);
 
-            return CreatedAtRoute("DefaultApi", new { id = Genre.Id }, Genre);
+            return CreatedAtRoute("DefaultApi", new { id = genre.Id }, genre);
         }
     }
 }

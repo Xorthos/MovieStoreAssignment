@@ -7,19 +7,21 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using MovieShopDALC.Context;
-using MovieShopDALC.Models;
 using MovieShopDALC.Facade;
+using MovieShopDALC.Models;
+using MovieShopDALC.Repositories.Abstraction;
 
 namespace MovieShopWebAPI.Controllers
 {
     public class MovieController : ApiController
     {
-        private Facade facade = new Facade();
+        //Gets the propper repository from the factory according to the object used.
+        private IRepository<Movie> movieRepository = Facade.GetMovieRepository();
 
-        
-        public List<Movie> GetMovies()
+
+        public IEnumerable<Movie> GetMovies()
         {
-            List<Movie> movies = (List<Movie>)facade.GetMovieRepository().GetAll();
+            IEnumerable<Movie> movies = movieRepository.GetAll();
             return movies;
         }
 
@@ -27,7 +29,7 @@ namespace MovieShopWebAPI.Controllers
         [ResponseType(typeof(Movie))]
         public IHttpActionResult GetMovie(int id)
         {
-            Movie movie = facade.GetMovieRepository().GetMovie(id);
+            Movie movie = movieRepository.Get(id);
             if (movie == null)
             {
                 return NotFound();
@@ -50,7 +52,7 @@ namespace MovieShopWebAPI.Controllers
                 return BadRequest();
             }
 
-            facade.GetMovieRepository().UpdateMovie(movie);
+            movieRepository.Update(movie);
 
             return StatusCode(HttpStatusCode.NoContent);
         }
@@ -64,7 +66,7 @@ namespace MovieShopWebAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            facade.GetMovieRepository().Add(movie);
+            movieRepository.Add(movie);
 
             return CreatedAtRoute("DefaultApi", new { id = movie.Id }, movie);
         }

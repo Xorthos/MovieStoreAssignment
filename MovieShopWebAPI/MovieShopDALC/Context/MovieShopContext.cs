@@ -19,7 +19,7 @@ namespace MovieShopDALC.Context
         public DbSet<Orderline> Orderline { get; set; }
         public DbSet<Status> status { get; set; }
 
-        public MovieShopContext() : base("Data Source=80.167.187.177;Integrated Security=False;User ID=Mads;Password=ipaeeea8;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False;database=MovieShop")
+        public MovieShopContext() : base("MovieShop")
         {
             Configuration.ProxyCreationEnabled = false;
         }
