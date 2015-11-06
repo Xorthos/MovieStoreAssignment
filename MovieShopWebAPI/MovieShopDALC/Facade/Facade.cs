@@ -1,52 +1,55 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MovieShopDALC.Models;
+using MovieShopDALC.Repositories.Abstraction;
 using MovieShopDALC.Repositories.Implementation;
 
 namespace MovieShopDALC.Facade
 {
-    public class Facade
+    public static class Facade
     {
-        //Hack to make sure that the DLL file for EntityFramework.SQLserver is being included in the build.
-        private System.Data.Entity.SqlServer.SqlProviderServices ensureDLLIsCopied =
-            System.Data.Entity.SqlServer.SqlProviderServices.Instance;
-
-        /// <summary>
-        /// Creates a Movierepository and returns it
-        /// </summary>
-        /// <returns>a movie repository</returns>
-        public MovieRepository GetMovieRepository()
+        public static IRepository<Movie> GetMovieRepository()
         {
             return new MovieRepository();
         }
 
-        /// <summary>
-        /// Creates a GenreRepository and returns it
-        /// </summary>
-        /// <returns>A genre repository</returns>
-        public GenreRepository GetGenreRepository()
+        public static IRepository<Genre> GetGenreRepository()
         {
             return new GenreRepository();
         }
 
-        /// <summary>
-        /// Creates a CustomerRepository
-        /// </summary>
-        /// <returns>a Customer repository</returns>
-        public CustomerRepository GetCustomerRepository()
+        public static ICustomerRepository GetCustomerRepository()
         {
             return new CustomerRepository();
         }
 
-        /// <summary>
-        /// Creates a orderrepository
-        /// </summary>
-        /// <returns>a Order repository</returns>
-        public OrderRepository GetOrderRepository()
+        public static IOrderRepository GetOrderRepository()
         {
             return new OrderRepository();
         }
+        //public static IRepository<Object> GetRepository(Object t)
+        //{
+        //    if(t is Movie)
+        //    {
+        //        return new MovieRepository() as IRepository<Object>;
+        //    }
+        //    if (t is Genre)
+        //    {
+        //        return new GenreRepository() as IRepository<Object>;
+        //    }
+        //    if (t is Customer)
+        //    {
+        //        return new CustomerRepository() as IRepository<Object>;
+        //    }
+        //    if (t is Order)
+        //    {
+        //        return new OrderRepository() as IRepository<Object>;
+        //    }
+        //        return null;
+        //}
     }
 }

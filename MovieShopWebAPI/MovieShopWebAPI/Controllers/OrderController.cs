@@ -7,26 +7,28 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using MovieShopDALC.Context;
-using MovieShopDALC.Models;
 using MovieShopDALC.Facade;
+using MovieShopDALC.Models;
+using MovieShopDALC.Repositories.Abstraction;
 
 namespace MovieShopWebAPI.Controllers
 {
     public class OrderController : ApiController
     {
-        private Facade facade = new Facade();
+        //Gets the propper repository from the factory according to the object used.
+        private IOrderRepository orderRepository = Facade.GetOrderRepository();
 
         // GET: api/Order
-        public List<Order> GetOrders()
+        public IEnumerable<Order> GetOrders()
         {
-            List<Order> orders = facade.GetOrderRepository().GetAll();
+            IEnumerable<Order> orders = orderRepository.GetAll();
             return orders;
         }
 
         // GET: api/Order
-        public List<Order> GetUserOrders(int custId)
+        public IEnumerable<Order> GetUserOrders(int custId)
         {
-            return facade.GetOrderRepository().GetOrders(custId);
+            return orderRepository.GetOrders(custId);
         }
 
         // PUT: api/Order/5
@@ -38,7 +40,7 @@ namespace MovieShopWebAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            facade.GetOrderRepository().ChangeOrder(order);
+            orderRepository.Update(order);
 
             return StatusCode(HttpStatusCode.NoContent);
         }
@@ -52,7 +54,7 @@ namespace MovieShopWebAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            facade.GetOrderRepository().Add(order);
+            orderRepository.Add(order);
 
             return CreatedAtRoute("DefaultApi", new { id = order.Id }, order);
         }

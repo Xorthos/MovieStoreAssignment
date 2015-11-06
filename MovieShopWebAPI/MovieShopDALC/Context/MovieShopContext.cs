@@ -21,7 +21,9 @@ namespace MovieShopDALC.Context
         public DbSet<Orderline> Orderline { get; set; }
         public DbSet<Status> Status { get; set; }
 
+
         public MovieShopContext() : base("name=MyContext")
+
         {
             Configuration.ProxyCreationEnabled = false;
         }
