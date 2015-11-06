@@ -1,4 +1,4 @@
-﻿using Proxy.Context;
+﻿
 using Proxy.DomainModels;
 using System;
 using System.Collections.Generic;
@@ -6,42 +6,26 @@ using System.Data.Entity;
 using System.Data.Entity.Core.Objects;
 using System.Data.Entity.Core.Objects.DataClasses;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Proxy.Repositories
 {
     public class OrderRepository
     {
+        protected static readonly string endPoint = Proxy.Proxy.GetBaseString() + "order";
         /// <summary>
         /// Adds an order to the database
         /// </summary>
         /// <param name="ord">the order to be added</param>
         public void Add(Order ord)
         {
-
-            using (var ctx = new MovieShopContext())
+            using (var httpClient = new HttpClient())
             {
-                ctx.Customers.Attach(ord.Customer);
-                foreach (Orderline item in ord.Orderlines)
-                {
-                    bool isDetached = ctx.Entry(item.Movie).State == EntityState.Detached;
-                    if (isDetached)
-                        ctx.Movies.Attach(item.Movie);
-                    ctx.Entry(item.Movie.Genre).State = EntityState.Detached;
-                }
-                GenreRepository genreRep = new GenreRepository();
-                foreach (var item in genreRep.GetAll())
-                {
-                    ctx.Genres.Attach(item);
-                }
-                foreach (var item in ctx.status.ToList())
-                {
-                    if (item.Name.Equals("Processing"))
-                        ord.Status = item;
-                }
-                ctx.Orders.Add(ord);
-                ctx.SaveChanges();
+                var result = httpClient.PostAsJsonAsync(endPoint, ord).Result;
+
             }
 
         }
@@ -52,17 +36,11 @@ namespace Proxy.Repositories
         /// <returns>a list containing all orders</returns>
         public List<Order> GetAll()
         {
-            using (var ctx = new MovieShopContext())
+            using (var httpClient = new HttpClient())
             {
-                var orderlines = ctx.Orderline.Include("Movie").ToList();
-                var orders = ctx.Orders.Include("Customer").Include("Orderlines").Include("Status").ToList();
+                var response = httpClient.GetAsync(endPoint).Result;
 
-                foreach (var item in orders)
-                {
-                    item.Orderlines = orderlines.Where(cm => cm.OrderId == item.Id).ToList();
-                }
-
-                return orders;
+                return JsonConvert.DeserializeObject<List<Order>>(response.Content.ReadAsStringAsync().Result);
             }
         }
         /// <summary>
@@ -70,17 +48,10 @@ namespace Proxy.Repositories
         /// </summary>
         public void ChangeOrder(Order ord)
         {
-            using (var ctx = new MovieShopContext())
+            using (var httpClient = new HttpClient())
             {
-                //gets the item that we want to update
-                var order = ctx.Orders.Include("Customer").Include("Orderlines").Include("Status").Where(c => c.Id == ord.Id).FirstOrDefault();
-                //changes the data
-                order.Orderlines = ord.Orderlines;
-                order.OrderDate = ord.OrderDate;
-                order.Customer = ord.Customer;
+                var result = httpClient.PutAsJsonAsync(endPoint, ord).Result;
 
-                //saves the changes.
-                ctx.SaveChanges();
             }
         }
 
@@ -89,17 +60,11 @@ namespace Proxy.Repositories
         /// </summary>
         public List<Order> GetOrders(int id)
         {
-            using (var ctx = new MovieShopContext())
+            using (var httpClient = new HttpClient())
             {
-                var orderlines = ctx.Orderline.Include("Movie").ToList();
-                var orders = ctx.Orders.Include("Customer").Include("Orderlines").Include("Status").Where(c => c.Customer.Id == id).ToList();
+                var response = httpClient.GetAsync(endPoint + "?custId=" + id).Result;
 
-                foreach (var item in orders)
-                {
-                    item.Orderlines = orderlines.Where(cm => cm.OrderId == item.Id).ToList();
-                }
-
-                return orders;
+                return JsonConvert.DeserializeObject<List<Order>>(response.Content.ReadAsStringAsync().Result);
             }
 
         }

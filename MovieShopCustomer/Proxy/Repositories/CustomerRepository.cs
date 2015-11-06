@@ -1,24 +1,26 @@
-﻿using Proxy.Context;
-using Proxy.DomainModels;
+﻿using Proxy.DomainModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Proxy.Repositories
 {
     public class CustomerRepository
     {
+        protected static readonly string endPoint = Proxy.Proxy.GetBaseString() + "customer";
         /// <summary>
         /// Add a customer
         /// </summary>
         public void Add(Customer cust) {
-
-            using(var ctx = new MovieShopContext())
+            
+            using (var httpClient = new HttpClient())
             {
-                ctx.Customers.Add(cust);
-                ctx.SaveChanges();
+                var result = httpClient.PostAsJsonAsync(endPoint, cust).Result;
+
             }
         }
 
@@ -28,9 +30,11 @@ namespace Proxy.Repositories
         /// <returns>a list containing all customers</returns>
         public List<Customer> GetAll()
         {
-            using (var ctx = new MovieShopContext())
+            using (var httpClient = new HttpClient())
             {
-                return ctx.Customers.ToList();
+                var response = httpClient.GetAsync(endPoint).Result;
+
+                return JsonConvert.DeserializeObject<List<Customer>>(response.Content.ReadAsStringAsync().Result);
             }
         }
         /// <summary>
@@ -41,9 +45,11 @@ namespace Proxy.Repositories
         
         public Customer GetCustomer(string email)
         {
-            using (var ctx = new MovieShopContext()) {
-                 var cust = ctx.Customers.Where(c => c.Email.Equals(email)).FirstOrDefault();
-                return cust;
+            using (var httpClient = new HttpClient())
+            {
+                var response = httpClient.GetAsync(endPoint + "?email=" + email).Result;
+
+                return JsonConvert.DeserializeObject<Customer>(response.Content.ReadAsStringAsync().Result);
             }
         }
 
@@ -54,10 +60,11 @@ namespace Proxy.Repositories
         /// <returns></returns>
         public Customer GetCustomer(int id)
         {
-            using (var ctx = new MovieShopContext())
+            using (var httpClient = new HttpClient())
             {
-                var cust = ctx.Customers.Where(c => c.Id == id).FirstOrDefault();
-                return cust;
+                var response = httpClient.GetAsync(endPoint + "/" + id).Result;
+
+                return JsonConvert.DeserializeObject<Customer>(response.Content.ReadAsStringAsync().Result);
             }
         }
         /// <summary>
@@ -65,17 +72,10 @@ namespace Proxy.Repositories
         /// </summary>
         public void ChangeCustomer(Customer cust)
         {
-            using (var ctx = new MovieShopContext())
+            using (var httpClient = new HttpClient())
             {
-                var customer = ctx.Customers.Where(c => c.Id == cust.Id).FirstOrDefault();
-                customer.FirstName = cust.FirstName;
-                customer.MiddleName = cust.MiddleName;
-                customer.LastName = cust.LastName;
-                customer.StreetName = cust.StreetName;
-                customer.StreetNumber = cust.StreetNumber;
-                customer.Email = cust.Email;
+                var result = httpClient.PutAsJsonAsync(endPoint, cust).Result;
 
-                ctx.SaveChanges();
             }
         }
 
@@ -84,13 +84,12 @@ namespace Proxy.Repositories
         /// </summary>
         public void ChangePassword(Customer cust)
         {
-            using (var ctx = new MovieShopContext())
-            {
-                var customer = ctx.Customers.Where(c => c.Id == cust.Id).FirstOrDefault();
+            
+                var customer = GetAll().FirstOrDefault(c => c.Id == cust.Id);
                 customer.Password = cust.Password;
 
-                ctx.SaveChanges();
-            }
+                ChangeCustomer(customer);
+            
         }
     }
 }

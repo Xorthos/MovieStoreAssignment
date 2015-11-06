@@ -1,25 +1,28 @@
-﻿using Proxy.Context;
-using Proxy.DomainModels;
+﻿using Proxy.DomainModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace Proxy.Repositories
 {
     public class MovieRepository
     {
+        protected static readonly string endPoint = Proxy.Proxy.GetBaseString() + "movie";
         /// <summary>
         /// Add a movie
         /// </summary>
         public void Add(Movie movie)
         {
-            using(var ctx = new MovieShopContext())
+            using (var httpClient = new HttpClient())
             {
-                ctx.Genres.Attach(movie.Genre);
-                ctx.Movies.Add(movie);
-                ctx.SaveChanges();
+                var result = httpClient.PostAsJsonAsync(endPoint, movie).Result;
+
             }
         }
         /// <summary>
@@ -27,18 +30,13 @@ namespace Proxy.Repositories
         /// </summary>
         public List<Movie> GetAll()
         {
-            try
+            using (var httpClient = new HttpClient())
             {
-                using(var ctx = new MovieShopContext())
-            {
-                return ctx.Movies.Include("Genre").ToList();
+                var response = httpClient.GetAsync(endPoint).Result;
+
+                return JsonConvert.DeserializeObject<List<Movie>>(response.Content.ReadAsStringAsync().Result);
             }
-            }
-            catch(Exception e)
-            {
-                return null;
-            }
-            
+
         }
 
         /// <summary>
@@ -47,8 +45,11 @@ namespace Proxy.Repositories
         /// <returns>the movie with the given Id</returns>
         public Movie GetMovie(int id)
         {
-            using(var ctx = new MovieShopContext()) { 
-                return ctx.Movies.Include("Genre").Where(c => c.Id == id).FirstOrDefault();
+            using (var httpClient = new HttpClient())
+            {
+                var response = httpClient.GetAsync(endPoint + "/" + id).Result;
+
+                return JsonConvert.DeserializeObject<Movie>(response.Content.ReadAsStringAsync().Result);
             }
         }
         /// <summary>
@@ -56,11 +57,9 @@ namespace Proxy.Repositories
         /// </summary>
         public void Delete(int id)
         {
-            using (var ctx = new MovieShopContext())
+            using (var httpClient = new HttpClient())
             {
-                var movie = ctx.Movies.Where(c => c.Id == id).FirstOrDefault();
-                ctx.Movies.Remove(movie);
-                ctx.SaveChanges();
+                var result = httpClient.DeleteAsync(endPoint + "/" + id).Result;
             }
         }
         /// <summary>
@@ -68,15 +67,10 @@ namespace Proxy.Repositories
         /// </summary>
         public void UpdateMovie(Movie mov)
         {
-            using (var ctx = new MovieShopContext())
+            using (var httpClient = new HttpClient())
             {
-                var movie = ctx.Movies.Include("Genre").Where(c => c.Id == mov.Id).FirstOrDefault();
-                movie.Genre = mov.Genre;
-                movie.Price = mov.Price;
-                movie.Title = mov.Title;
-                movie.Year = mov.Year;
+                var result = httpClient.PutAsJsonAsync(endPoint,mov).Result;
 
-                ctx.SaveChanges();
             }
         }
     }

@@ -1,25 +1,23 @@
-﻿using Proxy.Context;
-using Proxy.DomainModels;
-using System;
+﻿using Proxy.DomainModels;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Net.Http;
+using Newtonsoft.Json;
 
 namespace Proxy.Repositories
 {
     public class GenreRepository
     {
+        protected static readonly string endPoint = Proxy.Proxy.GetBaseString() + "genre";
         /// <summary>
         /// Adds a genre to the database
         /// </summary>
         /// <param name="gen">the genre to be added</param>
         public void Add(Genre gen)
         {
-            using (var ctx = new MovieShopContext())
+            using (var httpClient = new HttpClient())
             {
-                ctx.Genres.Add(gen);
-                ctx.SaveChanges();
+                var result = httpClient.PostAsJsonAsync(endPoint, gen).Result;
+
             }
         }
         
@@ -27,11 +25,14 @@ namespace Proxy.Repositories
         /// Get all genre
         /// </summary>
         /// <returns>a list containing all genres</returns>
+        
         public List<Genre> GetAll()
         {
-            using (var ctx = new MovieShopContext())
+            using (var httpClient = new HttpClient())
             {
-                return ctx.Genres.ToList();
+                var response = httpClient.GetAsync(endPoint).Result;
+
+                return JsonConvert.DeserializeObject<List<Genre>>(response.Content.ReadAsStringAsync().Result);
             }
         }
 
@@ -40,11 +41,10 @@ namespace Proxy.Repositories
         /// </summary>
         public void EditGenre(Genre gen)
         {
-            using (var ctx = new MovieShopContext())
+            using (var httpClient = new HttpClient())
             {
-                var genre = ctx.Genres.Where(c => c.Id == gen.Id).FirstOrDefault();
-                genre.Name = gen.Name;
-                ctx.SaveChanges();
+                var result = httpClient.PutAsJsonAsync(endPoint, gen).Result;
+
             }
         }
         /// <summary>
@@ -52,8 +52,11 @@ namespace Proxy.Repositories
         /// </summary>
         public Genre GetGenre(int id)
         {
-            using(var ctx = new MovieShopContext()) { 
-                return ctx.Genres.Where(c => c.Id == id).FirstOrDefault();
+            using (var httpClient = new HttpClient())
+            {
+                var response = httpClient.GetAsync(endPoint + "/" + id).Result;
+
+                return JsonConvert.DeserializeObject<Genre>(response.Content.ReadAsStringAsync().Result);
             }
         }
     }
