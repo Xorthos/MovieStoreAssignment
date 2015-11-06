@@ -8,25 +8,27 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using MovieShopDALC.Context;
 using MovieShopDALC.Models;
-using MovieShopDALC.Facade;
+using MovieShopDALC.Factory;
+using MovieShopDALC.Repositories.Abstraction;
 
 namespace MovieShopWebAPI.Controllers
 {
     public class CustomerController : ApiController
     {
-        private Facade facade = new Facade();
+        //Gets the propper repository from the factory according to the object used.
+        private ICustomerRepository customeRepository = Factory.GetRepository(new Customer()) as ICustomerRepository;
 
         // GET: api/Customer
-        public List<Customer> GetCustomers()
+        public IEnumerable<Customer> GetCustomers()
         {
-            return facade.GetCustomerRepository().GetAll();
+            return customeRepository.GetAll();
         }
 
         // GET: api/Customer/5
         [ResponseType(typeof(Customer))]
         public IHttpActionResult GetCustomer(int id)
         {
-            Customer customer = facade.GetCustomerRepository().GetCustomer(id);
+            Customer customer = customeRepository.Get(id);
             if (customer == null)
             {
                 return NotFound();
@@ -39,7 +41,7 @@ namespace MovieShopWebAPI.Controllers
         [ResponseType(typeof(Customer))]
         public IHttpActionResult GetCustomer(string email)
         {
-            Customer customer = facade.GetCustomerRepository().GetCustomer(email);
+            Customer customer = customeRepository.Get(email);
             if (customer == null)
             {
                 return NotFound();
@@ -62,7 +64,7 @@ namespace MovieShopWebAPI.Controllers
                 return BadRequest();
             }
 
-            facade.GetCustomerRepository().UpdateCustomer(customer);
+            customeRepository.Update(customer);
 
             return StatusCode(HttpStatusCode.NoContent);
         }
@@ -76,7 +78,7 @@ namespace MovieShopWebAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            facade.GetCustomerRepository().Add(customer);
+            customeRepository.Add(customer);
 
             return CreatedAtRoute("DefaultApi", new { id = customer.Id }, customer);
         }
