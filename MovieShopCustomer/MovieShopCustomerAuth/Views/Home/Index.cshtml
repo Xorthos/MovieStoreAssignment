@@ -1,0 +1,73 @@
+﻿@model MovieShopCustomerAuth.Models.IndexViewModelHomeMade
+
+@{
+    ViewBag.Title = "Home Page";
+}
+<form method="Get" action="~/Home/FilterMovies" class="col md-12" style="margin-top : 20px">
+    <input type="text" class="form-control" name="SearchToken" value="" />
+    <input type="checkbox" name="UseGenre" value="true">Search by genre<br>
+    <select class="form-control" name="GenreId">
+        @foreach (var item in Model.Genres)
+        {
+            <option value="@item.Id">@item.Name</option>
+        }
+    </select>
+    <button type="submit" class="btn btn-default">Search</button>
+</form>
+<div class="container">
+    <div class="row">
+        <h1>Available movies</h1>
+        <div class="row">
+            @foreach (var item in Model.Movies)
+            {
+                <div class="col-lg-2 col-sm-4 col-xs-6" style="outline : solid lightgrey 1px; margin : 10px; background-color : lightgray; min-height : 430px; min-width : 150px">
+                    <a title="@item.Title" href="#">
+                        <img style="margin-top: 15px; max-height : 220px; max-width : 160px; vertical-align : central; display: block; margin-left: auto; margin-right: auto" class="thumbnail img-responsive" src="@item.ImgUrl">
+                    </a>
+                        <div style="position : absolute; bottom: 0; width : 85%">
+                            <p style="font-size:20px; margin-bottom : 0px;"><b>@item.Title</b></p>
+                            <p style="font-size:15px; margin : 0px;">@item.Year.Year</p>
+                            <p style="font-size:15px; margin : 0px;">@item.Genre.Name</p>
+                            <div>
+                                <div style="position:relative; float:left">
+                                    <p style="font-size:30px">Kr. @item.Price </p>
+                                </div>
+                                <div style="position:relative; float:right">
+                                    <form method="Get" action="~/Home/AddMovieToCart">
+                                        <input type="hidden" name="movieId" value="@item.Id"/>
+                                        <input type="number" min="1" max="10" style="width : 50px" maxlength="2" name="amount" value="1" />
+                                        <button type="submit" class="btn btn-default">Add to cart</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            }
+        </div>
+    </div>
+</div>
+<div class="modal" id="myModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" type="button" data-dismiss="modal">×</button>
+                <h3 class="modal-title"></h3>
+            </div>
+            <div class="modal-body">
+                <div id="modalCarousel" class="carousel">
+
+                    <div class="carousel-inner">
+
+                    </div>
+
+                    <a class="carousel-control left" href="#modaCarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
+                    <a class="carousel-control right" href="#modalCarousel" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

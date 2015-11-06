@@ -31,7 +31,7 @@ namespace MovieShopDALC.Repositories.Implementation
                 {
                     ctx.Genres.Attach(item);
                 }
-                foreach (var item in ctx.status.ToList())
+                foreach (var item in ctx.Status.ToList())
                 {
                     if (item.Name.Equals("Processing"))
                         ord.Status = item;

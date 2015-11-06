@@ -30,6 +30,7 @@ namespace Proxy.Repositories
         /// </summary>
         public List<Movie> GetAll()
         {
+            return new List<Movie>();
             using (var httpClient = new HttpClient())
             {
                 var response = httpClient.GetAsync(endPoint).Result;
