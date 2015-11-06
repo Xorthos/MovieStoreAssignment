@@ -23,6 +23,7 @@ namespace MovieShopWebAPI.Controllers
         {
             IEnumerable<Movie> movies = movieRepository.GetAll();
             return movies;
+
         }
 
         // GET: api/Movie/5
