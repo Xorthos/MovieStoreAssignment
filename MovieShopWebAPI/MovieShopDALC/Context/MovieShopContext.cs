@@ -10,7 +10,7 @@ using MySql.Data.Entity;
 
 namespace MovieShopDALC.Context
 {
-
+    [DbConfigurationType(typeof(MySql.Data.Entity.MySqlEFConfiguration))]
     public class MovieShopContext : DbContext
     {
         public DbSet<Movie> Movies { get; set; }
@@ -22,10 +22,13 @@ namespace MovieShopDALC.Context
         public DbSet<Status> Status { get; set; }
 
 
-        public MovieShopContext() : base("name=MyContext")
-
+        public MovieShopContext() : base("name=db")
         {
-            Configuration.ProxyCreationEnabled = false;
+            //Configuration.ProxyCreationEnabled = false;
+
+            //I'm going to turn off lazy loading instead.
+            //Lazy loading is a problem when we start serialising therefore I now turn it off, I also removed the XML formatter.
+            Configuration.LazyLoadingEnabled = false;
         }
     }
 }

@@ -13,6 +13,11 @@ namespace MovieShopDALC.Seeding
     {
         public DBInitializer() : base()
         {
+            //This should make the database initialise
+            var  cont = new MovieShopContext();
+            cont.Database.Initialize(true);
+            cont.Database.Delete(); // the proper initializing doesn't work, so we use this.
+
             Seed(new MovieShopContext());
         }
 
@@ -72,6 +77,9 @@ namespace MovieShopDALC.Seeding
 
             context.Orders.Add(ord);
 
+            // this is again because the original intend of the method doesn't work.
+            context.SaveChanges();
+            
             base.Seed(context);
         }
     }

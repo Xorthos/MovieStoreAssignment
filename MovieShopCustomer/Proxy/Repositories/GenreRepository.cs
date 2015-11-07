@@ -28,7 +28,6 @@ namespace Proxy.Repositories
         
         public List<Genre> GetAll()
         {
-            return new List<Genre>();
             using (var httpClient = new HttpClient())
             {
                 var response = httpClient.GetAsync(endPoint).Result;
