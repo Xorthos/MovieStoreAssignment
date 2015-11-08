@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Proxy.Facade.Implementation;
 
 namespace MovieShopAdministrationAuth.Controllers
 {
@@ -16,8 +17,9 @@ namespace MovieShopAdministrationAuth.Controllers
         #region Index 
         public ActionResult Index()
         {
-            List<Movie> movies = facade.GetMovieRepository().GetAll();
-            List<Genre> genres = facade.GetGenreRepository().GetAll();
+            //could this be done in a view model?
+            List<Movie> movies = (List<Movie>) facade.GetMovieGateway().GetAll();
+            List<Genre> genres = (List<Genre>) facade.GetGenreGateway().GetAll();
             return View(new IndexViewModelHomeMade() { Movies = movies, Genres = genres });
         }
         #endregion
@@ -25,7 +27,7 @@ namespace MovieShopAdministrationAuth.Controllers
         [HttpGet]
         public ActionResult ViewCustomers()
         {
-            List<Customer> customers = facade.GetCustomerRepository().GetAll();
+            List<Customer> customers = (List<Customer>) facade.GetCustomerGateway().GetAll();
             return View(customers);
         }
         #endregion
@@ -34,7 +36,7 @@ namespace MovieShopAdministrationAuth.Controllers
         public ActionResult ViewOrders()
         {
             
-            return View(facade.GetOrderRepository().GetAll());
+            return View(facade.GetOrderGateway().GetAll());
         }
         #endregion
     }

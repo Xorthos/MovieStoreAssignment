@@ -6,18 +6,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Proxy.Facade.abstraction;
+using Proxy.Facade.Implementation;
 
 namespace MovieShopAdministrationAuth.Controllers
 {
     public class MovieController : Controller
     {
-        Facade facade = new Facade();
+        IFacade facade = new Facade();
         #region Index for Movies
         // GET: Movie
         public ActionResult Index()
         {
-            List<Movie> movies = facade.GetMovieRepository().GetAll();
-            List<Genre> genres = facade.GetGenreRepository().GetAll();
+            //could this be done in a viewmodel?
+            List<Movie> movies = (List<Movie>) facade.GetMovieGateway().GetAll();
+            List<Genre> genres = (List<Genre>) facade.GetGenreGateway().GetAll();
 
             return View(new IndexViewModelHomeMade() { Movies = movies, Genres = genres });
         }
@@ -27,7 +30,7 @@ namespace MovieShopAdministrationAuth.Controllers
         [HttpGet]
         public ActionResult FilterMovies(FilterModel filters)
         {
-            List<Movie> movies = facade.GetMovieRepository().GetAll();
+            List<Movie> movies = (List<Movie>) facade.GetMovieGateway().GetAll();
             if (filters.SearchToken != null)
             {
                 movies = movies.Where(c => c.Title.ToLower().Contains(filters.SearchToken.ToLower())).ToList();
@@ -37,7 +40,7 @@ namespace MovieShopAdministrationAuth.Controllers
                 movies = movies.Where(c => c.Genre.Id == filters.GenreId).ToList();
             }
 
-            List<Genre> genres = facade.GetGenreRepository().GetAll();
+            List<Genre> genres = (List<Genre>) facade.GetGenreGateway().GetAll();
 
             return View("Index", new IndexViewModelHomeMade() { Movies = movies, Genres = genres });
             //return RedirectToAction("Index", new { movies = movies });
@@ -55,9 +58,9 @@ namespace MovieShopAdministrationAuth.Controllers
         public ActionResult Create(Movie movie)
         {
             //[Bind(Include = "Title, Price, Year, Genre.Id, ImgUrl, TrailerUrl")]
-        //METHOD NAME MIGHT CHANGE.
-        movie.Genre = facade.GetGenreRepository().GetGenre(movie.Genre.Id);
-            facade.GetMovieRepository().Add(movie);
+            //METHOD NAME MIGHT CHANGE.
+            movie.Genre = facade.GetGenreGateway().Get(movie.Genre.Id);
+            facade.GetMovieGateway().Add(movie);
             return Redirect("Index");
         }
         #endregion
@@ -66,8 +69,9 @@ namespace MovieShopAdministrationAuth.Controllers
         [HttpGet]
         public ActionResult Edit(int movieId) {
 
-            Movie theMovie = facade.GetMovieRepository().GetMovie(movieId);
-            List<Genre> genres = facade.GetGenreRepository().GetAll();
+            //could this be done in a view model?
+            Movie theMovie = facade.GetMovieGateway().Get(movieId);
+            List<Genre> genres = (List<Genre>) facade.GetGenreGateway().GetAll();
             EditMovieModel theViewModel = new EditMovieModel() { Movie = theMovie, Genres = genres };
             
             return View(theViewModel);
@@ -78,9 +82,9 @@ namespace MovieShopAdministrationAuth.Controllers
         public ActionResult Edit(Movie movie)
         {
                 //METHOD NAME MIGHT CHANGE.
-                movie.Genre = facade.GetGenreRepository().GetGenre(movie.Genre.Id);
+                movie.Genre = facade.GetGenreGateway().Get(movie.Genre.Id);
             //METHOD NAME MIGHT CHANGE.
-            facade.GetMovieRepository().UpdateMovie(movie);
+            facade.GetMovieGateway().Update(movie);
             return Redirect("Index");
 
         }
@@ -90,13 +94,13 @@ namespace MovieShopAdministrationAuth.Controllers
         [HttpGet]
         public ActionResult Delete(int movieId)
         {
-            Movie theMovie = facade.GetMovieRepository().GetMovie(movieId);
+            Movie theMovie = facade.GetMovieGateway().Get(movieId);
             return View(theMovie);
         }
         [HttpPost]
         public ActionResult DeleteAccepted(int movieId)
         {
-            facade.GetMovieRepository().Delete(movieId);
+            facade.GetMovieGateway().Deactivate(movieId);
             return Redirect("Index");
         }
         #endregion

@@ -6,18 +6,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Proxy.Facade.abstraction;
+using Proxy.Facade.Implementation;
 
 namespace MovieShopAdministrationAuth.Controllers
 {
     public class GenreController : Controller
     {
-        Facade facade = new Facade();
+        IFacade facade = new Facade();
         // GET: Genre
         #region Index Listing all genres
         [HttpGet]
         public ActionResult Index()
         {
-            List<Genre> genres = facade.GetGenreRepository().GetAll();
+            List<Genre> genres = (List<Genre>) facade.GetGenreGateway().GetAll();
             return View(new IndexViewModelHomeMade() {Genres = genres });
         }
         #endregion
@@ -30,7 +32,7 @@ namespace MovieShopAdministrationAuth.Controllers
         
         [HttpPost]
         public ActionResult Create(Genre genre) {
-             facade.GetGenreRepository().Add(genre);
+             facade.GetGenreGateway().Add(genre);
             return Redirect("Index");
         }
         #endregion
@@ -39,7 +41,7 @@ namespace MovieShopAdministrationAuth.Controllers
         [HttpGet]
         public ActionResult Edit(int genreId) {
             try {
-                Genre theGenre = facade.GetGenreRepository().GetGenre(genreId);
+                Genre theGenre = facade.GetGenreGateway().Get(genreId);
                 return View(theGenre);
             }
             catch
@@ -51,7 +53,7 @@ namespace MovieShopAdministrationAuth.Controllers
         [HttpPost]
         public ActionResult Edit(Genre genre)
         {
-            facade.GetGenreRepository().EditGenre(genre);
+            facade.GetGenreGateway().Update(genre);
             return Redirect("Index");
         }
 

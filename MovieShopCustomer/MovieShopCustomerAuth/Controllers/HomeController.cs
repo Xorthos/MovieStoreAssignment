@@ -6,13 +6,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Proxy.Facade.abstraction;
+using Proxy.Facade.Implementation;
 
 namespace MovieShopCustomerAuth.Controllers
 {
     
     public class HomeController : Controller
     {
-        Facade facade = new Facade();
+        IFacade facade = new Facade();
         #region Home Index
         public ActionResult Index()
         {
@@ -20,8 +22,11 @@ namespace MovieShopCustomerAuth.Controllers
             {
                 Session["ShoppingCart"] = new ShoppingCart();
             }
-            List<Movie> movies = facade.GetMovieRepository().GetAll();
-            List<Genre> genres = facade.GetGenreRepository().GetAll();
+
+            //This should be done in the viewmodel
+            List<Movie> movies = (List<Movie>) facade.GetMovieGateway().GetAll();
+            List<Genre> genres = (List<Genre>) facade.GetGenreGateway().GetAll();
+            // to here
 
             return View(new IndexViewModelHomeMade() { Movies = movies, Genres = genres });
         }
@@ -31,7 +36,8 @@ namespace MovieShopCustomerAuth.Controllers
         [HttpGet]
         public ActionResult FilterMovies(FilterModel filters)
         {
-            List<Movie> movies = facade.GetMovieRepository().GetAll();
+            // could this be done in a view model? If so we need to do it, and test it!
+            List<Movie> movies = (List<Movie>) facade.GetMovieGateway().GetAll();
             if (filters.SearchToken != null)
             {
                 movies = movies.Where(c => c.Title.ToLower().Contains(filters.SearchToken.ToLower())).ToList();
@@ -41,7 +47,7 @@ namespace MovieShopCustomerAuth.Controllers
                 movies = movies.Where(c => c.Genre.Id == filters.GenreId).ToList(); 
             }
 
-            List<Genre> genres = facade.GetGenreRepository().GetAll();
+            List<Genre> genres = (List<Genre>) facade.GetGenreGateway().GetAll();
 
             return View("Index", new IndexViewModelHomeMade() { Movies = movies, Genres = genres });
         }
@@ -61,7 +67,8 @@ namespace MovieShopCustomerAuth.Controllers
             {
                 return Redirect("Index");
             }
-            Orderline line = new Orderline() { Movie = facade.GetMovieRepository().GetMovie(movieId), Amount = amount };
+            //could this be done in a view model? if so we need to do it, and test it!
+            Orderline line = new Orderline() { Movie = facade.GetMovieGateway().Get(movieId), Amount = amount };
             ShoppingCart cart = Session["ShoppingCart"] as ShoppingCart;
             cart.Orderline.Add(line);
             return Redirect("Index");
@@ -94,7 +101,7 @@ namespace MovieShopCustomerAuth.Controllers
         [HttpPost]
         public ActionResult UserLogIn(string UserEmail, string UserPassword)
         {
-            Customer cust = facade.GetCustomerRepository().GetCustomer(UserEmail);
+            Customer cust = facade.GetCustomerGateway().Get(UserEmail);
             if (cust != null && cust.Password.Equals(UserPassword))
             {
                 Session["UserName"] = cust.FirstName + " " + cust.LastName;
@@ -119,16 +126,21 @@ namespace MovieShopCustomerAuth.Controllers
             return View();
         }
 
+        /// <summary>
+        /// The changes to the gateway, and athorization has made this both not work, and not necessary
+        /// </summary>
+        /// <param name="viewModel"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult ChangePass(ChangePassModel viewModel)
         {
             if (ModelState.IsValid)
             {
-                Customer cust = facade.GetCustomerRepository().GetCustomer((int)Session["UserId"]);
+                Customer cust = facade.GetCustomerGateway().Get((int)Session["UserId"]);
                 if (cust.Password.Equals(viewModel.OldPassword))
                 {
                     cust.Password = viewModel.Password;
-                    facade.GetCustomerRepository().ChangePassword(cust);
+                    //facade.GetCustomerGateway().ChangePassword(cust);
                     ViewBag.PreviousFail = null;
 
                 }
@@ -150,7 +162,7 @@ namespace MovieShopCustomerAuth.Controllers
         [HttpGet]
         public ActionResult ChangeInfo()
         {
-            return View(facade.GetCustomerRepository().GetCustomer((int)Session["UserId"]));
+            return View(facade.GetCustomerGateway().Get((int)Session["UserId"]));
         }
 
         [HttpPost]
@@ -161,7 +173,7 @@ namespace MovieShopCustomerAuth.Controllers
             {
                 Session["UserName"] = cust.FirstName + " " + cust.LastName;
                 cust.Id = (int)Session["UserId"];
-                facade.GetCustomerRepository().ChangeCustomer(cust);
+                facade.GetCustomerGateway().Update(cust);
 
                 return RedirectToAction("UserProfile");
             }
@@ -176,7 +188,7 @@ namespace MovieShopCustomerAuth.Controllers
         [HttpGet]
         public ActionResult ViewOrders()
         {
-            return View(facade.GetOrderRepository().GetOrders((int)Session["UserId"]));
+            return View(facade.GetOrderGateway().GetOrders((int)Session["UserId"]));
         }
         #endregion
 

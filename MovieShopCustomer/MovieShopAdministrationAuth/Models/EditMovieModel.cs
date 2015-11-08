@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Proxy.Facade.Implementation;
 
 namespace MovieShopAdministrationAuth.Models
 {
@@ -20,11 +21,11 @@ namespace MovieShopAdministrationAuth.Models
             
         }
         private void GetGenres() {
-            Genres = facade.GetGenreRepository().GetAll();
+            Genres = (List<Genre>) facade.GetGenreGateway().GetAll();
         }
         private void GetMovie(int Id)
         {
-            Movie = facade.GetMovieRepository().GetMovie(Id);
+            Movie = facade.GetMovieGateway().Get(Id);
         }
         public Movie Movie { get; set; }
 

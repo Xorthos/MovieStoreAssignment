@@ -15,7 +15,7 @@ namespace MovieShopDALC.Seeding
         {
             //This should make the database initialise
             var  cont = new MovieShopContext();
-            cont.Database.Initialize(true);
+            //cont.Database.Initialize(true);
             cont.Database.Delete(); // the proper initializing doesn't work, so we use this.
 
             Seed(new MovieShopContext());

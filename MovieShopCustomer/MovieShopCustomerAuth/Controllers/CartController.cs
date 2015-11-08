@@ -57,8 +57,10 @@ namespace MovieShopCustomerAuth.Controllers
         public ActionResult AddToShoppingCar(Movie item)
         {
             var myCookie = Request.Cookies[CART_NAME];
+
             myCookie.Values.Add("", item.Id.ToString());
             myCookie.Expires = DateTime.Now.AddDays(1); // this will make the cart persist one day.
+
             return RedirectToAction("Index","Home");
             //this should allow you to return nothing, I imagine that this could be useful
             //for JavaScript 

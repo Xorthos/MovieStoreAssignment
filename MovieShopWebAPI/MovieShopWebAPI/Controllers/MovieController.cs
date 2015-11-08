@@ -55,7 +55,8 @@ namespace MovieShopWebAPI.Controllers
 
             movieRepository.Update(movie);
 
-            return StatusCode(HttpStatusCode.NoContent);
+            //original code : StatusCode(HttpStatusCode.NoContent)
+            return Ok(true);
         }
 
         // POST: api/Movie

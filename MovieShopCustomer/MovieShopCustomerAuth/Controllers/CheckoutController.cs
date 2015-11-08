@@ -6,12 +6,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Proxy.Facade.abstraction;
+using Proxy.Facade.Implementation;
 
 namespace MovieShopCustomerAuth.Controllers
 {
     public class CheckoutController : Controller
     {
-        Facade facade = new Facade();
+        IFacade facade = new Facade();
         // GET: Checkout
         #region CheckoutView Index
         [HttpGet]
@@ -20,7 +22,7 @@ namespace MovieShopCustomerAuth.Controllers
             try
             {   
                 int userId = (int)Session["UserId"];
-                Customer customer = facade.GetCustomerRepository().GetCustomer(userId);
+                Customer customer = facade.GetCustomerGateway().Get(userId);
                 ShoppingCart cart = Session["ShoppingCart"] as ShoppingCart;
                 return View("Index", new CheckoutViewModel() { Customer = customer, ShoppingCart = cart });
             }
@@ -68,7 +70,7 @@ namespace MovieShopCustomerAuth.Controllers
         public ActionResult Purchase() {
             try {
                 int userId = (int)Session["UserId"];
-                Customer customer = facade.GetCustomerRepository().GetCustomer(userId);
+                Customer customer = facade.GetCustomerGateway().Get(userId);
                 ShoppingCart cart = Session["ShoppingCart"] as ShoppingCart;
                 
                 for (int i = 0; i < cart.Orderline.Count; i++)
@@ -78,7 +80,7 @@ namespace MovieShopCustomerAuth.Controllers
                 }
                 
                 Order order = new Order(cart.Orderline, customer);
-                facade.GetOrderRepository().Add(order);
+                facade.GetOrderGateway().Add(order);
 
                 cart.Orderline = new List<Orderline>();
                 return View("Success");

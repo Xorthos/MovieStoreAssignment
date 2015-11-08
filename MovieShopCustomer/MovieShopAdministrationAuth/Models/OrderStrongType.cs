@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Proxy.Facade.Implementation;
 
 namespace MovieShopAdministrationAuth.Models
 {
@@ -25,7 +26,7 @@ namespace MovieShopAdministrationAuth.Models
         /// </summary>
         public OrderStrongType()
         {
-            Orders = new Facade().GetOrderRepository().GetAll();
+            Orders = (List<Order>) new Facade().GetOrderGateway().GetAll();
         }
     }
 }

@@ -64,7 +64,7 @@ namespace MovieShopAdministrationAuth.Controllers
                 : "";
 
             var userId = User.Identity.GetUserId();
-            var model = new IndexViewModelHomeMade
+            var model = new IndexViewModel
             {
                 HasPassword = HasPassword(),
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),

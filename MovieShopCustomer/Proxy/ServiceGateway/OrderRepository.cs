@@ -22,12 +22,12 @@ namespace Proxy.Repositories
         /// <param name="ord">the order to be added</param>
         public void Add(Order ord)
         {
+            
             using (var httpClient = new HttpClient())
             {
                 var result = httpClient.PostAsJsonAsync(endPoint, ord).Result;
 
             }
-
         }
 
         /// <summary>

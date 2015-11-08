@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Proxy.Facade.Implementation;
 
 namespace MovieShopCustomerAuth.Controllers
 {
@@ -38,7 +39,7 @@ namespace MovieShopCustomerAuth.Controllers
             if (ModelState.IsValid)
             {
                 registerModel.Customer.Password = registerModel.Password;
-                new Facade().GetCustomerRepository().Add(registerModel.Customer);
+                new Facade().GetCustomerGateway().Add(registerModel.Customer);
                 return RedirectToAction("Index", "Home");
             }
             return View(registerModel);
