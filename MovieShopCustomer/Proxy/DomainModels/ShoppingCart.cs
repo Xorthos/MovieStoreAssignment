@@ -14,7 +14,7 @@ namespace Proxy.DomainModels
             Orderline = new List<Orderline>();
         }
         [Key]
-        public string CustomerId { get; set; }
+        public int CustomerId { get; set; }
         public List<Orderline> Orderline { get; set; }
     }
 }

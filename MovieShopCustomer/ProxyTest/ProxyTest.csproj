@@ -70,9 +70,15 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="ModelTests\CustomerTest.cs" />
+    <Compile Include="ModelTests\GenreTest.cs" />
+    <Compile Include="ModelTests\MovieTest.cs" />
     <Compile Include="ModelTests\OrderlineTest.cs" />
+    <Compile Include="ModelTests\OrderTest.cs" />
     <Compile Include="ModelTests\ShoppingCartTest.cs" />
+    <Compile Include="ModelTests\StatusTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceGateway\CustomerRepositoryTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
