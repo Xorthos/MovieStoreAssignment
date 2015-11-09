@@ -23,12 +23,7 @@ namespace MovieShopCustomerAuth.Controllers
                 Session["ShoppingCart"] = new ShoppingCart();
             }
 
-            //This should be done in the viewmodel
-            List<Movie> movies = (List<Movie>) facade.GetMovieGateway().GetAll();
-            List<Genre> genres = (List<Genre>) facade.GetGenreGateway().GetAll();
-            // to here
-
-            return View(new IndexViewModelHomeMade() { Movies = movies, Genres = genres });
+            return View(new IndexViewModelHomeMade());
         }
         #endregion
 
@@ -36,20 +31,7 @@ namespace MovieShopCustomerAuth.Controllers
         [HttpGet]
         public ActionResult FilterMovies(FilterModel filters)
         {
-            // could this be done in a view model? If so we need to do it, and test it!
-            List<Movie> movies = (List<Movie>) facade.GetMovieGateway().GetAll();
-            if (filters.SearchToken != null)
-            {
-                movies = movies.Where(c => c.Title.ToLower().Contains(filters.SearchToken.ToLower())).ToList();
-            }
-            if (filters.UseGenre)
-            {
-                movies = movies.Where(c => c.Genre.Id == filters.GenreId).ToList(); 
-            }
-
-            List<Genre> genres = (List<Genre>) facade.GetGenreGateway().GetAll();
-
-            return View("Index", new IndexViewModelHomeMade() { Movies = movies, Genres = genres });
+            return View("Index", new IndexViewModelHomeMade(filters));
         }
         #endregion
 
