@@ -76,18 +76,13 @@
     <Compile Include="Facade\abstraction\IFacade.cs" />
     <Compile Include="Facade\Implementation\Facade.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Proxy\Proxy.cs" />
     <Compile Include="ServiceGateway\Abstraction\ICustomerGateway.cs" />
     <Compile Include="ServiceGateway\Abstraction\IOrderGateway.cs" />
     <Compile Include="ServiceGateway\Abstraction\ServiceGateway.cs" />
-    <Compile Include="ServiceGateway\CustomerRepository.cs" />
-    <Compile Include="ServiceGateway\GenreRepository.cs" />
     <Compile Include="ServiceGateway\Implementation\CustomerGateway.cs" />
     <Compile Include="ServiceGateway\Implementation\GenreGateway.cs" />
     <Compile Include="ServiceGateway\Implementation\MovieGateway.cs" />
     <Compile Include="ServiceGateway\Implementation\OrderGateway.cs" />
-    <Compile Include="ServiceGateway\MovieRepository.cs" />
-    <Compile Include="ServiceGateway\OrderRepository.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
