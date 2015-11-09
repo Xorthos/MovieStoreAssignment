@@ -7,10 +7,10 @@ using MovieShopCustomerAuth.Models;
 using NUnit.Core;
 using NUnit.Framework;
 
-namespace ViewModelCustomerTest.ViewModels
+namespace MovieShopCustomerTest
 {
     [TestFixture]
-    class IndexViewModelHomeMadeTest
+    class ViewModelsTest
     {
         /// <summary>
         /// Tests if the Genres in the view model is set on create.
@@ -30,14 +30,14 @@ namespace ViewModelCustomerTest.ViewModels
         public void Test_movies_not_null()
         {
             IndexViewModelHomeMade model = new IndexViewModelHomeMade();
-            
+
             Assert.NotNull(model.Movies);
         }
 
         [Test]
         public void Test_Movie_Search_Phrase_Lowercase()
         {
-            FilterModel filters = new FilterModel() {SearchToken = "horns"};
+            FilterModel filters = new FilterModel() { SearchToken = "horns" };
 
             IndexViewModelHomeMade model = new IndexViewModelHomeMade(filters);
 
@@ -57,7 +57,7 @@ namespace ViewModelCustomerTest.ViewModels
         [Test]
         public void Test_Movie_Search_Genre_True()
         {
-            FilterModel filters = new FilterModel() { GenreId = 2, UseGenre = true};
+            FilterModel filters = new FilterModel() { GenreId = 2, UseGenre = true };
 
             IndexViewModelHomeMade model = new IndexViewModelHomeMade(filters);
 

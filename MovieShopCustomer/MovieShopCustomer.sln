@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieShopCustomerAuth", "Mo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieShopAdministrationAuth", "MovieShopAdministrationAuth\MovieShopAdministrationAuth.csproj", "{A35DC77B-08BF-4989-A0CB-0C2E372FF474}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerTest", "ViewModelCustomerTest.cs\CustomerTest.csproj", "{F06AF8FC-81FB-42D2-A853-DF5A8B4386CE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieShopCustomerTest", "MovieShopCustomerTest\MovieShopCustomerTest.csproj", "{0DAB7804-24D0-441B-8ABD-FE2E03BA6FF6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +35,10 @@ Global
 		{A35DC77B-08BF-4989-A0CB-0C2E372FF474}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A35DC77B-08BF-4989-A0CB-0C2E372FF474}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A35DC77B-08BF-4989-A0CB-0C2E372FF474}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F06AF8FC-81FB-42D2-A853-DF5A8B4386CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F06AF8FC-81FB-42D2-A853-DF5A8B4386CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F06AF8FC-81FB-42D2-A853-DF5A8B4386CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F06AF8FC-81FB-42D2-A853-DF5A8B4386CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DAB7804-24D0-441B-8ABD-FE2E03BA6FF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DAB7804-24D0-441B-8ABD-FE2E03BA6FF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DAB7804-24D0-441B-8ABD-FE2E03BA6FF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DAB7804-24D0-441B-8ABD-FE2E03BA6FF6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
