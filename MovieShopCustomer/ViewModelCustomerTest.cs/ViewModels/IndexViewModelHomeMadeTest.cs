@@ -7,7 +7,7 @@ using MovieShopCustomerAuth.Models;
 using NUnit.Core;
 using NUnit.Framework;
 
-namespace ViewModelCustomerTest.cs.ViewModels
+namespace ViewModelCustomerTest.ViewModels
 {
     [TestFixture]
     class IndexViewModelHomeMadeTest
