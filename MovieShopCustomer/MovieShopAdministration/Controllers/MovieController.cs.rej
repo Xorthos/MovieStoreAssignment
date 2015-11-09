@@ -1,8 +1,0 @@
-diff a/MovieShopCustomer/MovieShopAdministration/Controllers/MovieController.cs b/MovieShopCustomer/MovieShopAdministration/Controllers/MovieController.cs	(rejected hunks)
-@@ -1,4 +0,5 @@
--﻿using Proxy.DomainModels;
-+﻿using MovieShopAdministration.Models;
-+using Proxy.DomainModels;
- using Proxy.Facade;
- using System;
- using System.Collections.Generic;
