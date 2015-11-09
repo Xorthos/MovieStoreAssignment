@@ -9,8 +9,8 @@ namespace Proxy.Proxy
 {
     public class Proxy
     {
-        //protected static readonly string _endPoint = "http://movieshopapi.azurewebsites.net/api/";
-        protected static readonly string _endPoint = "http://localhost:21748/api/";
+        protected static readonly string _endPoint = "http://movieshopapi.azurewebsites.net/api/";
+        //protected static readonly string _endPoint = "http://localhost:21748/api/";
 
         public static string GetBaseString()
         {

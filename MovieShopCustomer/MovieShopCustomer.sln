@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieShopCustomerAuth", "Mo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieShopAdministrationAuth", "MovieShopAdministrationAuth\MovieShopAdministrationAuth.csproj", "{A35DC77B-08BF-4989-A0CB-0C2E372FF474}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerTest.cs", "ViewModelCustomerTest.cs\CustomerTest.cs.csproj", "{F06AF8FC-81FB-42D2-A853-DF5A8B4386CE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{A35DC77B-08BF-4989-A0CB-0C2E372FF474}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A35DC77B-08BF-4989-A0CB-0C2E372FF474}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A35DC77B-08BF-4989-A0CB-0C2E372FF474}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F06AF8FC-81FB-42D2-A853-DF5A8B4386CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F06AF8FC-81FB-42D2-A853-DF5A8B4386CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F06AF8FC-81FB-42D2-A853-DF5A8B4386CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F06AF8FC-81FB-42D2-A853-DF5A8B4386CE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
