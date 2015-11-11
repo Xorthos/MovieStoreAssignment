@@ -77,6 +77,24 @@ namespace MovieShopDALC.Seeding
 
             context.Orders.Add(ord);
 
+            List<Orderline> orderline2 = new List<Orderline>();
+            orderline2.Add(context.Orderline.Add(new Orderline() { OrderId = 2, MovieId = 10, Amount = 5, Price = 150 }));
+            var ord2 = new Order(orderline2, cust2)
+            {
+                Id = 2,
+                Status = stat1
+            };
+            context.Orders.Add(ord2);
+
+            List<Orderline> orderline3 = new List<Orderline>();
+            orderline3.Add(context.Orderline.Add(new Orderline() { OrderId = 3, MovieId = 11, Amount = 1, Price = 300 }));
+            var ord3 = new Order(orderline3, cust2)
+            {
+                Id = 2,
+                Status = stat1
+            };
+            context.Orders.Add(ord3);
+
             // this is again because the original intend of the method doesn't work.
             context.SaveChanges();
             

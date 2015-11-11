@@ -18,7 +18,7 @@ namespace MovieShopDALC.Repositories.Implementation
 
             using (var ctx = new MovieShopContext())
             {
-                ctx.Customers.Attach(ord.Customer);
+                /*ctx.Customers.Attach(ord.Customer);
                 foreach (Orderline item in ord.Orderlines)
                 {
                     bool isDetached = ctx.Entry(item.Movie).State == EntityState.Detached;
@@ -36,6 +36,7 @@ namespace MovieShopDALC.Repositories.Implementation
                     if (item.Name.Equals("Processing"))
                         ord.Status = item;
                 }
+                */
                 Order newOrd = ctx.Orders.Add(ord);
                 ctx.SaveChanges();
                 return newOrd;

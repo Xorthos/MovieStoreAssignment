@@ -14,7 +14,7 @@ namespace MovieShopDALC.Models
             public string Title { get; set; }
             public double Price { get; set; }
             public DateTime Year { get; set; }
-            public Genre Genre { get; set; }
+            public virtual Genre Genre { get; set; }
             public string ImgUrl { get; set; }
             public string TrailerUrl { get; set; }
     }

@@ -33,7 +33,7 @@ namespace MovieShopDALC.Models
         {
             Orderlines = orderLines;
             Customer = cust;
-            OrderDate = DateTime.Now;
+            OrderDate = DateTime.Now.Date;
         }
     }
 }
