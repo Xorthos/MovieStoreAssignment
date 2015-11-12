@@ -16,7 +16,6 @@ namespace MovieShopDALCTest.ReporitoriesTest
         [Test]
         public void Test_Add_ListAll()
         {
-            Order order = new Order();
             List<Orderline> orderlines = new List<Orderline>();
             Orderline OL1 = new Orderline() { OrderId = 2, MovieId = 6, Amount = 6, Price = 30 };
             Orderline Ol2 = new Orderline() { OrderId = 2, MovieId = 17, Amount = 8, Price = 30 };

@@ -58,7 +58,7 @@ namespace MovieShopDALC.Seeding
             context.Movies.Add(new Movie() { Id = 18, Title = "Fast & Furious 7", Genre = g2, Price = 30, Year = DateTime.Now, ImgUrl = "http://scaled.ysimag.es/movie/fast-furious-7", TrailerUrl = "https://www.youtube.com/watch?v=w0qQkSuWOS8" });
 
             Customer cust = new Customer() { Id = 1, Email = "bh@h.dk", FirstName = "Hej", MiddleName = "Nows", LastName = "DFNDF", Password = "ddddddd", StreetName = "hejs", StreetNumber = 5 };
-            Customer cust2 = (new Customer() { Email = "mads@minimads.com", Password = "1234567", Id = 1, FirstName = "Mads", MiddleName = "Albæk", LastName = "Damsgaard-Sørensen", StreetName = "Skrænten", StreetNumber = 132 });
+            Customer cust2 = (new Customer() { Email = "mads@minimads.com", Password = "1234567", Id = 2, FirstName = "Mads", MiddleName = "Albæk", LastName = "Damsgaard-Sørensen", StreetName = "Skrænten", StreetNumber = 132 });
 
             context.Customers.Add(cust);
             context.Customers.Add(cust2);
@@ -90,7 +90,7 @@ namespace MovieShopDALC.Seeding
             orderline3.Add(context.Orderline.Add(new Orderline() { OrderId = 3, MovieId = 11, Amount = 1, Price = 300 }));
             var ord3 = new Order(orderline3, cust2)
             {
-                Id = 2,
+                Id = 3,
                 Status = stat1
             };
             context.Orders.Add(ord3);
