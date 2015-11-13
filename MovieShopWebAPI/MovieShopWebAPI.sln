@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieShopWebAPI", "MovieSho
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieShopDALC", "MovieShopDALC\MovieShopDALC.csproj", "{53D05A5B-BABA-4CCF-B789-A384012C63FD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieShopDALCTest", "MovieShopDALCTest\MovieShopDALCTest.csproj", "{BA4D297A-B5AA-448D-85A7-EEF1A5119093}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{53D05A5B-BABA-4CCF-B789-A384012C63FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53D05A5B-BABA-4CCF-B789-A384012C63FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53D05A5B-BABA-4CCF-B789-A384012C63FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA4D297A-B5AA-448D-85A7-EEF1A5119093}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA4D297A-B5AA-448D-85A7-EEF1A5119093}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA4D297A-B5AA-448D-85A7-EEF1A5119093}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA4D297A-B5AA-448D-85A7-EEF1A5119093}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
