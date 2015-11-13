@@ -279,11 +279,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-<<<<<<< HEAD
     <Folder Include="Views\Cart\" />
     <Folder Include="Views\Currency\" />
-=======
->>>>>>> 9c8eafefd803617ddd9a451f70efea89e33cc121
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

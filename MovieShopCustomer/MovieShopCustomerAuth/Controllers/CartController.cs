@@ -10,7 +10,6 @@ using Newtonsoft.Json;
 using Proxy.DomainModels;
 using Proxy.Facade;
 using Proxy.Facade.Implementation;
-using ShoppingCartView = MovieShopCustomerAuth.Models.ShoppingCartView;
 
 namespace MovieShopCustomerAuth.Controllers
 {

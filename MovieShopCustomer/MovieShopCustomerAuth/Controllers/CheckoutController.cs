@@ -15,7 +15,6 @@ namespace MovieShopCustomerAuth.Controllers
 {
     public class CheckoutController : Controller
     {
-        IFacade facade = new Facade();
         private IFacade facade = new Facade();
         // GET: Checkout
 
@@ -26,17 +25,6 @@ namespace MovieShopCustomerAuth.Controllers
         public ActionResult Index(CheckoutViewModel checkout)
         {
             GetCurrencies();
-            try
-            {   
-                int userId = (int)Session["UserId"];
-                Customer customer = facade.GetCustomerGateway().Get(userId);
-                ShoppingCart cart = Session["ShoppingCart"] as ShoppingCart;
-                return View("Index", new CheckoutViewModel() { Customer = customer, ShoppingCart = cart });
-            }
-            catch
-            {
-                return View("LogInAndTryAgain");
-            }
             Customer customer = facade.GetCustomerGateway().Get(User.Identity.Name);
 
             //gets the cookie, and get the cart from that
@@ -69,7 +57,7 @@ namespace MovieShopCustomerAuth.Controllers
 
                 while (reader.Read())
                 {
-                    if (reader.HasAttributes)
+                    if (reader.HasAttributes && reader.GetAttribute("code") != null)
                     {
                         ExchangeRateModel exchangeRateModel = new ExchangeRateModel()
                         {
@@ -78,7 +66,7 @@ namespace MovieShopCustomerAuth.Controllers
                         };
                         double tempRate;
                         double.TryParse(reader.GetAttribute("rate"), out tempRate);
-                        exchangeRateModel.rate = tempRate;
+                        exchangeRateModel.rate = tempRate/100;
 
                         exchangeRates.Add(exchangeRateModel);
                     }
