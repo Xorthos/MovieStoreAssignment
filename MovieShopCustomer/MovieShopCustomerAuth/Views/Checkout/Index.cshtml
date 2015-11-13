@@ -1,4 +1,5 @@
-﻿@model MovieShopCustomerAuth.Models.CheckoutViewModel
+﻿@using MovieShopCustomerAuth.Models
+@model MovieShopCustomerAuth.Models.CheckoutViewModel
 
 @{
     ViewBag.Title = "Checkout";
@@ -48,42 +49,53 @@
         </div>
 
         <div class="col-md-8">
-            
+
+            @using (Html.BeginForm("UpdateCurrency", "Checkout"))
+            {
+                <input list="code">
+                <datalist id="code">
+                    @foreach (ExchangeRateModel rate in (List<ExchangeRateModel>)Session["ExchangeRateList"])
+                    {
+                        <option value="@rate.code"></option>
+                    }
+                </datalist>
+            }
+
             <table id="example" class="table table-striped table-bordered col-lg-pull-5" cellspacing="0">
                 <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Amount</th>
-                        <th>Price/each</th>
-                        <th>Total Price</th>
-                    </tr>
+                <tr>
+                    <th>Title</th>
+                    <th>Amount</th>
+                    <th>Price/each</th>
+                    <th>Total Price</th>
+                </tr>
                 </thead>
                 <tbody>
-          @{double FinalPrice = 0; }
-          @foreach (var item in Model.ShoppingCart.Orderline)
-          {
-              double TotalPrice = @item.Movie.Price * @item.Amount;
-              FinalPrice += TotalPrice;
+                @{double FinalPrice = 0; }
+                @foreach (var item in Model.ShoppingCart.Orderline)
+                {
+                    double TotalPrice = @item.Movie.Price*@item.Amount;
+                    FinalPrice += TotalPrice;
                     <tr>
                         <td>@item.Movie.Title</td>
                         <td>@item.Amount</td>
                         <td>@item.Movie.Price</td>
                         <td>@TotalPrice</td>
-                        <td>@Html.ActionLink("Delete", "Delete", "Checkout", new { movieId = @item.Movie.Id}, null)</td>
+                        <td>@Html.ActionLink("Delete", "Delete", "Checkout", new {movieId = @item.Movie.Id}, null)</td>
                     </tr>
-          }
-                    <tr>
-                        <td colspan="3">Final Price</td>
-                        <td>@FinalPrice</td>
-                    </tr>
-               </tbody>
+                }
+                <tr>
+                    <td colspan="3">Final Price</td>
+                    <td>@FinalPrice</td>
+                </tr>
+                </tbody>
             </table>
             <button type="submit" class="btn btn-default">Purchase</button>
             <!--Html.ActionLink("Puchase", "Purchase", "Checkout", new { }, new { class = "btn btn-default", style = "float : right; margin-left: 10px" })-->
-            
-            
-           @Html.ActionLink("Back to List", "Index", "Home", new { }, new { @class = "btn btn-default", @style = "float : right" })
-            
+
+
+            @Html.ActionLink("Back to List", "Index", "Home", new {}, new {@class = "btn btn-default", @style = "float : right"})
+
         </div>
     </div>
 </form>

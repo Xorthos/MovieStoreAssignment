@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Xml;
 using Proxy.Facade.abstraction;
 using Proxy.Facade.Implementation;
 
@@ -19,6 +20,7 @@ namespace MovieShopCustomerAuth.Controllers
         [HttpGet]
         public ActionResult Index(CheckoutViewModel checkout)
         {
+            GetCurrencies();
             try
             {   
                 int userId = (int)Session["UserId"];
@@ -29,6 +31,38 @@ namespace MovieShopCustomerAuth.Controllers
             catch
             {
                 return View("LogInAndTryAgain");
+            }
+        }
+
+        private void GetCurrencies()
+        {
+            if (Session["ExchangeRateList"] == null)
+            {
+                XmlReader reader = XmlReader.Create("http://www.nationalbanken.dk/_vti_bin/DN/DataService.svc/CurrencyRatesXML?lang=da");
+                List<ExchangeRateModel> exchangeRates = new List<ExchangeRateModel>();
+
+                ExchangeRateModel DKK = new ExchangeRateModel() { code = "DKK", desc = "Danske kroner", rate = 1 };
+                Session["CurrentRate"] = DKK;
+                exchangeRates.Add(DKK);
+
+                while (reader.Read())
+                {
+                    if (reader.HasAttributes)
+                    {
+                        ExchangeRateModel exchangeRateModel = new ExchangeRateModel()
+                        {
+                            code = reader.GetAttribute("code"),
+                            desc = reader.GetAttribute("desc")
+                        };
+                        double tempRate;
+                        double.TryParse(reader.GetAttribute("rate"), out tempRate);
+                        exchangeRateModel.rate = tempRate;
+
+                        exchangeRates.Add(exchangeRateModel);
+                    }
+                }
+                Session["ExchangeRateList"] = exchangeRates;
+
             }
         }
 
@@ -92,7 +126,18 @@ namespace MovieShopCustomerAuth.Controllers
         }
         #endregion
 
-      
+        public ActionResult UpdateCurrency(string code)
+        {
+            
+            foreach (ExchangeRateModel rate in (List<ExchangeRateModel>)Session["ExchangeRateList"])
+            {
+                if (rate.code.Equals(code))
+                {
+                    Session["CurrentRate"] = rate;
+                }
+            }
+            return RedirectToAction("Index");
+        }
     }
 }
     
