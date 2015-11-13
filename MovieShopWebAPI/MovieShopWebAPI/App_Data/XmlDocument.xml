@@ -481,5 +481,11 @@
             </summary>
             <param name="documentPath">The physical path to XML document.</param>
         </member>
+        <member name="M:MovieShopWebAPI.Controllers.CustomerController.GetCustomers">
+            <summary>
+            this returns an IEnumerable, which contains all customers.
+            </summary>
+            <returns>an IEnumerable with customers</returns>
+        </member>
     </members>
 </doc>

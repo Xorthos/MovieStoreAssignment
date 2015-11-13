@@ -82,6 +82,7 @@
                         <td>@item.Movie.Price</td>
                         <td>@TotalPrice</td>
                         <td>@Html.ActionLink("Delete", "Delete", "Checkout", new {movieId = @item.Movie.Id}, null)</td>
+                        <td>@Html.ActionLink("DeleteItemFromCart", "Cart", new { movieId = @item.Movie.Id}, null)</td>
                     </tr>
                 }
                 <tr>

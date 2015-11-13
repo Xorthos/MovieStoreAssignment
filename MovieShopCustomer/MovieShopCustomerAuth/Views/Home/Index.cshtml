@@ -33,7 +33,7 @@
                                     <p style="font-size:30px">Kr. @item.Price </p>
                                 </div>
                                 <div style="position:relative; float:right">
-                                    <form method="Get" action="~/Home/AddMovieToCart">
+                                    <form method="POST" action="~/Cart/AddToShoppingCart">
                                         <input type="hidden" name="movieId" value="@item.Id"/>
                                         <input type="number" min="1" max="10" style="width : 50px" maxlength="2" name="amount" value="1" />
                                         <button type="submit" class="btn btn-default">Add to cart</button>

@@ -1,0 +1,12 @@
+﻿@model MovieShopCustomerAuth.Models.ShoppingCartView
+
+@{
+    ViewBag.Title = "title";
+}
+
+<h2>title</h2>
+
+@foreach (var item in Model.Items)
+{
+    <p>@item.MovieId</p>
+}

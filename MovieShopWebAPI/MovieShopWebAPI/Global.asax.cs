@@ -24,7 +24,10 @@ namespace MovieShopWebAPI
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            
+
+            //this is a hack
+            string EnsureMySQLDllIsCopied = MySql.Data.Entity.MySqlProviderInvariantName.ProviderName;
+
         }
     }
 }

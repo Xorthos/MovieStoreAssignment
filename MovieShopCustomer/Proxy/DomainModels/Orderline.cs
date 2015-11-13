@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Proxy.DomainModels
 {
-    public class Orderline
+    public class Orderline 
     {
         [Key]
         public int Id { get; set; }
@@ -48,6 +48,6 @@ namespace Proxy.DomainModels
         {
 
         }
-     
+        
     }
 }

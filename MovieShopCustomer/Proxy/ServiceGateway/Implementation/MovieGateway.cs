@@ -56,8 +56,9 @@ namespace Proxy.ServiceGateway.Implementation
             using (var httpClient = new HttpClient())
             {
                 var response = httpClient.GetAsync(MOVIE_END_POINT + id).Result;
+                var mov = JsonConvert.DeserializeObject<Movie>(response.Content.ReadAsStringAsync().Result);
 
-                return JsonConvert.DeserializeObject<Movie>(response.Content.ReadAsStringAsync().Result);
+                return mov;
             }
         }
 

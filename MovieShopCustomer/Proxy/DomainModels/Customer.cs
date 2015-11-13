@@ -30,7 +30,6 @@ namespace Proxy.DomainModels
         public int StreetNumber { get; set; }
 
         [Required]
-        //[RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}",ErrorMessage ="Doesn't look like an email")]
         [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}",ErrorMessage ="Doesn't look like an email")]
         public string Email { get; set; }
         
