@@ -12,6 +12,8 @@ namespace MovieShopCustomerAuth.Controllers
 {
     public class CustomerController : Controller
     {
+
+        // I THINK THAT GOOD ARGUMENTS CAN BE MADE TO KILL THIS CONTROLLER
         #region Customer Index
         // GET: Customer
         public ActionResult Index()

@@ -19,6 +19,10 @@ namespace MovieShopWebAPI.Controllers
         private ICustomerRepository customerRepository = Facade.GetCustomerRepository();
 
         // GET: api/Customer
+        /// <summary>
+        /// this returns an IEnumerable, which contains all customers.
+        /// </summary>
+        /// <returns>an IEnumerable with customers</returns>
         public IEnumerable<Customer> GetCustomers()
         {
             return customerRepository.GetAll();
