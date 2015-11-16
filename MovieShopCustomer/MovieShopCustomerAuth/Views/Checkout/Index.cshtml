@@ -1,14 +1,39 @@
-﻿@model MovieShopCustomerAuth.Models.CheckoutViewModel
+﻿@using MovieShopCustomerAuth.Models
+@model MovieShopCustomerAuth.Models.CheckoutViewModel
 
 @{
     ViewBag.Title = "Checkout";
 }
 
 <h2>Checkout</h2>
-<form method="Post" action="~/Checkout/Purchase" >
+<div style="float: right">
+    @using (Html.BeginForm("UpdateCurrency", "Checkout"))
+            {
+        <select class="form-control" name="code">
+            @{ ExchangeRateModel selectedRate = (ExchangeRateModel)Session["CurrentRate"]; }
+            @foreach (ExchangeRateModel rate in (List<ExchangeRateModel>)Session["ExchangeRateList"])
+            {
+                if (rate.rate.Equals(selectedRate.rate))
+                {
+                    <option value="@rate.code" selected="selected">@rate.code</option>
+                }
+                else
+                {
+                    <option value="@rate.code">@rate.code</option>
+                }
+
+            }
+        </select>
+                <button type="Submit" class=".btn-default">Update</button>
+                }
+</div>
+
+
+
+<form method="Post" action="~/Checkout/Purchase">
     <div class="row">
         <div class="col-md-4">
-           
+
 
 
             @Html.AntiForgeryToken()
@@ -27,7 +52,7 @@
             <div class="form-group">
                 @Html.LabelFor(c => c.Customer.LastName)
                 @Html.TextBoxFor(c => c.Customer.LastName, htmlAttributes: new { @class = "form-control", disabled = "disabled" })
-                
+
             </div>
 
             <div class="form-group">
@@ -48,7 +73,7 @@
         </div>
 
         <div class="col-md-8">
-            
+
             <table id="example" class="table table-striped table-bordered col-lg-pull-5" cellspacing="0">
                 <thead>
                     <tr>
@@ -59,31 +84,36 @@
                     </tr>
                 </thead>
                 <tbody>
-          @{double FinalPrice = 0; }
-          @foreach (var item in Model.ShoppingCart.Orderline)
-          {
-              double TotalPrice = @item.Movie.Price * @item.Amount;
-              FinalPrice += TotalPrice;
-                    <tr>
-                        <td>@item.Movie.Title</td>
-                        <td>@item.Amount</td>
-                        <td>@item.Movie.Price</td>
-                        <td>@TotalPrice</td>
-                        <td>@Html.ActionLink("DeleteItemFromCart", "Cart", new { movieId = @item.Movie.Id}, null)</td>
-                    </tr>
-          }
+                @{double FinalPrice = 0; }
+@{
+    ExchangeRateModel currentRate = (ExchangeRateModel) Session["CurrentRate"];
+}
+                    @foreach (var item in Model.ShoppingCart.Orderline)
+                    {
+                        double TotalPrice = (item.Movie.Price/currentRate.rate) * @item.Amount;
+                        FinalPrice += TotalPrice;
+                        double moviePrice = item.Movie.Price/currentRate.rate;
+                        <tr>
+                            <td>@item.Movie.Title</td>
+                            <td>@item.Amount</td>
+                            <td>@Math.Round(moviePrice,2)</td>
+                            <td>@Math.Round(TotalPrice,2)</td>
+                            <td>@Html.ActionLink("Remove", "Cart", new { movieId = @item.Movie.Id }, null)</td>
+                        </tr>
+                    }
                     <tr>
                         <td colspan="3">Final Price</td>
-                        <td>@FinalPrice</td>
+                        <td>
+                        @Math.Round(FinalPrice,2)</td>
                     </tr>
-               </tbody>
+                </tbody>
             </table>
             <button type="submit" class="btn btn-default">Purchase</button>
             <!--Html.ActionLink("Puchase", "Purchase", "Checkout", new { }, new { class = "btn btn-default", style = "float : right; margin-left: 10px" })-->
-            
-            
-           @Html.ActionLink("Back to List", "Index", "Home", new { }, new { @class = "btn btn-default", @style = "float : right" })
-            
+
+
+            @Html.ActionLink("Back to List", "Index", "Home", new { }, new { @class = "btn btn-default", @style = "float : right" })
+
         </div>
     </div>
 </form>
