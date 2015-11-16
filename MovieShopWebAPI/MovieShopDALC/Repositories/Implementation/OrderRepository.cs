@@ -54,7 +54,7 @@ namespace MovieShopDALC.Repositories.Implementation
             {
                 var orderlines = ctx.Orderline.Include("Movie").ToList();
                 var movies = ctx.Movies.Include("Genre").ToList();
-                var orders = ctx.Orders.Include("Customer").Include("Orderlines").Include("Status").ToList();
+                var orders = ctx.Orders.Include("Orderlines").Include("Status").ToList();
 
                 foreach (var orderline in orderlines)
                 {
@@ -77,7 +77,6 @@ namespace MovieShopDALC.Repositories.Implementation
                 var orderlines = ctx.Orderline.Where(cm => cm.OrderId == id).Include("Movie").ToList();
                 Order order =
                     ctx.Orders
-                        .Include("Customer")
                         .Include("Orderlines")
                         .Include("Status")
                         .FirstOrDefault(c => c.Id == id);
@@ -96,11 +95,10 @@ namespace MovieShopDALC.Repositories.Implementation
             using (var ctx = new MovieShopContext())
             {
                 //gets the item that we want to update
-                var order = ctx.Orders.Include("Customer").Include("Orderlines").Include("Status").FirstOrDefault(c => c.Id == ord.Id);
+                var order = ctx.Orders.Include("Orderlines").Include("Status").FirstOrDefault(c => c.Id == ord.Id);
                 //changes the data
                 order.Orderlines = ord.Orderlines;
                 order.OrderDate = ord.OrderDate;
-                order.Customer = ord.Customer;
 
                 //saves the changes.
                 ctx.SaveChanges();
@@ -118,10 +116,11 @@ namespace MovieShopDALC.Repositories.Implementation
         /// </summary>
         public IEnumerable<Order> GetOrders(int id)
         {
+            //this is dead, it was broken by Max, he changed shit
             using (var ctx = new MovieShopContext())
             {
                 var orderlines = ctx.Orderline.Include("Movie").ToList();
-                var orders = ctx.Orders.Include("Customer").Include("Orderlines").Include("Status").Where(c => c.Customer.Id == id).ToList();
+                var orders = ctx.Orders.Include("Orderlines").Include("Status").Where(c => c.Id == id).ToList();
 
                 foreach (var item in orders)
                 {

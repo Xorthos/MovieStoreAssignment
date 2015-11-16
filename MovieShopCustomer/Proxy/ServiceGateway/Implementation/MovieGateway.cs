@@ -72,7 +72,7 @@ namespace Proxy.ServiceGateway.Implementation
             using (var httpClient = new HttpClient())
             {
                 var result = httpClient.PutAsJsonAsync(MOVIE_END_POINT, item).Result;
-                return JsonConvert.DeserializeObject<bool>(result.Content.ReadAsStringAsync().Result);
+                return result.IsSuccessStatusCode;
             }
         }
 

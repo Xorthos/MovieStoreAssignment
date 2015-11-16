@@ -42,7 +42,7 @@ namespace MovieShopWebAPI.Controllers
 
             orderRepository.Update(order);
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return StatusCode(HttpStatusCode.OK);
         }
 
         // POST: api/Order

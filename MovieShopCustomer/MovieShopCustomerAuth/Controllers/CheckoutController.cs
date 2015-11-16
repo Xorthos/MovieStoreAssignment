@@ -61,7 +61,7 @@ namespace MovieShopCustomerAuth.Controllers
         [Authorize]
         public ActionResult Purchase()
         {
-            Customer customer = facade.GetCustomerGateway().Get(User.Identity.Name);
+            
             ShoppingCart cart = GetCart();
 
             for (int i = 0; i < cart.Orderline.Count; i++)
@@ -70,7 +70,7 @@ namespace MovieShopCustomerAuth.Controllers
                 cart.Orderline[i].Price = cart.Orderline[i].Movie.Price;
             }
 
-            Order order = new Order(cart.Orderline, customer);
+            Order order = new Order(cart.Orderline, User.Identity.Name);
             facade.GetOrderGateway().Add(order);
 
             cart.Orderline = new List<Orderline>();

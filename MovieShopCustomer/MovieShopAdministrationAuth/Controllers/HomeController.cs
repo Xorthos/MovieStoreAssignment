@@ -21,6 +21,7 @@ namespace MovieShopAdministrationAuth.Controllers
             List<Movie> movies = (List<Movie>) facade.GetMovieGateway().GetAll();
             List<Genre> genres = (List<Genre>) facade.GetGenreGateway().GetAll();
             return View(new IndexViewModelHomeMade() { Movies = movies, Genres = genres });
+            
         }
         #endregion
         #region ViewCustomer

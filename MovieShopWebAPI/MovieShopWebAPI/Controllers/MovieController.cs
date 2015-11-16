@@ -41,22 +41,16 @@ namespace MovieShopWebAPI.Controllers
 
         // PUT: api/Movie/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutMovie(int id, Movie movie)
+        public IHttpActionResult PutMovie(Movie movie)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != movie.Id)
-            {
-                return BadRequest();
-            }
-
             movieRepository.Update(movie);
 
-            //original code : StatusCode(HttpStatusCode.NoContent)
-            return Ok(true);
+            return StatusCode(HttpStatusCode.OK);
         }
 
         // POST: api/Movie

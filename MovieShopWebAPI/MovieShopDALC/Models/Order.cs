@@ -13,7 +13,7 @@ namespace MovieShopDALC.Models
         [Key]
         public int Id { get; set; }
         [Required]
-        public Customer Customer { get; set; }
+        public string Email { get; set; }
         
         public virtual List<Orderline> Orderlines { get; set; }
 
@@ -29,10 +29,10 @@ namespace MovieShopDALC.Models
         /// <summary>
         /// Constructor:
         /// </summary>
-        public Order(List<Orderline> orderLines, Customer cust)
+        public Order(List<Orderline> orderLines, string email)
         {
             Orderlines = orderLines;
-            Customer = cust;
+            Email = email;
             OrderDate = DateTime.Now.Date;
         }
     }

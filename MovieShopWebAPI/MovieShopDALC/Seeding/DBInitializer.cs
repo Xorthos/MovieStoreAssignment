@@ -3,6 +3,7 @@ using MovieShopDALC.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -69,7 +70,7 @@ namespace MovieShopDALC.Seeding
             orderlines.Add(context.Orderline.Add(new Orderline() { OrderId = 1, MovieId = 6, Amount = 6, Price = 30 }));
             orderlines.Add(context.Orderline.Add(new Orderline() { OrderId = 1, MovieId = 17, Amount = 8, Price = 30 }));
 
-            var ord = new Order(orderlines, cust)
+            var ord = new Order(orderlines, "bools@gmail.com")
             {
                 Id = 1,
                 Status = stat1
@@ -79,7 +80,7 @@ namespace MovieShopDALC.Seeding
 
             List<Orderline> orderline2 = new List<Orderline>();
             orderline2.Add(context.Orderline.Add(new Orderline() { OrderId = 2, MovieId = 10, Amount = 5, Price = 150 }));
-            var ord2 = new Order(orderline2, cust2)
+            var ord2 = new Order(orderline2, "bools@gmail.com")
             {
                 Id = 2,
                 Status = stat1
@@ -88,7 +89,7 @@ namespace MovieShopDALC.Seeding
 
             List<Orderline> orderline3 = new List<Orderline>();
             orderline3.Add(context.Orderline.Add(new Orderline() { OrderId = 3, MovieId = 11, Amount = 1, Price = 300 }));
-            var ord3 = new Order(orderline3, cust2)
+            var ord3 = new Order(orderline3, "bools@gmail.com")
             {
                 Id = 3,
                 Status = stat1

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using MovieShopDALC.Context;
 using MovieShopDALC.Models;
@@ -73,6 +74,7 @@ namespace MovieShopDALC.Repositories.Implementation
                 movie.Year = mov.Year;
                 movie.ImgUrl = mov.ImgUrl;
                 movie.TrailerUrl = mov.TrailerUrl;
+                ctx.Entry(movie).State = EntityState.Modified;
                 ctx.SaveChanges();
                 return movie;
             }
