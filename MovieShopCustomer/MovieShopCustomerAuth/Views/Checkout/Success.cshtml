@@ -4,6 +4,7 @@
 }
 
 <h2>Your order is in progress. Thank you for choosing us.</h2>
-    
-      @Html.ActionLink("Back to List", "Index", "Home", new { }, new { @class = "btn btn-default", @style = "float : right" })
-
+<form method="POST" action="@Url.Action("CleanCart", "Cart")">
+    <button type="submit">Return to List</button>
+    @*Html.ActionLink("Back to List", "CleanCart", "Cart", new {}, new {@class = "btn btn-default", @style = "float : right"})*@
+</form>

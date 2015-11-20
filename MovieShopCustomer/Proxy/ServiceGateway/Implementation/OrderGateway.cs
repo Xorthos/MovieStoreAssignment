@@ -82,5 +82,15 @@ namespace Proxy.ServiceGateway.Implementation
                 return JsonConvert.DeserializeObject<List<Order>>(response.Content.ReadAsStringAsync().Result);
             }
         }
+
+        public override IEnumerable<Order> GetOrders(string username)
+        {
+            using (var httpClient = new HttpClient())
+            {
+                var response = httpClient.GetAsync(END_POINT + "Order?username=" + username).Result;
+
+                return JsonConvert.DeserializeObject<List<Order>>(response.Content.ReadAsStringAsync().Result);
+            }
+        }
     }
 }

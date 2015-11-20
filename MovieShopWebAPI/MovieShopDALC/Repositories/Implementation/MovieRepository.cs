@@ -59,22 +59,13 @@ namespace MovieShopDALC.Repositories.Implementation
         {
             using (var ctx = new MovieShopContext())
             {
-                /*var movie = ctx.Movies.Include("Genre").Where(c => c.Id == mov.Id).FirstOrDefault();
-                movie.Genre.Id = mov.Genre.Id;
-                movie.Price = mov.Price;
-                movie.Title = mov.Title;
-                movie.Year = mov.Year;
-
-                ctx.SaveChanges();
-                return movie;*/
-                Movie movie = Get(mov.Id);
+                var movie = ctx.Movies.Include("Genre").Where(c => c.Id == mov.Id).FirstOrDefault();
                 movie.Genre = mov.Genre;
                 movie.Price = mov.Price;
                 movie.Title = mov.Title;
                 movie.Year = mov.Year;
                 movie.ImgUrl = mov.ImgUrl;
                 movie.TrailerUrl = mov.TrailerUrl;
-                ctx.Entry(movie).State = EntityState.Modified;
                 ctx.SaveChanges();
                 return movie;
             }

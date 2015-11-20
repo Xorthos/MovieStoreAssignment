@@ -10,5 +10,6 @@ namespace MovieShopDALC.Repositories.Abstraction
     public interface IOrderRepository : IRepository<Order>
     {
         IEnumerable<Order> GetOrders(int id);
+        IEnumerable<Order> GetOrders(string username);
     }
 }

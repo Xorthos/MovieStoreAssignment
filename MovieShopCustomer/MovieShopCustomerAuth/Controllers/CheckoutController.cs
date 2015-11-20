@@ -108,6 +108,7 @@ namespace MovieShopCustomerAuth.Controllers
             facade.GetOrderGateway().Add(order);
 
             cart.Orderline = new List<Orderline>();
+
             return View("Success");
             
         }
