@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -41,8 +42,8 @@ namespace Proxy.ServiceGateway.Implementation
             using (var httpClient = new HttpClient())
             {
                 var response = httpClient.GetAsync(MOVIE_END_POINT).Result;
-
-                return JsonConvert.DeserializeObject<List<Movie>>(response.Content.ReadAsStringAsync().Result);
+                
+                    return JsonConvert.DeserializeObject<List<Movie>>(response.Content.ReadAsStringAsync().Result);
             }
         }
 

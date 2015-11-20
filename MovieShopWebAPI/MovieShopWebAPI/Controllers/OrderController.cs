@@ -19,30 +19,30 @@ namespace MovieShopWebAPI.Controllers
         private IOrderRepository orderRepository = Facade.GetOrderRepository();
 
         // GET: api/Order
-        public IEnumerable<Order> GetOrders()
+        public HttpResponseMessage GetOrders()
         {
             IEnumerable<Order> orders = orderRepository.GetAll();
-            return orders;
+            return Request.CreateResponse(HttpStatusCode.OK, orders);
         }
 
         // GET: api/Order
-        public IEnumerable<Order> GetUserOrders(int custId)
+        public HttpResponseMessage GetUserOrders(int custId)
         {
-            return orderRepository.GetOrders(custId);
+            return Request.CreateResponse(HttpStatusCode.OK, orderRepository.GetOrders(custId));
         }
 
         // PUT: api/Order/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutOrder(Order order)
+        public HttpResponseMessage PutOrder(Order order)
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                return Request.CreateResponse(HttpStatusCode.BadRequest, ModelState);
             }
 
-            orderRepository.Update(order);
+            Order newOrder = orderRepository.Update(order);
 
-            return StatusCode(HttpStatusCode.OK);
+            return Request.CreateResponse(HttpStatusCode.OK, newOrder);
         }
 
         // POST: api/Order
