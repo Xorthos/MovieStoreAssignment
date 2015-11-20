@@ -5,6 +5,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using System.Xml;
+using Antlr.Runtime.Misc;
 using MovieShopCustomerAuth.Models;
 using Newtonsoft.Json;
 using Proxy.DomainModels;
@@ -162,7 +163,13 @@ namespace MovieShopCustomerAuth.Controllers
         [HttpPost]
         public ActionResult CleanCart()
         {
-            this.HttpContext.Response.Cookies.Remove(CART_NAME);
+            HttpCookie myCookie = Request.Cookies.Get(CART_NAME);
+            ShoppingCart cart = JsonConvert.DeserializeObject<ShoppingCart>(myCookie.Value);
+
+            cart.Orderline = new List<Orderline>();
+
+            myCookie.Value = JsonConvert.SerializeObject(cart);
+            this.HttpContext.Response.Cookies.Set(myCookie);
             return RedirectToAction("Index", "Home");
         }
     }

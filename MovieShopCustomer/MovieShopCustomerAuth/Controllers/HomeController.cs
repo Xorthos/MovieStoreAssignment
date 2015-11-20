@@ -51,7 +51,7 @@ namespace MovieShopCustomerAuth.Controllers
         [HttpGet]
         public ActionResult ViewOrders()
         {
-            return View(facade.GetOrderGateway().GetOrders((int)Session["UserId"]));
+            return View(facade.GetOrderGateway().GetOrders(User.Identity.Name));
         }
         #endregion
 

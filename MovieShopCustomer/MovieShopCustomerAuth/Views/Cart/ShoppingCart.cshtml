@@ -34,4 +34,9 @@
 </table>
 @*new{} is needed because there are no html parameter for a Checkout/Index *@
 
-@Html.ActionLink("Checkout", "Index", "Checkout", new { }, new { @class = "btn btn-default", @style = "float : right" });
+@if (@Model.Orderline.Count >=1)
+{
+    @Html.ActionLink("Checkout", "Index", "Checkout", new {}, new {@class = "btn btn-default", @style = "float : right"})
+
+}
+@Html.ActionLink("Back to list", "Index", "Home", new { }, new { @class = "btn btn-default", @style = "float : right" })

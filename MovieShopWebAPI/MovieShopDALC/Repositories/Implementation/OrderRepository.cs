@@ -18,7 +18,6 @@ namespace MovieShopDALC.Repositories.Implementation
 
             using (var ctx = new MovieShopContext())
             {
-                /*ctx.Customers.Attach(ord.Customer);
                 foreach (Orderline item in ord.Orderlines)
                 {
                     bool isDetached = ctx.Entry(item.Movie).State == EntityState.Detached;
@@ -36,7 +35,6 @@ namespace MovieShopDALC.Repositories.Implementation
                     if (item.Name.Equals("Processing"))
                         ord.Status = item;
                 }
-                */
                 Order newOrd = ctx.Orders.Add(ord);
                 ctx.SaveChanges();
                 return newOrd;
@@ -121,6 +119,27 @@ namespace MovieShopDALC.Repositories.Implementation
             {
                 var orderlines = ctx.Orderline.Include("Movie").ToList();
                 var orders = ctx.Orders.Include("Orderlines").Include("Status").Where(c => c.Id == id).ToList();
+
+                foreach (var item in orders)
+                {
+                    item.Orderlines = orderlines.Where(cm => cm.OrderId == item.Id).ToList();
+                }
+
+                return orders;
+            }
+
+        }
+
+        /// <summary>
+        /// List all order by customer id
+        /// </summary>
+        public IEnumerable<Order> GetOrders(string username)
+        {
+            //this is dead, it was broken by Max, he changed shit
+            using (var ctx = new MovieShopContext())
+            {
+                var orderlines = ctx.Orderline.Include("Movie").ToList();
+                var orders = ctx.Orders.Include("Orderlines").Include("Status").Where(c => c.Email == username).ToList();
 
                 foreach (var item in orders)
                 {

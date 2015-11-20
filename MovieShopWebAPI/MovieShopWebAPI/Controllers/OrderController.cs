@@ -31,6 +31,12 @@ namespace MovieShopWebAPI.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, orderRepository.GetOrders(custId));
         }
 
+        // GET: api/Order
+        public IEnumerable<Order> GetUserOrders(string username)
+        {
+            return orderRepository.GetOrders(username);
+        }
+
         // PUT: api/Order/5
         [ResponseType(typeof(void))]
         public HttpResponseMessage PutOrder(Order order)
